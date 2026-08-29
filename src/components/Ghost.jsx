@@ -60,16 +60,16 @@ export default function Ghost() {
         data-effect={theme.effect}
         ref={stageRef}
         role="img"
-        aria-label={`Hexxis ghost mascot — ${theme.label}`}
+        aria-label="Hexxis ghost mascot"
       >
         <div className="ghost-body" />
+        <img className="ghost-depth" src="/mascot/ghost-detailed.png" alt="" aria-hidden="true" />
         <div className={`ghost-eyes${blinking ? ' is-blinking' : ''}`} aria-hidden="true">
           <span /><span />
         </div>
         {theme.accessory >= 0 && <div className="ghost-accessory" style={accessoryPosition(theme.accessory)} aria-hidden="true" />}
         {theme.effect && <div className="ghost-particles" aria-hidden="true">{Array.from({ length: 8 }, (_, index) => <i key={index} />)}</div>}
       </div>
-      <span className="ghost-status"><i /> {theme.label}</span>
     </div>
   )
 }

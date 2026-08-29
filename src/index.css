@@ -1,14 +1,14 @@
 :root {
-  color-scheme: light dark;
-  --bg: #f5f0f2;
-  --surface: #ffffff;
-  --surface-soft: #eee5e9;
-  --text: #1a0f12;
-  --muted: #6f5c63;
-  --accent: #800020;
-  --accent-bright: #b51f47;
-  --border: #d8c0c8;
-  --shadow: 0 20px 60px rgba(67, 16, 31, 0.13);
+  color-scheme: dark;
+  --bg: #07050a;
+  --surface: #100b15;
+  --surface-soft: #180f20;
+  --text: #eee7f2;
+  --muted: #ad9eb2;
+  --accent: #760020;
+  --accent-bright: #d43b70;
+  --border: #342039;
+  --shadow: 0 28px 90px rgba(0, 0, 0, 0.56);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text);
   background: var(--bg);
@@ -16,22 +16,33 @@
   text-rendering: optimizeLegibility;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #0d0a0f;
-    --surface: #150f1a;
-    --surface-soft: #1d1422;
-    --text: #e8e0ec;
-    --muted: #ac9cae;
-    --border: #3a202a;
-    --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
-  }
-}
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--bg); }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 78% 10%, rgba(80, 25, 105, .2), transparent 34rem),
+    radial-gradient(circle at 12% 72%, rgba(118, 0, 32, .16), transparent 30rem),
+    linear-gradient(145deg, #060409, #0a0710 55%, #08050c);
+  background-attachment: fixed;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .26;
+  background-image:
+    radial-gradient(circle, rgba(231, 194, 126, .65) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(166, 104, 190, .5) 0 1px, transparent 1.5px);
+  background-position: 0 0, 23px 31px;
+  background-size: 71px 71px, 97px 97px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 78%);
+  mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 78%);
+}
 button, a { font: inherit; }
 button { cursor: pointer; }
 img { display: block; max-width: 100%; }

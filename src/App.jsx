@@ -1,16 +1,38 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import '@fontsource-variable/pixelify-sans'
 import Ghost from './components/Ghost'
 import projects from './data/projects.json'
+import { useHolidayTheme } from './hooks/useHolidayTheme'
+import { useSoundscape } from './hooks/useSoundscape'
 import './App.css'
 
 const categories = ['All', 'Writing', 'Tools', 'Generators', 'Games', 'Art']
+
+function useRoute() {
+  const readRoute = () => {
+    const route = window.location.hash.replace(/^#\/?/, '').split('/')[0]
+    return ['projects', 'about'].includes(route) ? route : 'home'
+  }
+  const [route, setRoute] = useState(readRoute)
+
+  useEffect(() => {
+    const update = () => {
+      setRoute(readRoute())
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+    window.addEventListener('hashchange', update)
+    return () => window.removeEventListener('hashchange', update)
+  }, [])
+
+  return route
+}
 
 function ProjectCard({ project, onLaunch }) {
   return (
     <article className="project-card">
       <div className="project-image-wrap">
         <img src={project.thumbnail} alt={`${project.title} project artwork`} />
-        {project.featured && <span className="featured-badge">Featured build</span>}
+        {project.featured && <span className="featured-badge">Featured</span>}
       </div>
       <div className="project-card-body">
         <div className="project-title-line">
@@ -52,7 +74,7 @@ function LaunchModal({ project, onClose }) {
       <section className="launch-modal" role="dialog" aria-modal="true" aria-labelledby="launch-title">
         <header className="modal-header">
           <div>
-            <span className="modal-live"><i /> Running locally</span>
+            <span className="modal-label">Browser preview</span>
             <h2 id="launch-title">{project.title}</h2>
           </div>
           <button className="close-button" ref={closeRef} type="button" onClick={onClose} aria-label={`Close ${project.title}`}>×</button>
@@ -67,88 +89,128 @@ function LaunchModal({ project, onClose }) {
   )
 }
 
-function App() {
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [launchedProject, setLaunchedProject] = useState(null)
+function Navigation({ route, soundEnabled, onSoundToggle }) {
+  const link = (target, label) => (
+    <a href={target === 'home' ? '#/' : `#/${target}`} aria-current={route === target ? 'page' : undefined}>{label}</a>
+  )
+
+  return (
+    <nav className="topbar" aria-label="Primary navigation">
+      <a className="wordmark" href="#/" aria-label="Hexxis Command Center home"><span>H</span><b>Hexxis-cmd</b></a>
+      <div className="nav-links">
+        {link('home', 'Home')}
+        {link('projects', 'Projects')}
+        {link('about', 'About')}
+        <a href="https://github.com/Hexxis-cmd" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <button
+          className={`sound-toggle${soundEnabled ? ' is-enabled' : ''}`}
+          type="button"
+          onClick={onSoundToggle}
+          aria-pressed={soundEnabled}
+          aria-label={soundEnabled ? 'Mute sounds' : 'Enable sounds'}
+          title={soundEnabled ? 'Mute sounds' : 'Enable sounds'}
+        >
+          <span className="speaker-pixel" aria-hidden="true"><i /><b /></span>
+        </button>
+      </div>
+    </nav>
+  )
+}
+
+function HomePage() {
+  return (
+    <header className="hero-shell page-view">
+      <div className="hero-grid">
+        <div className="hero-copy">
+          <p className="kicker"><span /> Software. Hardware. Strange ideas.</p>
+          <h1 className="brand-title">Hexxis<br />Command<br />Center</h1>
+          <p className="hero-intro">A living collection of tools, experiments, games, and whatever I build next.</p>
+          <div className="hero-actions">
+            <a className="primary-button" href="#/projects">Browse projects <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <Ghost />
+      </div>
+    </header>
+  )
+}
+
+function ProjectsPage({ activeCategory, setActiveCategory, onLaunch }) {
   const visibleProjects = useMemo(
     () => activeCategory === 'All' ? projects : projects.filter((project) => project.category === activeCategory),
     [activeCategory],
   )
 
   return (
+    <section className="projects-section page-view">
+      <div className="page-heading">
+        <div>
+          <p className="eyebrow">Projects</p>
+          <h1 className="page-title">Built, shipped,<br />and still evolving.</h1>
+        </div>
+        <p>Filter the collection or launch a browser-ready project without leaving the site.</p>
+      </div>
+
+      <div className="filter-bar" aria-label="Filter projects by category">
+        {categories.map((category) => (
+          <button
+            className={category === activeCategory ? 'is-active' : ''}
+            key={category}
+            type="button"
+            onClick={() => setActiveCategory(category)}
+            aria-pressed={category === activeCategory}
+          >
+            {category}
+            {category !== 'All' && <sup>{projects.filter((project) => project.category === category).length}</sup>}
+          </button>
+        ))}
+      </div>
+
+      <div className="project-grid" aria-live="polite">
+        {visibleProjects.length > 0
+          ? visibleProjects.map((project) => <ProjectCard key={project.id} project={project} onLaunch={onLaunch} />)
+          : <div className="empty-state"><span>∅</span><h3>Nothing here yet.</h3><p>Future {activeCategory.toLowerCase()} projects will appear here.</p></div>}
+      </div>
+    </section>
+  )
+}
+
+function AboutPage() {
+  return (
+    <section className="about-section page-view">
+      <div>
+        <p className="eyebrow">About me</p>
+        <h1 className="page-title">Building across<br />the whole stack.</h1>
+      </div>
+      <div className="about-copy">
+        <p className="about-lead">I'm Daymien Vanhorn, also known as Hexxis-cmd.</p>
+        <p>I'm a software developer, hardware engineer, student, freelancer, and entrepreneur with a habit of getting involved in just about anything technical.</p>
+        <p>I work across software, hardware, AI, games, scripts, tools, robotics, computers, vehicles, and whatever else I can get my hands on. I'm usually juggling multiple projects at once—from text adventures and horror games to development tools and full-scale courses.</p>
+        <p>I'm always learning, building, experimenting, and occasionally making things far more complicated than they needed to be. I'm straightforward, casual, stubborn when I believe in something, and always interested in solving problems or creating something new.</p>
+        <div className="discipline-list" aria-label="Areas of work">
+          {['Software', 'Hardware', 'AI', 'Games', 'Robotics', 'Tools'].map((item) => <span key={item}>{item}</span>)}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function App() {
+  const route = useRoute()
+  const theme = useHolidayTheme()
+  const sound = useSoundscape(theme.id)
+  const [activeCategory, setActiveCategory] = useState('All')
+  const [launchedProject, setLaunchedProject] = useState(null)
+
+  return (
     <>
       <main>
-        <header className="hero-shell">
-          <nav className="topbar" aria-label="Primary navigation">
-            <a className="wordmark" href="#top" aria-label="Hexxis Command Center home"><span>H</span> Hexxis-cmd</a>
-            <div className="nav-links">
-              <a href="#projects">Projects</a>
-              <a href="#about">About</a>
-              <a href="https://github.com/Hexxis-cmd" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            </div>
-          </nav>
-
-          <div className="hero-grid" id="top">
-            <div className="hero-copy">
-              <p className="kicker"><span /> Software. Hardware. Strange ideas.</p>
-              <h1>Hexxis<br />Command<br />Center</h1>
-              <p className="hero-intro">A living index of tools, experiments, games, and whatever I build next.</p>
-              <div className="hero-actions">
-                <a className="primary-button" href="#projects">Browse projects <span aria-hidden="true">↓</span></a>
-                <span className="system-status"><i /> Systems operational</span>
-              </div>
-            </div>
-            <Ghost />
-          </div>
-          <div className="scroll-cue" aria-hidden="true"><span>Scroll to explore</span><i /></div>
-        </header>
-
-        <section className="projects-section" id="projects">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">01 // Project archive</p>
-              <h2>Built, shipped,<br />and still evolving.</h2>
-            </div>
-            <p className="section-note">Filter the archive or launch a browser-ready project without leaving the command center.</p>
-          </div>
-
-          <div className="filter-bar" aria-label="Filter projects by category">
-            {categories.map((category) => (
-              <button
-                className={category === activeCategory ? 'is-active' : ''}
-                key={category}
-                type="button"
-                onClick={() => setActiveCategory(category)}
-                aria-pressed={category === activeCategory}
-              >
-                {category}
-                {category !== 'All' && <sup>{projects.filter((project) => project.category === category).length}</sup>}
-              </button>
-            ))}
-          </div>
-
-          <div className="project-grid" aria-live="polite">
-            {visibleProjects.length > 0
-              ? visibleProjects.map((project) => <ProjectCard key={project.id} project={project} onLaunch={setLaunchedProject} />)
-              : <div className="empty-state"><span>∅</span><h3>No transmissions yet.</h3><p>The {activeCategory.toLowerCase()} channel is ready for a future project.</p></div>}
-          </div>
-        </section>
-
-        <section className="about-section" id="about">
-          <div>
-            <p className="eyebrow">02 // About the operator</p>
-            <h2>Building across<br />the whole stack.</h2>
-          </div>
-          <div className="about-copy">
-            <p className="about-lead">I'm Daymien Vanhorn, also known as Hexxis-cmd.</p>
-            <p>I'm a software developer, hardware engineer, student, freelancer, and entrepreneur with a habit of getting involved in just about anything technical.</p>
-            <p>I work across software, hardware, AI, games, scripts, tools, robotics, computers, vehicles, and whatever else I can get my hands on. I'm usually juggling multiple projects at once—from text adventures and horror games to development tools and full-scale courses.</p>
-            <p>I'm always learning, building, experimenting, and occasionally making things far more complicated than they needed to be. I'm straightforward, casual, stubborn when I believe in something, and always interested in solving problems or creating something new.</p>
-            <div className="discipline-list" aria-label="Areas of work">
-              {['Software', 'Hardware', 'AI', 'Games', 'Robotics', 'Tools'].map((item) => <span key={item}>{item}</span>)}
-            </div>
-          </div>
-        </section>
+        <Navigation route={route} soundEnabled={sound.enabled} onSoundToggle={sound.toggle} />
+        <div key={route}>
+          {route === 'home' && <HomePage />}
+          {route === 'projects' && <ProjectsPage activeCategory={activeCategory} setActiveCategory={setActiveCategory} onLaunch={setLaunchedProject} />}
+          {route === 'about' && <AboutPage />}
+        </div>
       </main>
 
       <footer>
