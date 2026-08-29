@@ -23,9 +23,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 78% 10%, rgba(80, 25, 105, .2), transparent 34rem),
-    radial-gradient(circle at 12% 72%, rgba(118, 0, 32, .16), transparent 30rem),
-    linear-gradient(145deg, #060409, #0a0710 55%, #08050c);
+    radial-gradient(ellipse at 78% 10%, rgba(73, 0, 33, .22), transparent 32rem),
+    radial-gradient(ellipse at 12% 72%, rgba(61, 7, 38, .15), transparent 28rem),
+    linear-gradient(145deg, #040305, #09060a 55%, #050306);
   background-attachment: fixed;
 }
 body::before {
@@ -34,12 +34,11 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: .26;
+  opacity: .3;
   background-image:
-    radial-gradient(circle, rgba(231, 194, 126, .65) 0 1px, transparent 1.5px),
-    radial-gradient(circle, rgba(166, 104, 190, .5) 0 1px, transparent 1.5px);
-  background-position: 0 0, 23px 31px;
-  background-size: 71px 71px, 97px 97px;
+    repeating-linear-gradient(115deg, transparent 0 76px, rgba(119, 75, 92, .08) 77px, transparent 78px),
+    repeating-linear-gradient(65deg, transparent 0 108px, rgba(74, 34, 49, .07) 109px, transparent 110px),
+    radial-gradient(ellipse at center, transparent 35%, #000 100%);
   -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 78%);
   mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 78%);
 }

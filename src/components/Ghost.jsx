@@ -9,7 +9,7 @@ function accessoryPosition(index) {
   return { backgroundPosition: `${steps[column]} ${steps[row]}` }
 }
 
-export default function Ghost() {
+export default function Ghost({ startled = false }) {
   const theme = useHolidayTheme()
   const stageRef = useRef(null)
   const [blinking, setBlinking] = useState(false)
@@ -56,7 +56,7 @@ export default function Ghost() {
   return (
     <div className={`ghost-wrap ghost-${theme.id}`}>
       <div
-        className="ghost-stage"
+        className={`ghost-stage${startled ? ' is-startled' : ''}`}
         data-effect={theme.effect}
         ref={stageRef}
         role="img"
