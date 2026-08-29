@@ -125,13 +125,29 @@ function Navigation({ route, soundEnabled, onSoundToggle }) {
 }
 
 function HomePage() {
+  const [archiveSettled, setArchiveSettled] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+
   return (
     <header className="hero-shell page-view">
-      <div className="archive-scene" aria-hidden="true">
-        <video className="archive-video" autoPlay loop muted playsInline poster="/video/archive-loop-poster.png">
-          <source src="/video/archive-loop.webm" type="video/webm" />
-          <source src="/video/archive-loop.mp4" type="video/mp4" />
-        </video>
+      <div className={`archive-scene${archiveSettled ? ' is-settled' : ''}`} aria-hidden="true">
+        {archiveSettled
+          ? <img className="archive-video" src="/video/archive-idle-v3.png" alt="" />
+          : (
+              <video
+                className="archive-video"
+                autoPlay
+                muted
+                playsInline
+                poster="/video/archive-idle-v3.png"
+                onEnded={() => setArchiveSettled(true)}
+              >
+                <source src="/video/archive-entrance-v3.webm" type="video/webm" />
+                <source src="/video/archive-entrance-v3.mp4" type="video/mp4" />
+              </video>
+            )}
+        {archiveSettled && <div className="archive-ambience"><i /><i /><i /><i /><i /></div>}
       </div>
       <div className="hero-grid">
         <div className="hero-copy">
