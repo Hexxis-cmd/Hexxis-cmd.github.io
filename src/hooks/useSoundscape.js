@@ -184,6 +184,27 @@ function playPartyBlower(engine) {
   oscillator.stop(now + 0.45)
 }
 
+function playTarotFlip(engine, reverse = false) {
+  if (!engine || engine.context.state !== 'running') return
+  const { context, master } = engine
+  const source = context.createBufferSource()
+  const filter = context.createBiquadFilter()
+  const gain = context.createGain()
+  const now = context.currentTime
+  source.buffer = noiseBuffer(context, 0.28)
+  filter.type = 'bandpass'
+  filter.frequency.setValueAtTime(reverse ? 1150 : 760, now)
+  filter.frequency.exponentialRampToValueAtTime(reverse ? 520 : 1650, now + 0.22)
+  filter.Q.value = 0.7
+  gain.gain.setValueAtTime(0.0001, now)
+  gain.gain.exponentialRampToValueAtTime(0.055, now + 0.025)
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.25)
+  source.connect(filter).connect(gain).connect(master)
+  source.start(now)
+  tone(context, master, reverse ? 105 : 132, 0.09, 0.028, 'triangle', 0.02)
+  tone(context, master, reverse ? 82 : 98, 0.08, 0.022, 'square', 0.22)
+}
+
 export function useSoundscape(themeId) {
   const [enabled, setEnabled] = useState(() => localStorage.getItem(STORAGE_KEY) === 'true')
   const engineRef = useRef(null)
@@ -222,6 +243,7 @@ export function useSoundscape(themeId) {
     if (!enabled) return undefined
     const interact = async (event) => {
       const engine = await start()
+      if (event.target.closest?.('[data-card-flip]')) return
       if (event.target.closest?.('a, button, [role="button"]')) playClick(engine)
     }
     document.addEventListener('pointerdown', interact, true)
@@ -242,5 +264,11 @@ export function useSoundscape(themeId) {
     engineRef.current?.context.close()
   }, [])
 
-  return { enabled, toggle }
+  const flipCard = useCallback(async (reverse) => {
+    if (!enabled) return
+    const engine = await start()
+    playTarotFlip(engine, reverse)
+  }, [enabled, start])
+
+  return { enabled, toggle, flipCard }
 }

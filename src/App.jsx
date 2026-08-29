@@ -7,10 +7,43 @@ import './App.css'
 
 const categories = ['All', 'Writing', 'Tools', 'Generators', 'Games', 'Art', 'Website Templates', 'GitHub Page Templates']
 
+const pricingTiers = [
+  {
+    id: 'template',
+    name: 'Blank Template',
+    price: '$80',
+    qualifier: 'one-time',
+    art: '/pricing/tarot-template.webp',
+    link: 'https://www.patreon.com/Hexxis_CMD/posts/business-website-168038505',
+    features: ['Business Foundation theme ZIP', 'Responsive native WordPress blocks', 'Editable homepage and reusable sections', 'Installation and replacement guide', 'Single-business license'],
+    note: 'For owners comfortable editing and publishing their own WordPress site.',
+  },
+  {
+    id: 'turnkey',
+    name: 'Template + Turnkey Setup',
+    price: '$580',
+    qualifier: 'one-time',
+    art: '/pricing/tarot-turnkey.webp',
+    link: 'https://www.patreon.com/Hexxis_CMD/posts/business-website-168043113',
+    features: ['Everything in Blank Template', 'Theme installation and launch setup', 'Your supplied logo, colors, copy, and images', 'Up to five standard pages', 'Contact form, mobile QA, and one revision'],
+    note: 'Hosting, domain, paid plugins, and copywriting are not included.',
+  },
+  {
+    id: 'custom',
+    name: 'Complete Custom Build',
+    price: '$1,500+',
+    qualifier: 'starting at',
+    art: '/pricing/tarot-custom.webp',
+    link: 'https://www.patreon.com/Hexxis_CMD/posts/custom-business-168045774',
+    features: ['Original design direction', 'Up to five core pages', 'Responsive WordPress build', 'Contact form and basic SEO foundations', 'Deployment and two revision rounds'],
+    note: 'Commerce, booking, membership, and other complex integrations are quoted separately.',
+  },
+]
+
 function useRoute() {
   const readRoute = () => {
     const route = window.location.hash.replace(/^#\/?/, '').split('/')[0]
-    return ['projects', 'about'].includes(route) ? route : 'home'
+    return ['projects', 'products', 'about'].includes(route) ? route : 'home'
   }
   const [route, setRoute] = useState(readRoute)
 
@@ -112,6 +145,7 @@ function Navigation({ route, soundEnabled, onSoundToggle }) {
       <div className="nav-links">
         {link('home', 'Home')}
         {link('projects', 'Projects')}
+        {link('products', 'Products')}
         {link('about', 'About')}
         <button
           className={`sound-toggle${soundEnabled ? ' is-enabled' : ''}`}
@@ -215,6 +249,67 @@ function AboutPage() {
   )
 }
 
+function PricingCard({ tier, onFlip }) {
+  const [flipped, setFlipped] = useState(false)
+
+  const toggleCard = () => {
+    const next = !flipped
+    setFlipped(next)
+    onFlip(!next)
+  }
+
+  return (
+    <article className={`tarot-card${flipped ? ' is-flipped' : ''}`}>
+      <button
+        className="tarot-card-button"
+        type="button"
+        onClick={toggleCard}
+        aria-pressed={flipped}
+        aria-label={flipped ? `Turn ${tier.name} face down` : `Reveal ${tier.name}`}
+        data-card-flip
+      >
+        <span className="tarot-card-inner">
+          <span className="tarot-face tarot-back" aria-hidden={flipped}>
+            <img src={tier.art} alt="" />
+            <span className="tarot-reveal">Tap to reveal</span>
+          </span>
+          <span className="tarot-face tarot-front" aria-hidden={!flipped}>
+            <span className="tarot-front-ornament" aria-hidden="true">✦</span>
+            <span className="tarot-tier-name">{tier.name}</span>
+            <span className="tarot-price"><small>{tier.qualifier}</small>{tier.price}</span>
+            <span className="tarot-divider" aria-hidden="true" />
+            <span className="tarot-features">
+              {tier.features.map((feature) => <span key={feature}>{feature}</span>)}
+            </span>
+            <span className="tarot-note">{tier.note}</span>
+            <span className="tarot-return">Tap card to turn it back</span>
+          </span>
+        </span>
+      </button>
+      <a className="tarot-purchase" href={tier.link} target="_blank" rel="noreferrer" aria-label={`View ${tier.name} on Patreon`} aria-hidden={!flipped} tabIndex={flipped ? 0 : -1}>
+        <img src="/branding/patreon-symbol.png" alt="" aria-hidden="true" />
+        View on Patreon <span aria-hidden="true">↗</span>
+      </a>
+    </article>
+  )
+}
+
+function ProductsPage({ onCardFlip }) {
+  return (
+    <section className="products-section page-view">
+      <div className="products-heading">
+        <p className="eyebrow">Website Services</p>
+        <h1>Choose your build.</h1>
+        <p>Three clear ways to begin. Turn over a card to compare exactly what is included.</p>
+      </div>
+      <div className="pricing-grid">
+        {pricingTiers.map((tier) => <PricingCard key={tier.id} tier={tier} onFlip={onCardFlip} />)}
+      </div>
+      <p className="pricing-footnote">All prices are one-time project prices in USD. Final custom-build scope is confirmed before work begins.</p>
+    </section>
+  )
+}
+
 function App() {
   const route = useRoute()
   const theme = useHolidayTheme()
@@ -229,6 +324,7 @@ function App() {
         <div key={route}>
           {route === 'home' && <HomePage />}
           {route === 'projects' && <ProjectsPage activeCategory={activeCategory} setActiveCategory={setActiveCategory} onLaunch={setLaunchedProject} />}
+          {route === 'products' && <ProductsPage onCardFlip={sound.flipCard} />}
           {route === 'about' && <AboutPage />}
         </div>
       </main>
