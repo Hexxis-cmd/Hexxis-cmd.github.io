@@ -190,6 +190,7 @@ main:has(.topbar a:is(:hover, :focus-visible), .hero-actions a:is(:hover, :focus
 .project-meta span { padding: 6px 9px; border: 1px solid var(--border); border-radius: 4px; color: var(--muted); font: 700 .65rem ui-monospace, monospace; text-transform: uppercase; }
 .card-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .product-link { letter-spacing: .06em; }
+.patreon-mark { width: 24px; height: 24px; padding: 3px; border-radius: 4px; background: #fff; object-fit: contain; }
 .empty-state { min-height: 330px; display: grid; place-items: center; align-content: center; text-align: center; border: 1px dashed var(--border); border-radius: 12px; background: rgba(16, 11, 21, .82); }
 .empty-state > span { color: var(--accent); font: 300 4rem ui-monospace, monospace; }
 .empty-state h3 { margin: 12px 0 8px; font-size: 1.6rem; }
