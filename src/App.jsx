@@ -31,14 +31,14 @@ function ProjectCard({ project, onLaunch }) {
     <article className="project-card">
       <div className="project-image-wrap">
         {project.thumbnail
-          ? <img src={project.thumbnail} alt={`${project.title} project artwork`} />
+          ? <img src={project.thumbnail} alt={`${project.title} project artwork`} style={{ objectPosition: project.thumbnailPosition || 'center' }} />
           : <div className="template-preview" aria-hidden="true"><span>&lt;/&gt;</span><strong>YOUR SITE</strong><small>Replace this placeholder</small></div>}
         {project.featured && <span className="featured-badge">Featured</span>}
       </div>
       <div className="project-card-body">
         <div className="project-title-line">
           <span className="category">{project.category}</span>
-          <span className="version">v{project.version}</span>
+          <span className={project.price ? 'product-price' : 'version'}>{project.price || `v${project.version}`}</span>
         </div>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
@@ -46,7 +46,8 @@ function ProjectCard({ project, onLaunch }) {
           {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
         </div>
         <div className="card-actions">
-          {project.launchFile && <button className="primary-button" type="button" onClick={() => onLaunch(project)}>Launch</button>}
+          {project.launchFile && <button className={project.purchaseLink ? 'secondary-button' : 'primary-button'} type="button" onClick={() => onLaunch(project)}>{project.purchaseLink ? 'Preview' : 'Launch'}</button>}
+          {project.purchaseLink && <a className="primary-button product-link" href={project.purchaseLink} target="_blank" rel="noreferrer" aria-label={`Buy ${project.title} for ${project.price} on Patreon`}>{project.productCode} <span aria-hidden="true">↗</span></a>}
           {project.downloads?.windows && <a className="secondary-button" href={project.downloads.windows} target="_blank" rel="noreferrer">Windows <span aria-hidden="true">↗</span></a>}
           {project.downloads?.android && <a className="secondary-button" href={project.downloads.android} target="_blank" rel="noreferrer">Android <span aria-hidden="true">↗</span></a>}
           {project.downloads?.template && <a className="secondary-button" href={project.downloads.template} download>Download template <span aria-hidden="true">↓</span></a>}

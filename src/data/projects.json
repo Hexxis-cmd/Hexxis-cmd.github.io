@@ -27,5 +27,20 @@
       "template": "/downloads/github-pages-starter.zip"
     },
     "featured": false
+  },
+  {
+    "id": "business-foundation-template-001",
+    "title": "Business Foundation",
+    "version": "1.0.0",
+    "description": "A neutral, responsive WordPress business theme built with native editable blocks. Includes a polished homepage, navigation, service cards, calls to action, and clear replacement instructions.",
+    "category": "Website Templates",
+    "tags": ["wordpress", "business", "responsive", "block-theme", "no-plugins"],
+    "thumbnail": "/thumbnails/business-template-001.png",
+    "thumbnailPosition": "left center",
+    "launchFile": "/templates/business-foundation/index.html",
+    "price": "$80",
+    "productCode": "TEMPLATE#001",
+    "purchaseLink": "https://www.patreon.com/Hexxis_CMD/posts/business-website-168038505",
+    "featured": false
   }
 ]

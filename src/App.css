@@ -183,11 +183,13 @@ main:has(.topbar a:is(:hover, :focus-visible), .hero-actions a:is(:hover, :focus
 .project-title-line { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .category { color: var(--accent-bright); font: 800 .69rem ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; }
 .version { color: var(--muted); font: 700 .68rem ui-monospace, monospace; }
+.product-price { color: #f1e6c4; font: 850 1.25rem/1 ui-monospace, monospace; letter-spacing: -.04em; }
 .project-card h3 { margin: 12px 0 17px; font-size: clamp(2.4rem, 4vw, 4rem); letter-spacing: -.055em; line-height: 1; }
 .project-card p { margin: 0; color: var(--muted); font-size: 1.02rem; line-height: 1.72; }
 .project-meta { display: flex; flex-wrap: wrap; gap: 7px; margin: 24px 0 31px; }
 .project-meta span { padding: 6px 9px; border: 1px solid var(--border); border-radius: 4px; color: var(--muted); font: 700 .65rem ui-monospace, monospace; text-transform: uppercase; }
 .card-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.product-link { letter-spacing: .06em; }
 .empty-state { min-height: 330px; display: grid; place-items: center; align-content: center; text-align: center; border: 1px dashed var(--border); border-radius: 12px; background: rgba(16, 11, 21, .82); }
 .empty-state > span { color: var(--accent); font: 300 4rem ui-monospace, monospace; }
 .empty-state h3 { margin: 12px 0 8px; font-size: 1.6rem; }
