@@ -13,5 +13,19 @@
       "android": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/tag/Draft_A_Lore-v1.0.0-Release"
     },
     "featured": true
+  },
+  {
+    "id": "github-pages-starter",
+    "title": "GitHub Pages Starter",
+    "version": "1.0.0",
+    "description": "A neutral, responsive portfolio starter with placeholder content, setup instructions, and automatic GitHub Pages deployment. No personal information, branding, images, or third-party dependencies.",
+    "category": "GitHub Page Templates",
+    "tags": ["template", "github-pages", "responsive", "no-build", "accessible"],
+    "thumbnail": null,
+    "launchFile": "/templates/github-pages-starter/index.html",
+    "downloads": {
+      "template": "/downloads/github-pages-starter.zip"
+    },
+    "featured": false
   }
 ]

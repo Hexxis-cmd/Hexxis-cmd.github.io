@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="[REPLACE WITH A SHORT DESCRIPTION OF YOUR WEBSITE]" />
+    <title>[SITE NAME]</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-name" href="#/">[SITE NAME]</a>
+      <nav aria-label="Primary navigation">
+        <a href="#/">Home</a>
+        <a href="#/projects">Projects</a>
+        <a href="#/about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page hero" data-page="home">
+        <p class="eyebrow">[OPTIONAL LABEL]</p>
+        <h1>[YOUR MAIN HEADLINE]</h1>
+        <p class="lead">[ONE OR TWO SENTENCES EXPLAINING WHAT YOU CREATE OR OFFER]</p>
+        <a class="button" href="#/projects">View projects</a>
+      </section>
+
+      <section class="page" data-page="projects" hidden>
+        <header class="page-heading">
+          <p class="eyebrow">Projects</p>
+          <h1>[YOUR WORK]</h1>
+          <p>[REPLACE THIS WITH A SHORT INTRODUCTION TO YOUR PROJECTS]</p>
+        </header>
+        <div class="project-grid">
+          <article>
+            <span>01</span>
+            <h2>[PROJECT NAME]</h2>
+            <p>[WHAT THE PROJECT DOES AND WHY IT MATTERS]</p>
+            <a href="[PROJECT URL]">Open project</a>
+          </article>
+          <article>
+            <span>02</span>
+            <h2>[PROJECT NAME]</h2>
+            <p>[WHAT THE PROJECT DOES AND WHY IT MATTERS]</p>
+            <a href="[PROJECT URL]">Open project</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="page about" data-page="about" hidden>
+        <div>
+          <p class="eyebrow">About</p>
+          <h1>[YOUR NAME OR ORGANIZATION]</h1>
+        </div>
+        <div>
+          <p class="lead">[ONE-SENTENCE INTRODUCTION]</p>
+          <p>[REPLACE THIS WITH A SHORT BIOGRAPHY. DESCRIBE YOUR EXPERIENCE, INTERESTS, OR PURPOSE.]</p>
+          <p>[OPTIONAL SECOND PARAGRAPH ABOUT YOUR CURRENT WORK OR GOALS.]</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <b data-year></b> [YOUR NAME OR ORGANIZATION]</span>
+      <a href="[YOUR GITHUB OR CONTACT URL]">Contact</a>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>

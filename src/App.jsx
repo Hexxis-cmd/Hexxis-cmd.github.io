@@ -5,7 +5,7 @@ import { useHolidayTheme } from './hooks/useHolidayTheme'
 import { useSoundscape } from './hooks/useSoundscape'
 import './App.css'
 
-const categories = ['All', 'Writing', 'Tools', 'Generators', 'Games', 'Art']
+const categories = ['All', 'Writing', 'Tools', 'Generators', 'Games', 'Art', 'Website Templates', 'GitHub Page Templates']
 
 function useRoute() {
   const readRoute = () => {
@@ -30,7 +30,9 @@ function ProjectCard({ project, onLaunch }) {
   return (
     <article className="project-card">
       <div className="project-image-wrap">
-        <img src={project.thumbnail} alt={`${project.title} project artwork`} />
+        {project.thumbnail
+          ? <img src={project.thumbnail} alt={`${project.title} project artwork`} />
+          : <div className="template-preview" aria-hidden="true"><span>&lt;/&gt;</span><strong>YOUR SITE</strong><small>Replace this placeholder</small></div>}
         {project.featured && <span className="featured-badge">Featured</span>}
       </div>
       <div className="project-card-body">
@@ -47,6 +49,7 @@ function ProjectCard({ project, onLaunch }) {
           {project.launchFile && <button className="primary-button" type="button" onClick={() => onLaunch(project)}>Launch</button>}
           {project.downloads?.windows && <a className="secondary-button" href={project.downloads.windows} target="_blank" rel="noreferrer">Windows <span aria-hidden="true">↗</span></a>}
           {project.downloads?.android && <a className="secondary-button" href={project.downloads.android} target="_blank" rel="noreferrer">Android <span aria-hidden="true">↗</span></a>}
+          {project.downloads?.template && <a className="secondary-button" href={project.downloads.template} download>Download template <span aria-hidden="true">↓</span></a>}
         </div>
       </div>
     </article>
@@ -125,29 +128,11 @@ function Navigation({ route, soundEnabled, onSoundToggle }) {
 }
 
 function HomePage() {
-  const [archiveSettled, setArchiveSettled] = useState(
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  )
-
   return (
     <header className="hero-shell page-view">
-      <div className={`archive-scene${archiveSettled ? ' is-settled' : ''}`} aria-hidden="true">
-        {archiveSettled
-          ? <img className="archive-video" src="/video/archive-idle-v3.png" alt="" />
-          : (
-              <video
-                className="archive-video"
-                autoPlay
-                muted
-                playsInline
-                poster="/video/archive-idle-v3.png"
-                onEnded={() => setArchiveSettled(true)}
-              >
-                <source src="/video/archive-entrance-v3.webm" type="video/webm" />
-                <source src="/video/archive-entrance-v3.mp4" type="video/mp4" />
-              </video>
-            )}
-        {archiveSettled && <div className="archive-ambience"><i /><i /><i /><i /><i /></div>}
+      <div className="archive-scene is-settled" aria-hidden="true">
+        <img className="archive-video" src="/video/archive-idle-v3.png" alt="" />
+        <div className="archive-ambience"><i /><i /><i /><i /><i /></div>
       </div>
       <div className="hero-grid">
         <div className="hero-copy">
