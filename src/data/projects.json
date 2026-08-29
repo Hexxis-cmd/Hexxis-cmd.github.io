@@ -1,0 +1,17 @@
+[
+  {
+    "id": "draft-a-lore",
+    "title": "Draft A Lore",
+    "version": "1.0.0",
+    "description": "An offline writing workspace for manuscripts, story planning, and branching RPG adventures. No account, no server, no AI.",
+    "category": "Writing",
+    "tags": ["no-ai", "offline", "writing", "rpg", "story"],
+    "thumbnail": "/thumbnails/draft-a-lore.png",
+    "launchFile": "/apps/DraftALore.html",
+    "downloads": {
+      "windows": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/tag/Draft_A_Lore-v1.0.0-Release",
+      "android": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/tag/Draft_A_Lore-v1.0.0-Release"
+    },
+    "featured": true
+  }
+]
