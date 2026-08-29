@@ -100,9 +100,7 @@ function Navigation({ route, soundEnabled, onSoundToggle }) {
     <nav className="topbar" aria-label="Primary navigation">
       <a className="wordmark" href="#/" aria-label="Hexxis Command Center home">
         <span className="github-mark" aria-hidden="true">
-          <svg viewBox="0 0 16 16" shapeRendering="crispEdges">
-            <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.49c-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.7 7.7 0 0 1 8 3.95c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-          </svg>
+          <img src="/branding/github-demonic-rpg.png" alt="" />
         </span>
         <span className="sr-only">Hexxis-cmd</span>
         <img className="wordmark-art" src="/branding/labels/hexxis-cmd.png" alt="" aria-hidden="true" />
@@ -130,9 +128,10 @@ function HomePage() {
   return (
     <header className="hero-shell page-view">
       <div className="archive-scene" aria-hidden="true">
-        <div className="archive-depth" />
-        <div className="archive-wraith" />
-        <div className="archive-lights"><i /><i /><i /></div>
+        <video className="archive-video" autoPlay loop muted playsInline poster="/video/archive-loop-poster.png">
+          <source src="/video/archive-loop.webm" type="video/webm" />
+          <source src="/video/archive-loop.mp4" type="video/mp4" />
+        </video>
       </div>
       <div className="hero-grid">
         <div className="hero-copy">
@@ -143,7 +142,7 @@ function HomePage() {
             <a className="primary-button" href="#/projects">
               <span className="sr-only">Browse projects</span>
               <img className="button-art" src="/branding/labels/browse-projects.png" alt="" aria-hidden="true" />
-              <span aria-hidden="true">→</span>
+              <img className="keyhole-art" src="/branding/keyhole-rpg.png" alt="" aria-hidden="true" />
             </a>
           </div>
         </div>
