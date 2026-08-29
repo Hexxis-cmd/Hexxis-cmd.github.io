@@ -67,6 +67,7 @@ export default function Ghost() {
         <div className={`ghost-eyes${blinking ? ' is-blinking' : ''}`} aria-hidden="true">
           <span /><span />
         </div>
+        <div className="ghost-mouth" aria-hidden="true" />
         {theme.accessory >= 0 && <div className="ghost-accessory" style={accessoryPosition(theme.accessory)} aria-hidden="true" />}
         {theme.effect && <div className="ghost-particles" aria-hidden="true">{Array.from({ length: 8 }, (_, index) => <i key={index} />)}</div>}
       </div>

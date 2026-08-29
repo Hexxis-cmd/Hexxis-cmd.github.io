@@ -96,7 +96,14 @@ function Navigation({ route, soundEnabled, onSoundToggle }) {
 
   return (
     <nav className="topbar" aria-label="Primary navigation">
-      <a className="wordmark" href="#/" aria-label="Hexxis Command Center home"><span>H</span><b>Hexxis-cmd</b></a>
+      <a className="wordmark" href="#/" aria-label="Hexxis Command Center home">
+        <span className="discord-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M7.1 6.4A14 14 0 0 1 10 5.7l.4.8a11 11 0 0 1 3.2 0l.4-.8a14 14 0 0 1 2.9.7c1.8 2.5 2.3 5 2 7.4a12 12 0 0 1-3.6 1.8l-.9-1.2c.5-.2 1-.5 1.4-.8-2.7 1.2-5 1.2-7.6 0 .4.3.9.6 1.4.8l-.9 1.2a12 12 0 0 1-3.6-1.8c-.3-2.4.2-4.9 2-7.4Zm2.3 5.8c.7 0 1.2-.7 1.2-1.5s-.5-1.5-1.2-1.5-1.2.7-1.2 1.5.5 1.5 1.2 1.5Zm5.2 0c.7 0 1.2-.7 1.2-1.5s-.5-1.5-1.2-1.5-1.2.7-1.2 1.5.5 1.5 1.2 1.5Z" />
+          </svg>
+        </span>
+        <b>Hexxis-cmd</b>
+      </a>
       <div className="nav-links">
         {link('home', 'Home')}
         {link('projects', 'Projects')}
@@ -122,9 +129,7 @@ function HomePage() {
     <header className="hero-shell page-view">
       <div className="hero-grid">
         <div className="hero-copy">
-          <p className="kicker"><span /> Software. Hardware. Strange ideas.</p>
           <h1 className="brand-title">Hexxis<br />Command<br />Center</h1>
-          <p className="hero-intro">A living collection of tools, experiments, games, and whatever I build next.</p>
           <div className="hero-actions">
             <a className="primary-button" href="#/projects">Browse projects <span aria-hidden="true">→</span></a>
           </div>
