@@ -21,7 +21,7 @@ main { width: min(1180px, calc(100% - 40px)); min-height: calc(100vh - 120px); m
   border-radius: 240px 240px 4px 4px;
   background:
     linear-gradient(180deg, rgba(4, 2, 5, .12), rgba(4, 2, 5, .58)),
-    url('/backgrounds/archive-library-v2.png') center/cover no-repeat;
+    url('/backgrounds/cryptid-archive-v3.png') center/cover no-repeat;
   box-shadow: inset 0 0 80px rgba(0, 0, 0, .48), 0 0 70px rgba(72, 0, 26, .1);
   image-rendering: pixelated;
   opacity: .68;
@@ -65,8 +65,9 @@ main { width: min(1180px, calc(100% - 40px)); min-height: calc(100vh - 120px); m
 .hero-grid { min-height: 600px; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 46px; position: relative; z-index: 1; }
 .hero-copy { max-width: 720px; padding-top: 45px; }
 h1 { margin: 0; font-size: clamp(4rem, 8vw, 7.5rem); line-height: .78; letter-spacing: -.078em; }
-.brand-title, .page-title { font-family: 'Pixelify Sans Variable', ui-monospace, monospace; font-weight: 760; color: transparent; -webkit-background-clip: text; background-clip: text; }
-.brand-title { line-height: .82; letter-spacing: -.035em; background-image: repeating-linear-gradient(0deg, transparent 0 5px, rgba(255, 244, 238, .22) 5px 6px), linear-gradient(180deg, #f0e5df 0%, #9f9298 20%, #3d2531 42%, #d7c9c5 55%, #8f0a30 70%, #230a15 100%); -webkit-text-stroke: 1px rgba(239, 221, 216, .62); filter: drop-shadow(4px 5px 0 #1b030c) drop-shadow(0 0 16px rgba(115, 0, 35, .42)); }
+.brand-title, .page-title { font-family: 'Pixelify Sans Variable', ui-monospace, monospace; font-weight: 760; }
+.brand-title { width: min(660px, 100%); line-height: 1; }
+.brand-title img { width: 100%; height: auto; object-fit: contain; object-position: left center; image-rendering: pixelated; filter: drop-shadow(5px 7px 0 #16030b) drop-shadow(0 0 20px rgba(120, 0, 38, .28)); }
 .page-title { margin-top: 12px; font-size: clamp(3rem, 6vw, 6rem); line-height: .9; letter-spacing: -.04em; }
 .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 36px; }
 .modal-label { color: #bca9b2; font: 700 .68rem ui-monospace, monospace; letter-spacing: .07em; text-transform: uppercase; }
@@ -99,17 +100,22 @@ h1 { margin: 0; font-size: clamp(4rem, 8vw, 7.5rem); line-height: .78; letter-sp
 .ghost-stage { --eye-x: 0px; --eye-y: 0px; --ghost-gradient: linear-gradient(135deg, #ffd990, #fff6db 35%, #cf9dff 68%, #ffd990); position: relative; width: 100%; aspect-ratio: 1; animation: ghost-float 5.4s ease-in-out infinite; isolation: isolate; }
 .ghost-body { position: absolute; inset: 0; background: var(--ghost-gradient); background-size: 260% 260%; -webkit-mask: url('/mascot/ghost-rpg.png') center/contain no-repeat; mask: url('/mascot/ghost-rpg.png') center/contain no-repeat; filter: drop-shadow(0 28px 28px rgba(128, 0, 32, .24)); image-rendering: pixelated; animation: ghost-gradient 8s ease-in-out infinite; }
 .ghost-depth { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; opacity: .72; mix-blend-mode: multiply; filter: contrast(1.38) saturate(.22); image-rendering: pixelated; pointer-events: none; }
-.ghost-eyes { position: absolute; top: 21.8%; left: 50%; display: flex; gap: 29px; transform: translateX(-50%); z-index: 3; }
-.ghost-eyes span { width: 21px; height: 14px; position: relative; border-radius: 0; background: #130710; clip-path: polygon(0 0, 100% 20%, 82% 100%, 18% 78%); box-shadow: 0 4px 0 rgba(67, 17, 43, .5); transform: translate(var(--eye-x), var(--eye-y)); transition: height .08s ease; image-rendering: pixelated; }
+.ghost-eyes { position: absolute; top: 11.8%; left: 50%; display: flex; gap: 14px; transform: translateX(-50%); z-index: 3; }
+.ghost-eyes span { width: 12px; height: 8px; position: relative; border-radius: 0; background: #130710; clip-path: polygon(0 0, 100% 25%, 75% 100%, 25% 75%); box-shadow: 0 2px 0 rgba(67, 17, 43, .52); transform: translate(var(--eye-x), var(--eye-y)); transition: height .08s ease; image-rendering: pixelated; }
 .ghost-eyes span:last-child { clip-path: polygon(0 20%, 100% 0, 82% 78%, 18% 100%); }
-.ghost-eyes span::after { content: ''; position: absolute; width: 3px; height: 3px; top: 6px; left: 9px; background: #9f284d; }
-.ghost-eyes.is-blinking span { height: 3px; margin-top: 10px; box-shadow: none; }
+.ghost-eyes span::after { content: ''; position: absolute; width: 2px; height: 2px; top: 3px; left: 5px; background: #b5264f; }
+.ghost-eyes.is-blinking span { height: 2px; margin-top: 5px; box-shadow: none; }
 .ghost-eyes.is-blinking span::after { display: none; }
-.ghost-mouth { position: absolute; top: 27.4%; left: 50%; z-index: 3; width: 28px; height: 12px; color: #17070d; transform: translateX(-50%); image-rendering: pixelated; }
-.ghost-mouth::before { content: ''; position: absolute; width: 4px; height: 4px; left: 0; top: 3px; background: currentColor; box-shadow: 4px 0 0 currentColor, 8px 4px 0 currentColor, 12px 4px 0 currentColor, 16px 4px 0 currentColor, 20px 0 0 currentColor, 24px 0 0 currentColor; }
-main:has(.topbar a:is(:hover, :focus-visible), .hero-actions a:is(:hover, :focus-visible)) .ghost-mouth { top: 26.7%; width: 16px; height: 24px; }
-main:has(.topbar a:is(:hover, :focus-visible), .hero-actions a:is(:hover, :focus-visible)) .ghost-mouth::before { left: 4px; top: 0; box-shadow: 4px 0 0 currentColor, -4px 4px 0 currentColor, 8px 4px 0 currentColor, -4px 8px 0 currentColor, 8px 8px 0 currentColor, -4px 12px 0 currentColor, 8px 12px 0 currentColor, -4px 16px 0 currentColor, 8px 16px 0 currentColor, 0 20px 0 currentColor, 4px 20px 0 currentColor; }
-.ghost-accessory { position: absolute; width: 52%; aspect-ratio: 1; top: -2%; left: 50%; z-index: 4; transform: translateX(-50%); background: url('/mascot/holiday-accessories.png') no-repeat; background-size: 400% 400%; image-rendering: pixelated; filter: drop-shadow(0 8px 7px rgba(0,0,0,.2)); }
+.ghost-mouth { position: absolute; top: 15.5%; left: 50%; z-index: 3; width: 16px; height: 8px; color: #17070d; transform: translateX(-50%); image-rendering: pixelated; }
+.ghost-mouth::before { content: ''; position: absolute; width: 2px; height: 2px; left: 0; top: 1px; background: currentColor; box-shadow: 2px 0 0 currentColor, 4px 2px 0 currentColor, 6px 4px 0 currentColor, 8px 4px 0 currentColor, 10px 2px 0 currentColor, 12px 0 0 currentColor, 14px 0 0 currentColor; }
+main:has(.topbar a:is(:hover, :focus-visible), .hero-actions a:is(:hover, :focus-visible)) .ghost-mouth { top: 15%; width: 10px; height: 16px; }
+main:has(.topbar a:is(:hover, :focus-visible), .hero-actions a:is(:hover, :focus-visible)) .ghost-mouth::before { left: 4px; top: 0; box-shadow: 2px 0 0 currentColor, -2px 2px 0 currentColor, 4px 2px 0 currentColor, -2px 4px 0 currentColor, 4px 4px 0 currentColor, -2px 6px 0 currentColor, 4px 6px 0 currentColor, -2px 8px 0 currentColor, 4px 8px 0 currentColor, 0 10px 0 currentColor, 2px 10px 0 currentColor; }
+.ghost-accessory { position: absolute; width: 40%; aspect-ratio: 1; top: -9%; left: 50%; z-index: 4; transform: translateX(-50%); background: url('/mascot/holiday-accessories-rpg.png') no-repeat; background-size: 400% 400%; image-rendering: pixelated; filter: drop-shadow(0 8px 7px rgba(0,0,0,.32)); }
+.ghost-easter .ghost-accessory, .ghost-halloween .ghost-accessory, .ghost-thanksgiving .ghost-accessory { width: 48%; top: -5%; }
+.ghost-st-patrick .ghost-accessory, .ghost-fathers-day .ghost-accessory { width: 44%; top: -10%; }
+.ghost-mothers-day .ghost-accessory { width: 46%; top: 3%; }
+.ghost-veterans-day .ghost-accessory { width: 46%; top: -8%; }
+.ghost-christmas .ghost-accessory, .ghost-kwanzaa .ghost-accessory { width: 46%; top: -3%; }
 .ghost-particles { position: absolute; inset: 8%; z-index: 5; pointer-events: none; }
 .ghost-particles i { position: absolute; width: 6px; height: 6px; background: var(--accent-bright); animation: pixel-pop 2.2s steps(4) infinite; }
 .ghost-particles i:nth-child(1) { left: 5%; top: 20%; animation-delay: -.3s; }

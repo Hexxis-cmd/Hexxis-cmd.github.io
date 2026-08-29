@@ -77,10 +77,11 @@ function getTheme(date) {
 
   if (month <= 1) return holiday('winter', 'Winter mode', -1)
   if (month <= 4) return holiday('spring', 'Spring mode', -1)
-  if (month <= 7) return holiday('summer', 'Summer mode', -1)
+  if (month <= 6) return holiday('summer', 'Summer mode', -1)
   return holiday('fall', 'Fall mode', -1)
 }
 
 export function useHolidayTheme() {
-  return useMemo(() => getTheme(new Date()), [])
+  const previewDate = import.meta.env.DEV ? new URLSearchParams(window.location.search).get('date') : null
+  return useMemo(() => getTheme(previewDate ? new Date(`${previewDate}T12:00:00`) : new Date()), [previewDate])
 }

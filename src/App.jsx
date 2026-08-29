@@ -128,7 +128,9 @@ function HomePage() {
     <header className="hero-shell page-view">
       <div className="hero-grid">
         <div className="hero-copy">
-          <h1 className="brand-title">Hexxis<br />Command<br />Center</h1>
+          <h1 className="brand-title">
+            <img src="/branding/hexxis-command-center-rpg.png" alt="Hexxis Command Center" />
+          </h1>
           <div className="hero-actions">
             <a className="primary-button" href="#/projects">Browse projects <span aria-hidden="true">→</span></a>
           </div>
