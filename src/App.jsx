@@ -108,7 +108,6 @@ function Navigation({ route, soundEnabled, onSoundToggle }) {
         {link('home', 'Home')}
         {link('projects', 'Projects')}
         {link('about', 'About')}
-        <a href="https://github.com/Hexxis-cmd" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
         <button
           className={`sound-toggle${soundEnabled ? ' is-enabled' : ''}`}
           type="button"
@@ -125,28 +124,16 @@ function Navigation({ route, soundEnabled, onSoundToggle }) {
 }
 
 function HomePage() {
-  const [startled, setStartled] = useState(false)
-  const projectTimer = useRef(null)
-
-  useEffect(() => () => clearTimeout(projectTimer.current), [])
-
-  const openProjects = (event) => {
-    event.preventDefault()
-    clearTimeout(projectTimer.current)
-    setStartled(true)
-    projectTimer.current = window.setTimeout(() => { window.location.hash = '#/projects' }, 420)
-  }
-
   return (
     <header className="hero-shell page-view">
       <div className="hero-grid">
         <div className="hero-copy">
           <h1 className="brand-title">Hexxis<br />Command<br />Center</h1>
           <div className="hero-actions">
-            <a className="primary-button" href="#/projects" onClick={openProjects}>Browse projects <span aria-hidden="true">→</span></a>
+            <a className="primary-button" href="#/projects">Browse projects <span aria-hidden="true">→</span></a>
           </div>
         </div>
-        <Ghost startled={startled} />
+        <Ghost />
       </div>
     </header>
   )
@@ -196,6 +183,9 @@ function AboutPage() {
     <section className="about-section page-view">
       <div>
         <p className="eyebrow">About me</p>
+        <figure className="about-portrait">
+          <img src="/about/daymien-vanhorn.png" alt="Daymien Vanhorn in a black suit" />
+        </figure>
       </div>
       <div className="about-copy">
         <p className="about-lead">I'm Daymien Vanhorn, also known as Hexxis-cmd.</p>

@@ -9,7 +9,7 @@ function accessoryPosition(index) {
   return { backgroundPosition: `${steps[column]} ${steps[row]}` }
 }
 
-export default function Ghost({ startled = false }) {
+export default function Ghost() {
   const theme = useHolidayTheme()
   const stageRef = useRef(null)
   const [blinking, setBlinking] = useState(false)
@@ -56,14 +56,14 @@ export default function Ghost({ startled = false }) {
   return (
     <div className={`ghost-wrap ghost-${theme.id}`}>
       <div
-        className={`ghost-stage${startled ? ' is-startled' : ''}`}
+        className="ghost-stage"
         data-effect={theme.effect}
         ref={stageRef}
         role="img"
         aria-label="Hexxis ghost mascot"
       >
         <div className="ghost-body" />
-        <img className="ghost-depth" src="/mascot/ghost-detailed.png" alt="" aria-hidden="true" />
+        <img className="ghost-depth" src="/mascot/ghost-rpg.png" alt="" aria-hidden="true" />
         <div className={`ghost-eyes${blinking ? ' is-blinking' : ''}`} aria-hidden="true">
           <span /><span />
         </div>
