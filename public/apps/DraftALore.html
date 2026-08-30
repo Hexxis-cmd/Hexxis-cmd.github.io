@@ -31,11 +31,6 @@
  * terms (see LICENSE.md). Credit to the original author must remain visible.
  * Commercial use requires a license — see COMMERCIAL-LICENSE.md.
  */
-/* ============================================
-   DRAFT A LORE — Complete Stylesheet
-   ============================================ */
-
-/* --- Reset & Base --- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 /* Fluid root size: every rem-based token below scales with the viewport, so the
    same layout stays legible on a 720p phone, a 1080p laptop and a 4K monitor. */
@@ -50,8 +45,6 @@ table{border-collapse:collapse;width:100%}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier(.16,1,.3,1),background 180ms cubic-bezier(.16,1,.3,1),border-color 180ms cubic-bezier(.16,1,.3,1),box-shadow 180ms cubic-bezier(.16,1,.3,1),transform 120ms ease}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-
-/* --- Type Scale --- */
 :root{
   --ts-xs:clamp(.75rem,.7rem+.2vw,.875rem);
   --ts-sm:clamp(.875rem,.8rem+.3vw,1rem);
@@ -80,7 +73,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --ws-body-h:calc(var(--app-h,100dvh) - var(--topbar-h) - var(--ws-strip-h));
   --ws-canvas-h:calc(var(--ws-body-h) - var(--ws-toolbar-h));
 
-  /* --- Layer scale ---------------------------------------------------------
+  /* Layer scale
      Every stacking context draws from this scale. Hardcoding a z-index inside a
      component is what let the workspace tool strip paint over the scene editor,
      so new layers belong here rather than in the component. */
@@ -97,7 +90,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --z-popover:400;
   --z-menu:5000;
 
-  /* --- Motion -------------------------------------------------------------
+  /* Motion
      One easing curve and three durations so hovers, panels and entrances all
      move with the same character. Everything decorative is switched off by the
      prefers-reduced-motion rule near the top of this file. */
@@ -108,17 +101,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --dur-slow:300ms;
 }
 
-/* ============================================================
-   THEMES
-   Every colour in the app comes from one of these blocks. Component CSS only
-   ever refers to the tokens, so a new theme needs no changes anywhere else.
-
-   --p-*  raw palette values, declared once and reused by both the theme block
-          and its swatch in the Settings picker so the two cannot drift.
-   --c-brand-1/2/3  the theme's gradient identity (brand mark, primary button,
-          progress fill, active nav).
-   --c-on-accent    text drawn on top of accent and brand surfaces.
-   ============================================================ */
 :root{
   --p-aurora-bg:#0a0814; --p-aurora-1:#6366F1; --p-aurora-2:#8B5CF6; --p-aurora-3:#EC4899;
   --p-aurora-panel:#151028; --p-aurora-text:#E8E0F0; --p-aurora-muted:#A997C4; --p-aurora-border:#2a1f48;
@@ -141,8 +123,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --p-slate-bg:#0B0F14; --p-slate-1:#2563EB; --p-slate-2:#38BDF8; --p-slate-3:#818CF8;
   --p-slate-panel:#151C24; --p-slate-text:#E9EFF6; --p-slate-muted:#A3B1C2; --p-slate-border:#26303C;
 }
-
-/* --- Theme: Midnight Ink --- */
 :root,:root[data-theme="dark"]{
   --c-bg:var(--p-dark-bg); --c-surface:#15181F; --c-surface-2:#1B1F28; --c-panel:#1A1D24;
   --c-border:#2A2E38; --c-divider:#232730;
@@ -164,8 +144,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Aurora --- */
 :root[data-theme="aurora"]{
   --c-bg:var(--p-aurora-bg); --c-surface:#110d20; --c-surface-2:#181230; --c-panel:#151028;
   --c-border:#2a1f48; --c-divider:#221838;
@@ -187,8 +165,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Daylight --- */
 :root[data-theme="light"]{
   --c-bg:var(--p-light-bg); --c-surface:#F5F2EB; --c-surface-2:#EFEBE2; --c-panel:#F0EDE5;
   --c-border:#D5D0C5; --c-divider:#E0DCD3;
@@ -210,8 +186,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Emberhold --- */
 :root[data-theme="fantasy-dark"]{
   --c-bg:var(--p-fantasy-dark-bg); --c-surface:#12150F; --c-surface-2:#171B13; --c-panel:#15180F;
   --c-border:#282E1E; --c-divider:#1E2218;
@@ -234,8 +208,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Gilded Vellum --- */
 :root[data-theme="fantasy-light"]{
   --c-bg:var(--p-fantasy-light-bg); --c-surface:#F8F0D8; --c-surface-2:#F2E8CE; --c-panel:#F5EDD5;
   --c-border:#D8CCA0; --c-divider:#E0D4B8;
@@ -258,8 +230,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Nebula --- */
 :root[data-theme="nebula"]{
   --c-bg:var(--p-nebula-bg); --c-surface:#0A1B26; --c-surface-2:#0F2532; --c-panel:#0C2030;
   --c-border:#1B3B4C; --c-divider:#152E3C;
@@ -281,8 +251,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Ember --- */
 :root[data-theme="ember"]{
   --c-bg:var(--p-ember-bg); --c-surface:#1F120E; --c-surface-2:#2A1813; --c-panel:#241511;
   --c-border:#40241B; --c-divider:#331C15;
@@ -304,8 +272,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Sakura --- */
 :root[data-theme="sakura"]{
   --c-bg:var(--p-sakura-bg); --c-surface:#FFF7FA; --c-surface-2:#F8E9EF; --c-panel:#FEF4F8;
   --c-border:#E7CBD7; --c-divider:#F0DBE3;
@@ -327,8 +293,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Moss --- */
 :root[data-theme="moss"]{
   --c-bg:var(--p-moss-bg); --c-surface:#F6F8F1; --c-surface-2:#E8EEE1; --c-panel:#F2F5EC;
   --c-border:#CBD6C0; --c-divider:#DCE3D2;
@@ -350,8 +314,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-body:'Georgia','Cambria','Times New Roman',serif;
   --font-mono:'Courier New',monospace;
 }
-
-/* --- Theme: Slate --- */
 :root[data-theme="slate"]{
   --c-bg:var(--p-slate-bg); --c-surface:#12181F; --c-surface-2:#18202A; --c-panel:#151C24;
   --c-border:#26303C; --c-divider:#1E2630;
@@ -374,7 +336,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   --font-mono:'Courier New',monospace;
 }
 
-/* --- Theme identity ---
+/* Theme identity
    These rules are theme-agnostic: each one reads the active theme's brand
    tokens, so all ten themes get the same gradient treatment without a block
    per theme. The [data-theme] prefix only exists to outrank the plain
@@ -412,50 +374,33 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 :root[data-theme] .card{border-color:var(--c-brand-edge)}
 :root[data-theme] .card.hoverable:hover{box-shadow:0 4px 20px var(--c-brand-glow);border-color:var(--c-brand-edge-strong)}
 
-/* --- Settings theme picker swatches ---
+/* Settings theme picker swatches
    One rule per theme, each pointing at that theme's palette values. */
 .theme-option[data-swatch]{background:var(--sw-panel);color:var(--sw-text);border-color:var(--sw-border)}
-.theme-option[data-swatch] .theme-option-desc{color:var(--sw-muted)}
 .theme-chip-bg{background:var(--sw-bg)}
 .theme-chip-grad{background:var(--sw-grad)}
-.theme-option[data-swatch="aurora"]{--sw-bg:var(--p-aurora-bg);--sw-grad:linear-gradient(135deg,var(--p-aurora-1),var(--p-aurora-2),var(--p-aurora-3));--sw-panel:var(--p-aurora-panel);--sw-text:var(--p-aurora-text);--sw-muted:var(--p-aurora-muted);--sw-border:var(--p-aurora-border)}
-.theme-option[data-swatch="dark"]{--sw-bg:var(--p-dark-bg);--sw-grad:linear-gradient(135deg,var(--p-dark-1),var(--p-dark-2),var(--p-dark-3));--sw-panel:var(--p-dark-panel);--sw-text:var(--p-dark-text);--sw-muted:var(--p-dark-muted);--sw-border:var(--p-dark-border)}
-.theme-option[data-swatch="light"]{--sw-bg:var(--p-light-bg);--sw-grad:linear-gradient(135deg,var(--p-light-1),var(--p-light-2),var(--p-light-3));--sw-panel:var(--p-light-panel);--sw-text:var(--p-light-text);--sw-muted:var(--p-light-muted);--sw-border:var(--p-light-border)}
-.theme-option[data-swatch="fantasy-dark"]{--sw-bg:var(--p-fantasy-dark-bg);--sw-grad:linear-gradient(135deg,var(--p-fantasy-dark-1),var(--p-fantasy-dark-2),var(--p-fantasy-dark-3));--sw-panel:var(--p-fantasy-dark-panel);--sw-text:var(--p-fantasy-dark-text);--sw-muted:var(--p-fantasy-dark-muted);--sw-border:var(--p-fantasy-dark-border)}
-.theme-option[data-swatch="fantasy-light"]{--sw-bg:var(--p-fantasy-light-bg);--sw-grad:linear-gradient(135deg,var(--p-fantasy-light-1),var(--p-fantasy-light-2),var(--p-fantasy-light-3));--sw-panel:var(--p-fantasy-light-panel);--sw-text:var(--p-fantasy-light-text);--sw-muted:var(--p-fantasy-light-muted);--sw-border:var(--p-fantasy-light-border)}
-.theme-option[data-swatch="nebula"]{--sw-bg:var(--p-nebula-bg);--sw-grad:linear-gradient(135deg,var(--p-nebula-1),var(--p-nebula-2),var(--p-nebula-3));--sw-panel:var(--p-nebula-panel);--sw-text:var(--p-nebula-text);--sw-muted:var(--p-nebula-muted);--sw-border:var(--p-nebula-border)}
-.theme-option[data-swatch="ember"]{--sw-bg:var(--p-ember-bg);--sw-grad:linear-gradient(135deg,var(--p-ember-1),var(--p-ember-2),var(--p-ember-3));--sw-panel:var(--p-ember-panel);--sw-text:var(--p-ember-text);--sw-muted:var(--p-ember-muted);--sw-border:var(--p-ember-border)}
-.theme-option[data-swatch="sakura"]{--sw-bg:var(--p-sakura-bg);--sw-grad:linear-gradient(135deg,var(--p-sakura-1),var(--p-sakura-2),var(--p-sakura-3));--sw-panel:var(--p-sakura-panel);--sw-text:var(--p-sakura-text);--sw-muted:var(--p-sakura-muted);--sw-border:var(--p-sakura-border)}
-.theme-option[data-swatch="moss"]{--sw-bg:var(--p-moss-bg);--sw-grad:linear-gradient(135deg,var(--p-moss-1),var(--p-moss-2),var(--p-moss-3));--sw-panel:var(--p-moss-panel);--sw-text:var(--p-moss-text);--sw-muted:var(--p-moss-muted);--sw-border:var(--p-moss-border)}
-.theme-option[data-swatch="slate"]{--sw-bg:var(--p-slate-bg);--sw-grad:linear-gradient(135deg,var(--p-slate-1),var(--p-slate-2),var(--p-slate-3));--sw-panel:var(--p-slate-panel);--sw-text:var(--p-slate-text);--sw-muted:var(--p-slate-muted);--sw-border:var(--p-slate-border)}
+.theme-option[data-swatch="aurora"]{--sw-bg:var(--p-aurora-bg);--sw-grad:linear-gradient(135deg,var(--p-aurora-1),var(--p-aurora-2),var(--p-aurora-3));--sw-panel:var(--p-aurora-panel);--sw-text:var(--p-aurora-text);--sw-border:var(--p-aurora-border)}
+.theme-option[data-swatch="dark"]{--sw-bg:var(--p-dark-bg);--sw-grad:linear-gradient(135deg,var(--p-dark-1),var(--p-dark-2),var(--p-dark-3));--sw-panel:var(--p-dark-panel);--sw-text:var(--p-dark-text);--sw-border:var(--p-dark-border)}
+.theme-option[data-swatch="light"]{--sw-bg:var(--p-light-bg);--sw-grad:linear-gradient(135deg,var(--p-light-1),var(--p-light-2),var(--p-light-3));--sw-panel:var(--p-light-panel);--sw-text:var(--p-light-text);--sw-border:var(--p-light-border)}
+.theme-option[data-swatch="fantasy-dark"]{--sw-bg:var(--p-fantasy-dark-bg);--sw-grad:linear-gradient(135deg,var(--p-fantasy-dark-1),var(--p-fantasy-dark-2),var(--p-fantasy-dark-3));--sw-panel:var(--p-fantasy-dark-panel);--sw-text:var(--p-fantasy-dark-text);--sw-border:var(--p-fantasy-dark-border)}
+.theme-option[data-swatch="fantasy-light"]{--sw-bg:var(--p-fantasy-light-bg);--sw-grad:linear-gradient(135deg,var(--p-fantasy-light-1),var(--p-fantasy-light-2),var(--p-fantasy-light-3));--sw-panel:var(--p-fantasy-light-panel);--sw-text:var(--p-fantasy-light-text);--sw-border:var(--p-fantasy-light-border)}
+.theme-option[data-swatch="nebula"]{--sw-bg:var(--p-nebula-bg);--sw-grad:linear-gradient(135deg,var(--p-nebula-1),var(--p-nebula-2),var(--p-nebula-3));--sw-panel:var(--p-nebula-panel);--sw-text:var(--p-nebula-text);--sw-border:var(--p-nebula-border)}
+.theme-option[data-swatch="ember"]{--sw-bg:var(--p-ember-bg);--sw-grad:linear-gradient(135deg,var(--p-ember-1),var(--p-ember-2),var(--p-ember-3));--sw-panel:var(--p-ember-panel);--sw-text:var(--p-ember-text);--sw-border:var(--p-ember-border)}
+.theme-option[data-swatch="sakura"]{--sw-bg:var(--p-sakura-bg);--sw-grad:linear-gradient(135deg,var(--p-sakura-1),var(--p-sakura-2),var(--p-sakura-3));--sw-panel:var(--p-sakura-panel);--sw-text:var(--p-sakura-text);--sw-border:var(--p-sakura-border)}
+.theme-option[data-swatch="moss"]{--sw-bg:var(--p-moss-bg);--sw-grad:linear-gradient(135deg,var(--p-moss-1),var(--p-moss-2),var(--p-moss-3));--sw-panel:var(--p-moss-panel);--sw-text:var(--p-moss-text);--sw-border:var(--p-moss-border)}
+.theme-option[data-swatch="slate"]{--sw-bg:var(--p-slate-bg);--sw-grad:linear-gradient(135deg,var(--p-slate-1),var(--p-slate-2),var(--p-slate-3));--sw-panel:var(--p-slate-panel);--sw-text:var(--p-slate-text);--sw-border:var(--p-slate-border)}
 
-/* --- Settings theme picker ---
+/* Settings theme picker
    Ten options, so the grid fills the width it has and each option stays a
    comfortable tap target rather than shrinking to fit a fixed column count. */
 .theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px}
 .theme-option{cursor:pointer;padding:14px}
 .theme-option.active{border:2px solid var(--c-accent);padding:13px}
-.theme-option-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.theme-option-head{display:flex;align-items:center;gap:8px}
 .theme-option-name{font-weight:700}
-.theme-option-desc{font-size:var(--ts-xs);color:var(--c-text-muted);line-height:1.5}
 .theme-chip{width:18px;height:18px;border-radius:var(--radius-sm);border:1px solid var(--c-border);flex-shrink:0}
 
-/* --- Settings theme picker swatches ---
-   One rule per theme, each pointing at that theme's palette values. */
-.theme-chip-bg{background:var(--sw-bg)}
-.theme-chip-grad{background:var(--sw-grad)}
-.theme-option[data-swatch="aurora"]{--sw-bg:var(--p-aurora-bg);--sw-grad:linear-gradient(135deg,var(--p-aurora-1),var(--p-aurora-2),var(--p-aurora-3))}
-.theme-option[data-swatch="dark"]{--sw-bg:var(--p-dark-bg);--sw-grad:linear-gradient(135deg,var(--p-dark-1),var(--p-dark-2),var(--p-dark-3))}
-.theme-option[data-swatch="light"]{--sw-bg:var(--p-light-bg);--sw-grad:linear-gradient(135deg,var(--p-light-1),var(--p-light-2),var(--p-light-3))}
-.theme-option[data-swatch="fantasy-dark"]{--sw-bg:var(--p-fantasy-dark-bg);--sw-grad:linear-gradient(135deg,var(--p-fantasy-dark-1),var(--p-fantasy-dark-2),var(--p-fantasy-dark-3))}
-.theme-option[data-swatch="fantasy-light"]{--sw-bg:var(--p-fantasy-light-bg);--sw-grad:linear-gradient(135deg,var(--p-fantasy-light-1),var(--p-fantasy-light-2),var(--p-fantasy-light-3))}
-.theme-option[data-swatch="nebula"]{--sw-bg:var(--p-nebula-bg);--sw-grad:linear-gradient(135deg,var(--p-nebula-1),var(--p-nebula-2),var(--p-nebula-3))}
-.theme-option[data-swatch="ember"]{--sw-bg:var(--p-ember-bg);--sw-grad:linear-gradient(135deg,var(--p-ember-1),var(--p-ember-2),var(--p-ember-3))}
-.theme-option[data-swatch="sakura"]{--sw-bg:var(--p-sakura-bg);--sw-grad:linear-gradient(135deg,var(--p-sakura-1),var(--p-sakura-2),var(--p-sakura-3))}
-.theme-option[data-swatch="moss"]{--sw-bg:var(--p-moss-bg);--sw-grad:linear-gradient(135deg,var(--p-moss-1),var(--p-moss-2),var(--p-moss-3))}
-.theme-option[data-swatch="slate"]{--sw-bg:var(--p-slate-bg);--sw-grad:linear-gradient(135deg,var(--p-slate-1),var(--p-slate-2),var(--p-slate-3))}
-
-/* --- Layout Shell ---
+/* Layout Shell
    --app-h is set by DAL.applyViewport() from visualViewport so mobile browser
    chrome and on-screen keyboards can't push the UI off screen; the vh/dvh
    values are the progressive fallbacks. */
@@ -510,9 +455,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 /* Content Area */
 .content{flex:1;overflow-y:auto;padding:24px;animation:fadeIn 180ms ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-/* --- Components --- */
-
 /* Cards */
 .card{background:var(--c-panel);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:16px;transition:transform var(--transition),box-shadow var(--transition)}
 .card.hoverable:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
@@ -617,10 +559,14 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 
 /* Project Workspace */
 .workspace{display:flex;height:100%;width:100%;overflow:hidden}
+/* A project has its own name, menus, status, and Back control. The global
+   header duplicates those controls and steals a full row on tablets. */
+#app.in-workspace .main > .topbar{display:none}
 /* Column holding the workspace topbar and the active tool. Distinct from
    .workspace-main, which is the padded scroll area for a tool's own content. */
 .workspace-shell{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .workspace-sidebar{width:200px;flex-shrink:0;background:var(--c-surface);border-right:1px solid var(--c-border);display:flex;flex-direction:column;overflow-y:auto}
+.workspace-sidebar > div:first-child:has(> [data-action="nav-projects"]){display:none}
 .workspace-main{flex:1;overflow-y:auto;padding:16px;min-width:0}
 /* File/Edit/View menu bar lives in the project workspace header only —
    never on Dashboard/Projects/Settings. Each trigger opens a dropdown built
@@ -780,6 +726,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 /* Wide screens show the controls themselves; the "Aa" button is the phone
    fallback and stays out of the way here. */
 .reader-settings-btn{display:none}
+.mobile-context-action{display:none}
 .reader-sheet{display:flex;flex-direction:column;gap:14px}
 .reader-field{display:flex;flex-direction:column;gap:6px}
 .reader-field-label{font-size:var(--ts-xs);color:var(--c-text-muted);letter-spacing:.02em}
@@ -1431,7 +1378,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   border:1px solid var(--c-border)
 }
 
-/* --- Export groups ---
+/* Export groups
    Shared by the Export tool tabs and the Export Project dialog, which all build
    their markup from the same export registry. */
 .export-group{margin-bottom:12px}
@@ -1442,20 +1389,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 .export-intro{color:var(--c-text-muted);font-size:var(--ts-sm);line-height:1.6;margin-bottom:16px}
 /* Inside the dialog the groups are the whole body, so drop the trailing gap. */
 .export-groups .export-group:last-child{margin-bottom:0}
-
-/* ============================================
-   ADAPTIVE LAYOUT & DENSITY
-   One source of truth for how the app reflows across window sizes,
-   resolutions, pixel densities and input types. Everything below is additive:
-   it overrides the fixed panel widths defined earlier in this file.
-   Buckets (also mirrored on <html data-viewport>):
-     compact  < 760px    phones, tiny windows
-     snug     760-1049   large phones landscape, small tablets, half-screen windows
-     medium   1050-1599  laptops, 1080p windows
-     wide     >= 1600px  1440p / 4K monitors, maximised windows
-   ============================================ */
-
-/* --- Fluid shell + panel widths (no breakpoint jumps) --- */
 :root{
   --sidebar-w:clamp(190px,15vw,260px);
   --sidebar-w-collapsed:clamp(46px,4vw,56px);
@@ -1493,8 +1426,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .card-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
   .char-grid,.illustration-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 }
-
-/* --- Off-canvas navigation drawer (snug + compact) --- */
 .nav-scrim{display:none}
 @media (max-width:1049px){
   .sidebar{position:absolute;top:0;bottom:0;left:0;height:100%;z-index:var(--z-nav);
@@ -1514,9 +1445,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .playtest-inspector{position:absolute;right:0;top:0;bottom:0;z-index:var(--z-dock);width:min(300px,70vw)}
   .playtest-layout,.manuscript-layout{position:relative}
 }
-
-/* --- Compact: phones and very small windows --- */
-@media (max-width:759px){
+@media (max-width:759px), (max-width:959px) and (max-height:520px){
   .theme-grid{grid-template-columns:1fr}
   .theme-option{min-height:var(--tap)}
   :root{--gutter:12px;--topbar-h:52px}
@@ -1564,16 +1493,12 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 @media (min-width:560px) and (max-width:759px){
   .card-grid,.char-grid,.illustration-grid,.library-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-/* --- Short viewports (landscape phones, split windows) --- */
 @media (max-height:560px){
   :root{--topbar-h:44px}
   .editor-surface{padding-top:8px;padding-bottom:8px}
   .chapter-list,.lore-sidebar,.workspace-sidebar{max-height:none}
   .modal{max-height:92dvh}
 }
-
-/* --- Touch / coarse pointer: bigger targets, no accidental iOS zoom --- */
 @media (hover:none) and (pointer:coarse){
   .nav-item,.ws-nav-item,.chapter-item,.lore-entry-item,.lore-folder,.playtest-choice{min-height:var(--tap);align-items:center}
   .info-icon,.topbar-btn,.switch,.editor-toolbar .tb-btn,.canvas-toolbar .tb-btn{width:var(--tap);height:var(--tap)}
@@ -1608,21 +1533,15 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .card.hoverable:hover{transform:none;box-shadow:none}
   ::-webkit-scrollbar{width:10px;height:10px}
 }
-
-/* --- Notch / installed-app safe areas --- */
 @supports (padding:env(safe-area-inset-left)){
   .sidebar{padding-left:var(--safe-l)}
   .topbar{padding-top:var(--safe-t)}
   .editor-footer,.word-count-floating{padding-bottom:calc(4px + var(--safe-b))}
 }
-
-/* --- HiDPI: keep 1px borders visually 1px, not 2-3 device px --- */
 @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
   .card,.modal,.form-input,.form-textarea,.form-select,.btn,.badge{border-width:.5px}
   html[data-dpr="high"] .sidebar{border-right-width:.5px}
 }
-
-/* --- Print / PDF export --- */
 @media print{
   .sidebar,.topbar,.chapter-list,.workspace-sidebar,.lore-sidebar,.editor-toolbar,
   .editor-footer,.toast-container,.nav-scrim{display:none!important}
@@ -1630,7 +1549,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   body{overflow:visible}
 }
 
-/* --- Brand mark legibility ---
+/* Brand mark legibility
    logo.png is white line-art, so it disappears on the light themes; recolour it
    to the theme's accent instead of shipping a second bitmap. */
 :root[data-theme="light"] .sidebar-logo img,
@@ -1649,11 +1568,11 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .profile-stat{align-items:center}
 }
 
-/* --- Workspace shell on small viewports ---
+/* Workspace shell on small viewports
    The project workspace is a second nested shell (tool rail + topbar + panel
    layouts). On phones the tool rail becomes a horizontal, scrollable strip so
    the actual editor keeps the full width instead of being reduced to a sliver. */
-@media (max-width:759px){
+@media (max-width:759px), (max-width:959px) and (max-height:520px){
   .workspace{flex-direction:column}
   .workspace-sidebar{
     width:100%;max-height:none;flex-direction:row;flex-wrap:nowrap;align-items:center;
@@ -1684,9 +1603,17 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .ws-nav-item{padding:7px 10px}
 }
 
+/* A tablet or compact laptop still loses width to both navigation rails. Give
+   its project header a second row instead of clipping word counts and status. */
+@media (min-width:1050px) and (max-width:1399px){
+  .workspace-topbar{flex-wrap:wrap;height:auto;min-height:var(--topbar-h);row-gap:4px;padding:5px 10px}
+  .workspace-topbar #projNameInput{flex:1 1 210px;min-width:150px}
+  .workspace-topbar > div[style*="margin-left:auto"]{flex:1 1 auto;justify-content:flex-end;min-width:260px}
+}
+
 /* Wide data tables (stats, items, inventory) stay tabular on phones and get a
    horizontal scroll instead of pushing the page sideways. */
-@media (max-width:759px){
+@media (max-width:759px), (max-width:959px) and (max-height:520px){
   .workspace-main{overflow-x:auto}
   .workspace-main table,.content table{min-width:min-content}
   .stats-table{display:table;overflow:visible}
@@ -1699,34 +1626,13 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 .content:has(.workspace) > .workspace{height:100%}
 
 
-/* ============================================================================
-   MOBILE LAYOUT
-   ----------------------------------------------------------------------------
-   Everything above this point describes the desktop shell and then shrinks it.
-   A phone is not a small desktop, so below 760px the app switches to a
-   purpose-built layout instead:
-
-     * primary navigation moves from a hidden left drawer to a fixed
-       bottom tab bar, always visible and inside thumb reach;
-     * hover-only affordances (tooltips) are removed outright, because on touch
-       they latch open and float on top of the controls they describe;
-     * the type scale, tap targets and spacing are set for a hand-held screen
-       rather than being derived from the desktop values;
-     * modals become bottom sheets, side panels become stacked sections, and
-       the writing surface always keeps the majority of the screen.
-   ========================================================================== */
 
 :root{ --tabbar-h:58px; }
 
 /* Hidden by default — this is a phone-only control. */
 .mobile-tabbar{display:none}
 
-/* ==========================================================================
-   COMPACT / PHONE
-   ========================================================================== */
-@media (max-width:759px){
-
-  /* --- Tokens tuned for a hand-held screen ------------------------------- */
+@media (max-width:759px), (max-width:959px) and (max-height:520px){
   :root{
     --gutter:16px;
     --topbar-h:56px;
@@ -1749,8 +1655,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 
   /* Tool-tab chips in the workspace rail are tall enough to thumb reliably. */
   .ws-nav-item{min-height:48px}
-
-  /* --- 1. Left drawer out, bottom tab bar in ----------------------------- */
   #app > .sidebar,
   #app > .nav-scrim,
   .topbar > [data-action="toggle-sidebar"]{display:none!important}
@@ -1795,8 +1699,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 
   /* The workspace is a self-contained shell with its own rail + back button. */
   #app.in-workspace .mobile-tabbar{display:none}
-
-  /* --- 2. Top bar: title plus only the controls that matter on a phone --- */
   .topbar{
     height:auto;min-height:var(--topbar-h);
     gap:6px;
@@ -1819,8 +1721,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .save-status span{display:none}
   .save-dot{width:9px;height:9px}
   .search-box{max-width:none;flex:1 1 100%;order:9}
-
-  /* --- 3. Content column ------------------------------------------------- */
   .content{
     padding:var(--gutter);
     /* Clear the fixed tab bar so the last card and any floating button are
@@ -1837,8 +1737,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
     align-items:stretch;
   }
   .toast{max-width:none;width:100%}
-
-  /* --- 4. Cards, grids and sections ------------------------------------- */
   .card{padding:16px;border-radius:var(--radius-lg)}
   .card + .card{margin-top:12px}
   /* ...but inside a grid the gap already spaces them, and a stray top margin
@@ -1855,8 +1753,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
      squeezing the button into a sliver. */
   .section-header{flex-wrap:wrap;row-gap:8px;align-items:flex-start}
   .section-header > .btn{flex:0 0 auto}
-
-  /* --- 5. Controls: real touch targets ---------------------------------- */
   .btn{min-height:var(--tap);padding:11px 16px;font-size:var(--ts-sm)}
   .btn.sm{min-height:var(--tap);padding:8px 13px}
   .btn.block{width:100%}
@@ -1889,8 +1785,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .form-label{font-size:var(--ts-xs)}
   .chip,.tag{padding:7px 12px;font-size:var(--ts-xs)}
   .chip{min-height:var(--tap);margin:4px}
-
-  /* --- 6. Modals become bottom sheets ----------------------------------- */
   .modal-backdrop{align-items:flex-end;padding:0}
   .modal,.modal.wide{
     max-width:none;width:100%;
@@ -1910,19 +1804,11 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .modal-footer{flex-direction:column-reverse;gap:8px;margin-top:18px}
   .modal-footer .btn{width:100%}
   @keyframes sheetUp{from{transform:translateY(14%);opacity:.4}to{transform:translateY(0);opacity:1}}
-
-  /* --- 7. Dashboard ----------------------------------------------------- */
   .dashboard-profile-card{padding:16px;border-radius:var(--radius-lg)}
   .profile-card-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
 }
 
-/* ==========================================================================
-   COMPACT — PROJECT WORKSPACE
-   The workspace is a nested shell. On a phone the vertical tool rail becomes a
-   sticky, horizontally scrollable tab strip pinned under a compact header, so
-   the editor keeps the whole screen instead of sharing it with two side rails.
-   ========================================================================== */
-@media (max-width:759px){
+@media (max-width:759px), (max-width:959px) and (max-height:520px){
   .workspace{flex-direction:column;height:100%}
 
   /* The desktop markup wraps the project header and the main panel in an
@@ -2042,6 +1928,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .editor-toolbar .tb-btn{flex:0 0 auto;width:var(--tap);height:var(--tap)}
   .editor-toolbar select{font-size:16px}
   .canvas-toolbar .tb-btn{width:var(--tap);height:var(--tap)}
+  .mobile-context-action{display:inline-flex;align-items:center;justify-content:center;font-size:1.35rem;font-weight:700}
   .stats-table input,.stats-table select{min-height:var(--tap);font-size:16px}
   input[data-goal]{min-height:var(--tap);font-size:16px!important}
   .chapter-ill-remove{width:var(--tap);height:var(--tap);padding:0;background:transparent;font-size:16px}
@@ -2062,28 +1949,19 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   .stats-table{display:block;overflow-x:auto;white-space:nowrap}
 }
 
-/* --- Landscape phones / very short viewports ------------------------------
+/* Landscape phones / very short viewports
    Vertical space is the scarce resource here, so the tab bar and header
    compress and the panel height caps are lifted. */
 @media (max-width:959px) and (max-height:520px){
   :root{--tabbar-h:46px;--topbar-h:44px}
   .mtab{gap:0}
-  .mtab span{display:none}
+  .mtab span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .mtab svg{width:20px;height:20px}
   .chapter-list,.lore-sidebar{max-height:34vh}
   .editor-area{min-height:0}
   .modal{max-height:96dvh}
 }
 
-/* ==========================================================================
-   TOOL PANELS  ( .tool-panel )
-   The scene editor, and any future inspector, is one component with two
-   presentations: docked beside the canvas on a wide screen, and a bottom sheet
-   on a phone. It used to be built from an inline style string with a hardcoded
-   320px width and z-index:5, which is why it covered most of a phone screen and
-   was painted over by the workspace tool strip. Layout now lives here so the
-   media queries below can actually reach it.
-   ========================================================================== */
 .tool-panel{
   position:absolute;top:var(--ws-toolbar-h);right:0;
   width:clamp(300px,26vw,380px);
@@ -2121,12 +1999,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 /* The sheet scrim only exists in the phone presentation. */
 .tool-panel-scrim{display:none}
 
-/* ==========================================================================
-   UTILITIES
-   A deliberately small set, covering the repetitive text, spacing and layout
-   declarations that were previously written inline in the tool renderers. Every
-   one resolves to a design token so themes and media queries still apply.
-   ========================================================================== */
 .u-hint{font-size:var(--ts-xs);color:var(--c-text-muted)}
 .u-hint-faint{font-size:var(--ts-xs);color:var(--c-text-faint)}
 .u-hint-note{font-size:var(--ts-xs);color:var(--c-text-faint);font-style:italic;margin-top:4px}
@@ -2160,13 +2032,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 }
 .canvas-empty-title{font-size:var(--ts-lg);color:var(--c-text-muted);margin-bottom:8px;font-family:var(--font-display)}
 
-/* ==========================================================================
-   MOTION AND DEPTH
-   Restrained character: things lift slightly when pointed at, surfaces catch a
-   faint light from the theme's own brand colour, and content arrives rather
-   than appearing. No animation runs longer than 300ms, nothing loops except the
-   existing nav glow, and prefers-reduced-motion removes all of it.
-   ========================================================================== */
 
 /* Cards lift and pick up a brand-tinted edge on hover. Pointer devices only, so
    a tap on a phone never leaves a card stuck in a hover state. */
@@ -2227,14 +2092,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
   opacity:.85;
 }
 
-/* ==========================================================================
-   PHONE — TOOL PANELS BECOME SHEETS
-   A 380px dock on a 390px screen is the whole screen, so below this width the
-   panel becomes a proper bottom sheet: it stops at 88% of the viewport, sits
-   above the tool strip on the layer scale, dims what is behind it, and clears
-   the home indicator and the mobile tab bar.
-   ========================================================================== */
-@media (max-width:759px){
+@media (max-width:759px), (max-width:959px) and (max-height:520px){
   :root{--ws-strip-h:100px}
 
   .tool-panel{
@@ -2310,9 +2168,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 .folder-sync-note + .folder-sync-note{margin-top:10px}
 .folder-sync-note strong{color:var(--c-text)}
 
-/* ============================================================
-   Interaction layer: menus, selection, clipboard, drag, panels
-   ============================================================ */
 
 /* Menu additions on top of the base .menu-dropdown rules. Headings and check
    marks let one renderer serve the menu bar and right-click menus alike. */
@@ -2333,8 +2188,6 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
    shows its own colours. */
 .is-selected{outline:2px solid var(--c-accent);outline-offset:1px}
 .canvas-node.is-selected{box-shadow:0 0 0 2px var(--c-accent),0 0 22px -4px var(--c-brand-glow)}
-
-/* --- Clipboard board --- */
 .clip-board{display:flex;flex-direction:column;gap:8px;max-height:60vh;overflow-y:auto}
 .clip-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--c-border);border-radius:var(--radius-sm);background:var(--c-surface);transition:border-color var(--dur) var(--ease-out)}
 .clip-entry:hover{border-color:var(--c-brand-edge-strong)}
@@ -2343,7 +2196,7 @@ a,button,[role=button],input,textarea,select{transition:color 180ms cubic-bezier
 .clip-label{font-weight:600;color:var(--c-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .clip-entry-actions{display:flex;gap:6px;flex:0 0 auto}
 
-/* --- Drag and drop ---
+/* Drag and drop
    The ghost follows the pointer and is never a hit-test target itself. */
 .drag-ghost{position:fixed;z-index:var(--z-toast);pointer-events:none;padding:6px 12px;border-radius:var(--radius-sm);background:var(--c-panel);border:1px solid var(--c-brand-edge-strong);color:var(--c-text);font-size:var(--ts-sm);font-weight:600;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-shadow:0 10px 28px -8px rgba(0,0,0,.5);opacity:.94;transform:rotate(-1.5deg)}
 .drag-ghost.over-target{border-color:var(--c-accent);box-shadow:0 0 0 1px var(--c-accent),0 10px 28px -8px var(--c-brand-glow)}
@@ -2358,7 +2211,7 @@ body.dragging{user-select:none;-webkit-user-select:none}
 .drag-handle{cursor:grab;touch-action:none;color:var(--c-text-faint);letter-spacing:-1px;user-select:none}
 .drag-handle:hover{color:var(--c-accent)}
 
-/* --- Collapsible panels ---
+/* Collapsible panels
    Height is animated from a measured pixel value in JS, so the transition here
    only has to describe the curve. */
 .panel{border:1px solid var(--c-border);border-radius:var(--radius-sm);background:var(--c-surface);overflow:hidden}
@@ -2422,9 +2275,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
   line-height: 1.5;
   margin-top: 4px;
 }
-
-/* --- Folder tabs --- */
-
 .asset-tabs{
   display: flex;
   gap: 4px;
@@ -2467,9 +2317,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
   background: color-mix(in srgb, var(--c-accent) 20%, transparent);
   color: var(--c-accent);
 }
-
-/* --- Drop zone --- */
-
 .asset-dropzone{
   display: flex;
   flex-direction: column;
@@ -2504,9 +2351,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
   font-size: var(--ts-xs);
   margin-bottom: 20px;
 }
-
-/* --- Image and vector grid --- */
-
 .asset-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -2589,9 +2433,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
   font-size: var(--ts-xs);
   text-align: center;
 }
-
-/* --- Sound list --- */
-
 .asset-sound-list{ display: flex; flex-direction: column; gap: 10px; }
 .asset-sound{
   padding: 12px 14px;
@@ -2619,9 +2460,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
 }
 .asset-sound-head .btn{ margin-left: auto; }
 .asset-audio{ width: 100%; height: 34px; display: block; }
-
-/* --- Audio binding + settings --- */
-
 .audio-bind{
   display: flex;
   flex-direction: column;
@@ -2643,9 +2481,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
   accent-color: var(--c-accent);
 }
 .form-range.slim{ width: 84px; min-height: 28px; }
-
-/* --- Shared audio transport --- */
-
 .audio-bar{
   display: flex;
   align-items: center;
@@ -2663,9 +2498,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
   background: var(--c-surface-2);
 }
 .playtest-audio-bar .asset-note{ margin: 0; }
-
-/* --- Library shelf --- */
-
 .book-spine-kind{
   font-size: var(--ts-xs);
   font-weight: 700;
@@ -2697,9 +2529,6 @@ body.dragging{user-select:none;-webkit-user-select:none}
   border-top: 1px solid var(--c-border);
 }
 .import-choice:first-of-type{ border-top: 0; }
-
-/* --- Adventure player --- */
-
 .player-shell{
   display: grid;
   grid-template-columns: minmax(0, 1fr) 240px;
@@ -2913,13 +2742,7 @@ window.DAL_ASSETS={"logo":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH
  * terms (see LICENSE.md). Credit to the original author must remain visible.
  * Commercial use requires a license — see COMMERCIAL-LICENSE.md.
  */
-/* ============================================
-   DRAFT A LORE — Core Module
-   State, utilities, routing, app shell, modals, toasts, tooltips
-   ============================================ */
 var DAL = DAL || {};
-
-/* --- Utilities --- */
 DAL.uid = function(prefix){ return (prefix||'id') + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); };
 DAL.clone = function(obj){ return JSON.parse(JSON.stringify(obj)); };
 DAL.escapeHtml = function(str){ if(!str) return ''; var d=document.createElement('div'); d.textContent=str; return d.innerHTML; };
@@ -3143,8 +2966,6 @@ DAL.normalizeWorkspace = function(raw, sanitize){
   state.schemaVersion = DAL.SCHEMA_VERSION;
   return state;
 };
-
-/* --- Default State --- */
 DAL.defaultState = function(){
   return {
     schemaVersion: DAL.SCHEMA_VERSION,
@@ -3166,6 +2987,7 @@ DAL.defaultState = function(){
     analyticsRange: '30d',
     sidebarCollapsed: false,
     autosave: true,
+    onlineFontsEnabled: false,
     clipboard: [],
     panels: {}
   };
@@ -3223,8 +3045,6 @@ DAL.defaultAdventure = function(name){
 DAL.defaultChapter = function(title, order){
   return { id: DAL.uid('ch'), title: title||'New Chapter', order: order||0, contentHTML: '', images: [], updatedAt: Date.now(), createdAt: Date.now() };
 };
-
-/* --- State Management --- */
 DAL.state = null;
 DAL.currentView = 'dashboard';
 DAL.currentProjectId = null;
@@ -3245,7 +3065,7 @@ DAL.distractionFree = false;
 DAL.readerPage = 0;
 DAL.readerTheme = 'parchment';
 
-/* --- Reading preferences -------------------------------------------------
+/* Reading preferences
    Typeface, text size, line spacing, page tint and drop caps belong to the
    person reading rather than to the project, so they live once in state and
    apply to the Book Preview, the library reader and the adventure player
@@ -3559,7 +3379,6 @@ DAL._saveChain = Promise.resolve();
 DAL._doSave = function(){
   try{
     DAL.checkVersionSnapshot();
-    // strip non-serializable folder handles
     var toSave = DAL.clone(DAL.state);
     // folder handles are stored separately in memory
     for(var pid in toSave.projects){
@@ -3625,8 +3444,6 @@ DAL.setSaveStatus = function(status){
     setTimeout(function(){ dots.forEach(function(d){ d.classList.remove('ripple'); }); }, 400);
   }
 };
-
-/* --- Version Snapshots --- */
 DAL.VERSION_BYTES_MAX = 30 * 1024 * 1024;
 DAL.trimVersions = function(proj){
   if(!proj || !Array.isArray(proj.versions)) return;
@@ -3745,8 +3562,6 @@ DAL.redo = function(){
   if(DAL._driveEditorCommand('redo', 'Text change redone')) return;
   DAL.stepHistory('redoStack', 'history', 'Project change redone', 'No project change to redo');
 };
-
-/* --- Word Count Helpers --- */
 DAL.getProjectWordCount = function(proj){
   var manuscript = 0, supplementary = 0;
   if(proj.chapters){
@@ -3779,7 +3594,7 @@ DAL.getGlobalWordCount = function(){
   return { manuscript: manuscript, supplementary: supplementary, total: manuscript + supplementary };
 };
 
-/* --- Daily word history ----------------------------------------------------
+/* Daily word history
    Each entry in wordHistory is the number of words *written on that day*, keyed
    by local calendar date. Earlier versions stored a running lifetime total in
    the same place, which made every goal fill up permanently and never reset, so
@@ -3870,7 +3685,7 @@ DAL.updateWordHistory = function(){
   today.supplementary = Math.max(0, today.supplementary + ds);
 };
 
-/* --- Goal periods ----------------------------------------------------------
+/* Goal periods
    Every goal measures a calendar period that resets on its own boundary, which
    is what makes a goal reachable more than once. */
 DAL.goalPeriodStart = function(period, from){
@@ -3932,7 +3747,7 @@ DAL.getWritingStreak = function(){
   return streak;
 };
 
-/* --- Per-project goals -----------------------------------------------------
+/* Per-project goals
    The target lives on the project rather than in global state, so it travels
    with the project through export and import. */
 DAL.projectGoal = function(proj){
@@ -3996,7 +3811,7 @@ DAL.getLongestStreak = function(){
   return best;
 };
 
-/* --- Analytics buckets -----------------------------------------------------
+/* Analytics buckets
    Short ranges are read day by day; longer ones would be an unreadable forest
    of hairline bars, so they group into weeks or months. */
 DAL.ANALYTICS_RANGES = [
@@ -4090,7 +3905,7 @@ DAL.longDate = function(d){
 
 
 
-/* --- Dashboard layout ------------------------------------------------------
+/* Dashboard layout
    The Dashboard is a registry of cards rather than one fixed block of markup,
    so the reader can reorder, resize, hide and restore them in "Organize
    Dashboard" mode. The registry is the single source of truth for which cards
@@ -4206,7 +4021,7 @@ DAL.resetDashboardLayout = function(){
   DAL.saveState(true);
 };
 
-/* --- Canvas view (story graph + mind map) ----------------------------------
+/* Canvas view (story graph + mind map)
    Zoom and scroll position are remembered per project and per board, so coming
    back to a graph puts you where you left off. Both boards live under one field
    keyed by board name; anything missing falls back to 100% at the origin, which
@@ -4244,8 +4059,6 @@ DAL.zoomIndex = function(zoom){
   });
   return best;
 };
-
-/* --- Toast --- */
 DAL.toast = function(msg, type){
   var container = document.getElementById('toastContainer');
   if(!container) return;
@@ -4258,8 +4071,6 @@ DAL.toast = function(msg, type){
     setTimeout(function(){ el.remove(); }, 200);
   }, 3000);
 };
-
-/* --- Modal --- */
 DAL.modal = function(title, contentHTML, opts){
   opts = opts || {};
   DAL.closeModal();
@@ -4374,8 +4185,6 @@ DAL.initInfoTips = function(){
   window.addEventListener('orientationchange', hideOnMove);
   DAL._hideInfoPopover = hide;
 };
-
-/* --- Folder Sync (File System Access API) --- */
 DAL.folderHandles = {};
 DAL.folderSyncHealth = { status:'idle', lastSyncedAt:0, lastError:'' };
 DAL._folderSyncChain = Promise.resolve();
@@ -4441,7 +4250,6 @@ DAL.syncFolder = async function(){
     var data = DAL.clone(proj);
     delete data.folderHandle;
     await DAL.writeFile(handle, 'project.json', JSON.stringify(data, null, 2));
-    // Write chapters
     if(proj.chapters && proj.chapters.length){
       var chDir = await DAL.getDir(handle, 'chapters');
       for(var i=0; i<proj.chapters.length; i++){
@@ -4451,7 +4259,6 @@ DAL.syncFolder = async function(){
         await DAL.writeFile(chDir, fname, tmp.textContent);
       }
     }
-    // Write characters
     if(proj.characters && proj.characters.length){
       var chDir2 = await DAL.getDir(handle, 'characters');
       for(var j=0; j<proj.characters.length; j++){
@@ -4459,7 +4266,6 @@ DAL.syncFolder = async function(){
         await DAL.writeFile(chDir2, DAL.sanitizeFilename(c.name)+'.txt', c.backstory||'');
       }
     }
-    // Write lore
     if(proj.lore && proj.lore.entries && proj.lore.entries.length){
       var loreDir = await DAL.getDir(handle, 'lore');
       for(var k=0; k<proj.lore.entries.length; k++){
@@ -4468,7 +4274,6 @@ DAL.syncFolder = async function(){
         await DAL.writeFile(entryDir, DAL.sanitizeFilename(entry.title)+'.txt', entry.content||'');
       }
     }
-    // Write plots
     if(proj.plots && proj.plots.length){
       var plotDir = await DAL.getDir(handle, 'plots');
       for(var m=0; m<proj.plots.length; m++){
@@ -4501,8 +4306,6 @@ DAL.writeFile = async function(dir, name, content){
   try{ await writable.write(content); await writable.close(); }
   catch(e){ try{ await writable.abort(); }catch(ignore){} throw e; }
 };
-
-/* --- Theme --- */
 DAL.themeId = function(id){
   // A theme saved by an older or newer copy of the app may not exist here, and
   // an unknown id would leave the page with no palette at all.
@@ -4537,14 +4340,10 @@ DAL.getFontList = function(){
   return list;
 };
 
-/* --- Offline-first online extras (more fonts when connected) ---------------
-   The app is fully usable offline with system fonts. When there is a network
-   connection, a curated set of extra writing/display fonts is loaded from Google
-   Fonts and becomes selectable in the manuscript editor's font menu. If the
-   connection drops, already-loaded fonts keep working for the session and any
-   chosen font gracefully falls back to a readable system serif. Nothing here
-   blocks startup or breaks offline use — the link is only ever added when
-   navigator.onLine is true, and is removed again on going offline. */
+/* Optional online fonts
+   System and imported fonts work fully offline. Google Fonts is an explicit,
+   saved opt-in because loading it sends a normal network request to Google.
+   Chosen online fonts still fall back to a readable system serif offline. */
 DAL.ONLINE_FONTS = [
   {name:'Cinzel',      family:'Cinzel',      weights:'400;600;700;900'},
   {name:'EB Garamond', family:'EB Garamond', weights:'400;500;600;700'},
@@ -4587,16 +4386,15 @@ DAL.unloadOnlineFonts = function(){
 
 DAL.initOnlineFonts = function(){
   var apply = function(){
-    if(DAL.isOnline()) DAL.loadOnlineFonts(); else DAL.unloadOnlineFonts();
-    // Re-render Settings so the online-font list + status reflect the change.
+    if(DAL.state.onlineFontsEnabled && DAL.isOnline()) DAL.loadOnlineFonts();
+    else DAL.unloadOnlineFonts();
     if(DAL.currentView === 'settings') DAL.render();
   };
   apply();
   window.addEventListener('online', apply);
   window.addEventListener('offline', apply);
 };
-
-/* --- Routing --- */
+DAL.refreshOnlineFonts = function(){ if(DAL.state.onlineFontsEnabled && DAL.isOnline()) DAL.loadOnlineFonts(); else DAL.unloadOnlineFonts(); };
 DAL.navigate = function(view, projectId, tool){
   DAL.currentView = view;
   DAL.currentProjectId = projectId || null;
@@ -4615,11 +4413,25 @@ DAL.navigate = function(view, projectId, tool){
   DAL.render();
 };
 
-/* --- Main Render --- */
+/* Native Android Back follows the visual hierarchy: close the top layer, then
+   step out of a tool or screen. False on Dashboard lets Android exit normally. */
+DAL.handleAndroidBack = function(){
+  if(document.getElementById('dalCtxMenu')){ DAL.closeContextMenu(); return true; }
+  if(document.getElementById('dalMenuDropdown')){ DAL.closeMenu(); return true; }
+  if(document.getElementById('modalBackdrop')){ DAL.closeModal(); return true; }
+  if(DAL.distractionFree){ DAL.distractionFree=false; document.body.classList.remove('distraction-free'); DAL.render(); return true; }
+  if(DAL.grabMode){ DAL.setGrabMode(false); return true; }
+  if(DAL.organizeDashboard){ DAL.organizeDashboard=false; DAL.render(); return true; }
+  if(DAL.currentView === 'workspace'){
+    if(DAL.selectedNodeId){ DAL.selectedNodeId=null; DAL.render(); return true; }
+    DAL.navigate('projects'); return true;
+  }
+  if(DAL.currentView === 'player'){ DAL.navigate('library'); return true; }
+  if(DAL.currentView !== 'dashboard'){ DAL.navigate('dashboard'); return true; }
+  return false;
+};
 DAL.render = function(){
-  // Theme
   document.documentElement.setAttribute('data-theme', DAL.themeId(DAL.state.appTheme));
-  // Build shell if needed
   var app = document.getElementById('app');
   if(!app){
     app = DAL.buildShell();
@@ -4631,11 +4443,9 @@ DAL.render = function(){
   // The project workspace is its own full-height shell with its own back
   // button and tool rail, so the global tab bar steps aside there.
   app.classList.toggle('in-workspace', DAL.currentView === 'workspace');
-  // Collapse state
   document.querySelector('.sidebar')?.classList.toggle('collapsed', DAL.state.sidebarCollapsed);
   if(DAL.ensureScrim) DAL.ensureScrim();
 
-  // Render content
   var content = document.getElementById('content');
   var topTitle = document.getElementById('topTitle');
   var searchBox = document.getElementById('searchBox');
@@ -4652,7 +4462,6 @@ DAL.render = function(){
     return;
   }
 
-  // Non-workspace views
   searchBox.style.display = 'none';
   // The workspace sets inline padding:0 on #content for its own full-bleed
   // shell. Clear it on the way out so the normal views get their gutters (and
@@ -4733,8 +4542,6 @@ DAL.assetUrl = function(name, fallback){
   var assets = window.DAL_ASSETS;
   return (assets && assets[name]) || fallback;
 };
-
-/* --- App Shell --- */
 DAL.buildShell = function(){
   var app = document.createElement('div');
   app.id = 'app';
@@ -4774,7 +4581,7 @@ DAL.buildShell = function(){
   return app;
 };
 
-/* --- Adaptive Viewport ---
+/* Adaptive Viewport
    Keeps the shell usable from 320px phones up to 4K desktops, and on any
    window size in between. Sets a viewport bucket on <html> that the stylesheet
    reacts to, tracks the real visible height (mobile browser chrome / on-screen
@@ -4854,8 +4661,6 @@ DAL.initAdaptive = function(){
 
   DAL.ensureScrim();
 };
-
-/* --- Init --- */
 DAL.requestPersistentStorage = function(){
   if(!navigator.storage) return Promise.resolve(false);
   var check = navigator.storage.persisted ? navigator.storage.persisted() : Promise.resolve(false);
@@ -4893,24 +4698,24 @@ DAL.init = function(){
   });
 };
 
-/* --- Themes ---
+/* Themes
    One registry behind the Settings picker and the View menu, so adding a theme
    means adding its block in styles.css and one line here. Ids are stored in
    state.appTheme; never rename an existing id or saved settings break. */
 DAL.THEMES = [
-  { id:'aurora', name:'Aurora', desc:'Midnight purple lit by a pink and indigo aurora' },
-  { id:'dark', name:'Midnight Ink', desc:'Cool slate and candlelit gold, easy on tired eyes' },
-  { id:'light', name:'Daylight', desc:'Soft warm grey paper with a deep bronze accent' },
-  { id:'fantasy-dark', name:'Emberhold', desc:'Deep forest hall with brass fittings and old burgundy' },
-  { id:'fantasy-light', name:'Gilded Vellum', desc:'Aged vellum edged with sage and faded rose' },
-  { id:'nebula', name:'Nebula', desc:'Cold deep-sea blues with cyan and mint light' },
-  { id:'ember', name:'Ember', desc:'Banked coals: charred bark, orange fire, pale ash' },
-  { id:'sakura', name:'Sakura', desc:'Pale blossom light with plum and orchid accents' },
-  { id:'moss', name:'Moss', desc:'Sunlit clearing: pale stone, moss green, still water' },
-  { id:'slate', name:'Slate', desc:'High-contrast graphite with electric blue edges' }
+  { id:'aurora', name:'Aurora' },
+  { id:'dark', name:'Midnight Ink' },
+  { id:'light', name:'Daylight' },
+  { id:'fantasy-dark', name:'Emberhold' },
+  { id:'fantasy-light', name:'Gilded Vellum' },
+  { id:'nebula', name:'Nebula' },
+  { id:'ember', name:'Ember' },
+  { id:'sakura', name:'Sakura' },
+  { id:'moss', name:'Moss' },
+  { id:'slate', name:'Slate' }
 ];
 
-/* --- Workspace Menu Bar (File / Edit / View) ---
+/* Workspace Menu Bar (File / Edit / View)
    Dropdown menus live only inside a project's workspace header — never on the
    Dashboard/Projects/Settings top bar. Every item routes to a real existing
    action; nothing here is decorative. */
@@ -5069,7 +4874,6 @@ DAL.runAction = function(action, el, e){
     if(DAL.closeContextMenu) DAL.closeContextMenu();
     return;
   }
-  // Navigation
   if(action === 'nav-dashboard') DAL.navigate('dashboard');
   else if(action === 'nav-projects') DAL.navigate('projects');
   else if(action === 'nav-settings') DAL.navigate('settings');
@@ -5077,16 +4881,20 @@ DAL.runAction = function(action, el, e){
   else if(action === 'toggle-sidebar'){ DAL.state.sidebarCollapsed = !DAL.state.sidebarCollapsed; DAL.saveState(true); DAL.render(); }
   else if(action === 'manual-save'){ Promise.resolve(DAL.saveState(true)).then(function(ok){ DAL.toast(ok?'Saved':'Save failed',ok?'success':'error'); }); }
   else if(action === 'toggle-autosave'){ DAL.state.autosave = !DAL.state.autosave; DAL.saveState(true); DAL.render(); DAL.toast('Automatic saving on this device is '+(DAL.state.autosave ? 'on.' : 'off.'),'info'); }
+  else if(action === 'toggle-online-fonts'){
+    DAL.state.onlineFontsEnabled = !DAL.state.onlineFontsEnabled;
+    DAL.saveState(true); DAL.refreshOnlineFonts(); DAL.render();
+    DAL.toast(DAL.state.onlineFontsEnabled ? 'Online fonts enabled. Google Fonts will be contacted while online.' : 'Online fonts disabled.', 'info');
+  }
+  else if(action === 'show-privacy-policy') DAL.showPrivacyPolicy();
   else if(action === 'save-as'){ DAL.showSaveAsModal(); }
   else if(action === 'undo') DAL.undo();
   else if(action === 'redo') DAL.redo();
   else if(action === 'close-modal') DAL.closeModal();
   // Universal editing commands, resolved against whatever is selected.
   else if(['edit-select-all','edit-paste','edit-copy','edit-cut','edit-duplicate','edit-delete'].indexOf(action) >= 0){ DAL.handleEditAction(action); return; }
-  // Collapsible panels
   else if(action === 'toggle-panel'){ DAL.togglePanel(el.getAttribute('data-panel'), el); return; }
   else if(action === 'panels-expand' || action === 'panels-collapse'){ DAL.setAllPanels(action === 'panels-expand'); return; }
-  // Clipboard board
   else if(action === 'show-clipboard'){ DAL.showClipboardBoard(); return; }
   else if(action === 'clip-paste'){
     var pasteEntry = DAL.clipboard().find(function(c){ return c.id === el.getAttribute('data-clip'); });
@@ -5112,8 +4920,6 @@ DAL.runAction = function(action, el, e){
   // Delegates to the original view-specific handler after registered modules.
   if(DAL.handleClick) DAL.handleClick(action, el, e);
 };
-
-/* --- Event Delegation --- */
 document.addEventListener('click', function(e){
   var el = e.target.closest('[data-action]');
   if(!el) return;
@@ -5123,7 +4929,7 @@ document.addEventListener('click', function(e){
   DAL.runAction(action, el, e);
 });
 
-/* --- Keyboard shortcuts ---
+/* Keyboard shortcuts
    Anything typed into a field belongs to the field: the browser's own editing
    shortcuts must keep working there, so app-level bindings that would collide
    with text editing are skipped while a field has focus. Save, find and the
@@ -5197,7 +5003,7 @@ DAL.PASTE = {};  /* kind -> function(payload) placing a clipboard entry */
 DAL.DROP = {};   /* zone -> function(payload, targetEl, index) */
 DAL.SELECT = {}; /* kind -> {label, copy, remove, duplicate} */
 
-/* --- Universal selection ---
+/* Universal selection
    Copy, cut, duplicate and delete are single commands rather than one pair per
    entity type: whatever is selected answers them. Elements advertise
    data-sel="<kind>:<id>" and each kind registers how to read and change itself
@@ -5281,9 +5087,6 @@ DAL.handleEditAction = function(action){
     else DAL.toast('That cannot be deleted here', 'info');
   }
 };
-
-/* --- Menu rendering (shared by the menu bar and right-click menus) --- */
-
 /* Items are plain objects so both menu systems and every view can describe a
    menu without touching the DOM: {label, action, shortcut, attr, data, divider,
    danger, disabled, submenu, checked}. */
@@ -5360,9 +5163,6 @@ DAL.bindMenuKeyboard = function(menu){
     }
   });
 };
-
-/* --- Right-click context menus --- */
-
 DAL.closeContextMenu = function(){
   var m = document.getElementById('dalCtxMenu');
   if(m) m.remove();
@@ -5384,6 +5184,21 @@ DAL.contextMenu = function(x, y, items){
   if(first) first.focus();
 };
 
+DAL.openElementContextMenu = function(el, x, y, sourceEvent){
+  if(!el || el.closest('input, textarea, [contenteditable="true"]')) return false;
+  var selected = el.closest('[data-sel]');
+  if(selected){
+    var spec = (selected.getAttribute('data-sel') || '').split(':');
+    DAL.select(spec[0], spec.slice(1).join(':'), selected);
+  }
+  var builder = DAL.CTX[el.getAttribute('data-ctx')];
+  if(!builder) return false;
+  var items = builder(el.getAttribute('data-ctx-id'), el, sourceEvent || {});
+  if(!items || !items.length) return false;
+  DAL.contextMenu(x, y, items);
+  return true;
+};
+
 /* Elements opt in with data-ctx="<kind>" and usually data-ctx-id. The nearest
    ancestor carrying data-ctx wins, so a node inside a canvas gets the node menu
    while empty canvas space gets the canvas menu. Text selections and form
@@ -5392,13 +5207,47 @@ DAL.contextMenu = function(x, y, items){
 document.addEventListener('contextmenu', function(e){
   var el = e.target.closest('[data-ctx]');
   if(!el) return;
-  if(e.target.closest('input, textarea, [contenteditable="true"]')) return;
-  var builder = DAL.CTX[el.getAttribute('data-ctx')];
-  if(!builder) return;
-  var items = builder(el.getAttribute('data-ctx-id'), el, e);
-  if(!items || !items.length) return;
-  e.preventDefault();
-  DAL.contextMenu(e.clientX, e.clientY, items);
+  if(DAL.openElementContextMenu(el, e.clientX, e.clientY, e)) e.preventDefault();
+});
+
+/* Touch devices have no right-click. A short, movement-tolerant hold opens the
+   same menu while ordinary taps and canvas dragging remain untouched. */
+var touchContext = null;
+document.addEventListener('pointerdown', function(e){
+  if(e.pointerType !== 'touch' || e.button !== 0) return;
+  var el = e.target.closest('[data-ctx]');
+  if(!el || e.target.closest('input, textarea, [contenteditable="true"]')) return;
+  touchContext = {pointerId:e.pointerId, x:e.clientX, y:e.clientY, el:el, opened:false};
+  touchContext.timer = setTimeout(function(){
+    if(!touchContext) return;
+    touchContext.opened = DAL.openElementContextMenu(touchContext.el, touchContext.x, touchContext.y, e);
+    if(touchContext.opened && navigator.vibrate) navigator.vibrate(20);
+  }, 550);
+}, true);
+document.addEventListener('pointermove', function(e){
+  if(!touchContext || e.pointerId !== touchContext.pointerId) return;
+  if(Math.abs(e.clientX-touchContext.x)>10 || Math.abs(e.clientY-touchContext.y)>10){ clearTimeout(touchContext.timer); touchContext=null; }
+}, true);
+['pointerup','pointercancel'].forEach(function(type){
+  document.addEventListener(type, function(e){
+    if(!touchContext || e.pointerId !== touchContext.pointerId) return;
+    clearTimeout(touchContext.timer);
+    if(touchContext.opened){ e.preventDefault(); e.stopPropagation(); }
+    touchContext=null;
+  }, true);
+});
+
+DAL.registerActionHandler(function(action, el){
+  if(action !== 'selection-menu') return false;
+  var selectedSpec = DAL.selection && DAL.selection.kind+':'+DAL.selection.id;
+  var target = selectedSpec && Array.prototype.find.call(document.querySelectorAll('[data-sel]'), function(candidate){
+    return candidate.getAttribute('data-sel') === selectedSpec;
+  });
+  if(!target){ DAL.toast('Select something first', 'info'); return true; }
+  var contextTarget = target.closest('[data-ctx]');
+  var rect = el.getBoundingClientRect();
+  if(!DAL.openElementContextMenu(contextTarget, rect.left, rect.bottom+4, {})) DAL.toast('More actions are not available here', 'info');
+  return true;
 });
 
 document.addEventListener('click', function(e){
@@ -5406,7 +5255,7 @@ document.addEventListener('click', function(e){
   if(m && !m.contains(e.target)) DAL.closeContextMenu();
 }, true);
 
-/* --- Clipboard board ---
+/* Clipboard board
    A stack of copied elements that survives navigation and reloads, so parts can
    be lifted from one project and dropped into another. The newest matching
    entry is what a plain paste uses; the board modal reaches the rest. */
@@ -5476,7 +5325,7 @@ DAL.showClipboardBoard = function(){
   });
 };
 
-/* --- Drag and drop ---
+/* Drag and drop
    Pointer events rather than the HTML5 drag API, because HTML5 dragging does
    not exist on touch and half of this app is used on a phone. A drag starts
    only after the pointer travels far enough to prove intent, so taps, text
@@ -5646,7 +5495,7 @@ DAL.moveInArray = function(arr, fromIndex, toIndex){
   return true;
 };
 
-/* --- Collapsible panels ---
+/* Collapsible panels
    Open/closed state is remembered per panel key so a writer's layout survives
    navigation. Height is animated from a measured value because CSS cannot
    transition to or from `auto`. */
@@ -5714,13 +5563,9 @@ DAL.panel = function(key, title, bodyHtml, opts){
  * terms (see LICENSE.md). Credit to the original author must remain visible.
  * Commercial use requires a license — see COMMERCIAL-LICENSE.md.
  */
-/* ============================================
-   DRAFT A LORE — Views Module
-   Dashboard, Projects Hub, Settings, Library
-   ============================================ */
 DAL = DAL || {};
 
-/* --- Dashboard ------------------------------------------------------------
+/* Dashboard
    The Dashboard is composed from DAL.DASHBOARD_CARDS: each entry has a body
    renderer here, and the page is assembled in the reader's saved order at their
    saved widths. A body renderer returning an empty string means "nothing worth
@@ -5853,9 +5698,6 @@ DAL.renderHiddenCardTray = function(layout){
   html += '</div>';
   return html;
 };
-
-/* --- Dashboard card bodies --- */
-
 DAL.dashboardCardBody.continue = function(){
   var projects = DAL.state.projectOrder.map(function(id){ return DAL.state.projects[id]; }).filter(Boolean);
   if(!projects.length) return '';
@@ -5965,7 +5807,7 @@ DAL.dashboardCardBody.streak = function(){
   return html;
 };
 
-/* --- Project goals ---------------------------------------------------------
+/* Project goals
    A target word count and optional deadline per project. Finished goals move to
    their own list so the working list stays about what is still ahead. */
 DAL.dashboardCardBody.projectGoals = function(){
@@ -6048,7 +5890,7 @@ DAL.renderProjectGoalRow = function(proj, st){
   return html + '</div>';
 };
 
-/* --- Word output bar graph -------------------------------------------------
+/* Word output bar graph
    Hand-built inline SVG. Colour comes from CSS custom properties rather than
    literal hex, so the chart follows the active theme without a redraw, and the
    geometry is plain arithmetic so there is nothing to load. */
@@ -6173,8 +6015,6 @@ DAL.compactNumber = function(v){
   if(v >= 1000) return (v / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
   return String(v);
 };
-
-/* --- 12-week activity heatmap --------------------------------------------- */
 DAL.HEATMAP_WEEKS = 12;
 
 DAL.dashboardCardBody.heatmap = function(){
@@ -6321,8 +6161,6 @@ DAL.dashboardCardBody.goals = function(){
   html += '</div>';
   return html;
 };
-
-/* --- Projects --- */
 DAL.renderProjects = function(){
   var projects = DAL.state.projectOrder.map(function(id){ return DAL.state.projects[id]; }).filter(Boolean);
   if(projects.length === 0){
@@ -6449,11 +6287,26 @@ DAL.showStorageCenter = function(){
   });
 };
 
-/* --- Settings --- */
+DAL.privacyPolicyContent = function(){
+  return '<div class="privacy-policy">'+
+    '<p><strong>Effective August 29, 2026</strong></p>'+
+    '<p>Draft A Lore is an offline-first writing and RPG-building app by Hexxis-cmd (Daymien Vanhorn). It has no accounts, advertising, analytics, tracking, or telemetry.</p>'+
+    '<h3>Your work stays on your device</h3><p>Projects, manuscripts, imported media, settings, and backups are stored locally. The developer does not receive them. Exports and linked-folder copies happen only when you choose them.</p>'+
+    '<h3>Optional online fonts</h3><p>Online Fonts is off by default. If you enable it while connected, the app requests font files from Google Fonts. Google receives standard connection information such as your IP address, which can reveal an approximate area, and browser or device details under Google\'s privacy terms. Draft A Lore does not receive or store that information.</p>'+
+    '<h3>Permissions</h3><p>Internet access supports the optional font request. File and media pickers open only after you choose an import, export, image, audio, backup, or folder action.</p>'+
+    '<h3>Retention and deletion</h3><p>Your data remains until you delete it, clear app data, uninstall the app, or restore a different backup. Settings includes Clear All Data, and your device settings can also clear the app\'s storage.</p>'+
+    '<h3>Children and security</h3><p>The app is intended for a general 13+ audience and does not knowingly collect children\'s personal information. No local-only system can guarantee protection if someone else can access your unlocked device, so keep backups and use device security.</p>'+
+    '<h3>Contact and changes</h3><p>Material policy changes will be published with an updated effective date. Questions can be submitted through the Draft A Lore GitHub Issues page.</p>'+
+    '<p><a href="https://github.com/Hexxis-cmd/Draft-A-Lore/issues" target="_blank" rel="noopener">Contact through GitHub Issues</a></p>'+
+  '</div>';
+};
+
+DAL.showPrivacyPolicy = function(){
+  DAL.modal('Privacy Policy', DAL.privacyPolicyContent(), {wide:true, footer:'<button class="btn primary" data-action="close-modal">Done</button>'});
+};
 DAL.renderSettings = function(){
   var html = '<div class="u-measure u-auto">';
 
-  // Theme
   html += '<div class="section-header"><div class="section-title">Theme</div></div>';
   html += '<div class="theme-grid">';
   DAL.THEMES.forEach(function(t){
@@ -6465,15 +6318,12 @@ DAL.renderSettings = function(){
         '<span class="theme-chip theme-chip-grad" aria-hidden="true"></span>'+
         '<span class="theme-option-name">'+DAL.escapeHtml(t.name)+'</span>'+
       '</div>'+
-      '<div class="theme-option-desc">'+DAL.escapeHtml(t.desc)+'</div>'+
     '</div>';
   });
   html += '</div>';
 
-  // Author Info
   html += '<div class="section-header"><div class="section-title">Author Information</div></div>';
   html += '<div class="card" style="margin-bottom:20px">';
-  // Avatar upload
   html += '<div class="form-group"><label class="form-label">Author Photo</label>'+
     '<div style="display:flex;align-items:center;gap:12px">'+
     '<div class="author-avatar-preview">'+(DAL.state.authorAvatar?'<img src="'+DAL.state.authorAvatar+'">':DAL.escapeHtml((DAL.state.authorName||'?').charAt(0).toUpperCase()))+'</div>'+
@@ -6487,7 +6337,6 @@ DAL.renderSettings = function(){
     '<div style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="setAutoFill" '+(DAL.state.autoFillAuthor?'checked':'')+'><label for="setAutoFill" style="font-size:var(--ts-sm);cursor:pointer">Auto-fill author info into covers, title pages, and exports</label></div>'+
     '<button class="btn primary" style="margin-top:12px" data-action="save-author-info">Save Author Info</button></div>';
 
-  // Font Import
   html += '<div class="section-header"><div class="section-title">Custom Fonts</div></div>';
   html += '<div class="card" style="margin-bottom:20px">'+
     '<p style="font-size:var(--ts-sm);color:var(--c-text-muted);margin-bottom:12px">Import .ttf, .otf, .woff, or .woff2 fonts. Available in all editors.</p>'+
@@ -6505,22 +6354,19 @@ DAL.renderSettings = function(){
   }
   html += '</div></div>';
 
-  // Online Fonts (offline-first: these load only when a connection is live)
   var online = DAL.isOnline();
+  var onlineFonts = !!DAL.state.onlineFontsEnabled;
   html += '<div class="card" style="margin-bottom:20px">'+
-    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'+
-      '<span style="width:9px;height:9px;border-radius:999px;background:'+(online?'var(--c-success,#3ba55c)':'var(--c-text-faint)')+';flex-shrink:0"></span>'+
-      '<strong style="font-size:var(--ts-sm)">'+(online?'Online':'Offline')+'</strong>'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px">'+
+      '<div><strong>Optional Online Fonts</strong><div style="font-size:var(--ts-xs);color:var(--c-text-faint);margin-top:3px">'+(onlineFonts?(online?'Enabled and connected':'Enabled, currently offline'):'Off — no font network requests')+'</div></div>'+
+      '<button class="switch" data-action="toggle-online-fonts" aria-pressed="'+onlineFonts+'" aria-label="Toggle optional Google Fonts"><span class="track"></span></button>'+
     '</div>'+
-    '<p style="font-size:var(--ts-sm);color:var(--c-text-muted);margin-bottom:10px;line-height:1.55">The app works fully offline. When you\'re connected, extra fonts become available in the Manuscript editor\'s font menu. A chosen font falls back to a readable system serif if you go offline.</p>'+
+    '<p style="font-size:var(--ts-sm);color:var(--c-text-muted);margin-bottom:10px;line-height:1.55">System and imported fonts work fully offline. If you enable this option, the app contacts Google Fonts while online; Google receives standard connection information. Read the Privacy Policy below for details.</p>'+
     '<div style="display:flex;flex-wrap:wrap;gap:6px">';
   DAL.ONLINE_FONTS.forEach(function(f){
-    html += '<span style="font-family:\''+f.family+'\', Georgia, serif;font-size:var(--ts-sm);padding:5px 10px;border:1px solid var(--c-border);border-radius:999px;'+(online?'':'opacity:.45')+'">'+DAL.escapeHtml(f.name)+'</span>';
+    html += '<span style="font-family:'+(onlineFonts&&online?'\''+f.family+'\', ':'')+'Georgia, serif;font-size:var(--ts-sm);padding:5px 10px;border:1px solid var(--c-border);border-radius:999px;'+(onlineFonts&&online?'':'opacity:.45')+'">'+DAL.escapeHtml(f.name)+'</span>';
   });
   html += '</div>';
-  if(!online){
-    html += '<div style="font-size:var(--ts-xs);color:var(--c-text-faint);margin-top:10px">Connect to the internet to load and use these fonts.</div>';
-  }
   html += '</div>';
 
   html += '<div class="section-header"><div class="section-title">Saving</div></div>';
@@ -6551,6 +6397,12 @@ DAL.renderSettings = function(){
       '<button class="btn danger" data-action="clear-data">Clear All Data</button>'+
     '</div></div>';
 
+  html += '<div class="section-header"><div class="section-title">Privacy</div></div>'+
+    '<div class="card" style="margin-bottom:20px">'+
+      '<p style="font-size:var(--ts-sm);color:var(--c-text-muted);line-height:1.55;margin-bottom:12px">No account, ads, analytics, or telemetry. Your creative work is stored on this device and leaves only through actions you choose.</p>'+
+      '<button class="btn" data-action="show-privacy-policy">Read Privacy Policy</button>'+
+    '</div>';
+
   // Version + credit. This attribution is required by the project license
   // (see LICENSE.md, Supplemental Term S3) and must stay visible in forks.
   html += '<div style="text-align:center;font-size:var(--ts-xs);color:var(--c-text-faint);padding:16px;line-height:1.7">'+
@@ -6563,8 +6415,6 @@ DAL.renderSettings = function(){
   html += '</div>';
   return html;
 };
-
-/* --- Library --- */
 DAL.renderLibrary = function(){
   var projects = DAL.state.projectOrder.map(function(id){ return DAL.state.projects[id]; }).filter(function(p){ return p && (p.status === 'completed' || p.status === 'published'); });
   if(projects.length === 0){
@@ -6591,10 +6441,8 @@ DAL.renderBookReader = function(pid){
   var p = DAL.state.projects[pid];
   if(!p) return '<div class="empty-state"><h3>Project not found</h3></div>';
   var pages = [];
-  // Cover page
   var author = p.cover.author || (DAL.state.autoFillAuthor ? DAL.state.authorName : '');
   pages.push({ type:'cover', html: '<div class="book-cover"><div class="book-cover-title">'+DAL.escapeHtml(p.cover.title||p.name)+'</div>'+(p.cover.subtitle?'<div style="font-size:var(--ts-sm);opacity:.7;margin-bottom:12px">'+DAL.escapeHtml(p.cover.subtitle)+'</div>':'')+(author?'<div class="book-cover-author">'+DAL.escapeHtml(author)+'</div>':'')+'</div>' });
-  // TOC
   var tocHtml = '<h1>Table of Contents</h1>';
   if(p.chapters && p.chapters.length){
     p.chapters.forEach(function(ch, i){
@@ -6602,7 +6450,6 @@ DAL.renderBookReader = function(pid){
     });
   }
   pages.push({ type:'toc', html: tocHtml });
-  // Chapter pages
   if(p.chapters){
     p.chapters.forEach(function(ch){
       /* Chapter prose is wrapped so a drop capital can be attached to the first
@@ -6631,13 +6478,8 @@ DAL.renderBookReader = function(pid){
   '</div></div>';
   return html;
 };
-
-/* --- Click Handler (shared) --- */
 DAL.handleClick = function(action, el, e){
-  // Dashboard/Settings field changes
   if(action === 'set-theme'){ DAL.setTheme(el.getAttribute('data-theme')); DAL.render(); return; }
-
-  /* --- Dashboard organize mode --- */
   if(action === 'dash-organize-on'){ DAL.organizeDashboard = true; DAL.render(); return; }
   if(action === 'dash-organize-off'){ DAL.organizeDashboard = false; DAL.render(); return; }
 
@@ -6864,7 +6706,6 @@ DAL.handleClick = function(action, el, e){
     return;
   }
 
-  // Library / Reader
   if(action === 'open-reader'){
     DAL._readerPid = el.getAttribute('data-pid');
     DAL.readerPage = 0;
@@ -6897,7 +6738,6 @@ DAL.handleClick = function(action, el, e){
      and any narration under way both survive the change. */
   if(DAL.applyReaderPref(action, el)) return;
 
-  // Delegates to workspace/story-tools/adventure-tools
   // The canvas view controls come first because both boards share them.
   if(DAL.handleCanvasClick) DAL.handleCanvasClick(action, el, e);
   if(DAL.handleWorkspaceClick) DAL.handleWorkspaceClick(action, el, e);
@@ -6916,8 +6756,6 @@ DAL.flipPage = function(){
     document.getElementById('content').innerHTML = DAL.renderBookReader(DAL._readerPid);
   }
 };
-
-/* --- Field change handlers (input events) --- */
 document.addEventListener('input', function(e){
   var el = e.target;
   if(el.hasAttribute('data-field')){
@@ -6942,7 +6780,6 @@ document.addEventListener('input', function(e){
       DAL.saveState();
     }
   }
-  // Illustration name editing
   if(el.hasAttribute('data-illustration-name')){
     var projIllName = DAL.state.projects[DAL.currentProjectId];
     var illIdx = parseInt(el.getAttribute('data-illustration-name'));
@@ -7007,7 +6844,6 @@ document.addEventListener('change', function(e){
     });
     return;
   }
-  // Illustration upload (multiple files)
   if(el.id === 'illustrationUpload' && el.files.length){
     var projIll2 = DAL.state.projects[DAL.currentProjectId];
     if(!projIll2.images) projIll2.images = [];
@@ -7025,7 +6861,6 @@ document.addEventListener('change', function(e){
     });
     return;
   }
-  // Chapter image upload
   if(el.id === 'chapterImageInput' && el.files[0]){
     var projChImg = DAL.state.projects[DAL.currentProjectId];
     var chImg = projChImg.chapters.find(function(c){ return c.id === DAL._uploadChapterCid; });
@@ -7041,7 +6876,6 @@ document.addEventListener('change', function(e){
     DAL._uploadChapterCid = null;
     return;
   }
-  // Illustration category change
   if(el.hasAttribute('data-illustration-category')){
     var projIllCat = DAL.state.projects[DAL.currentProjectId];
     var catIdx = parseInt(el.getAttribute('data-illustration-category'));
@@ -7073,7 +6907,6 @@ document.addEventListener('change', function(e){
     if(fitImage){ fitImage.pageFit = el.value==='cover'?'cover':'contain'; DAL.saveState(); DAL.render(); }
     return;
   }
-  // Item image upload (adventure-tools)
   if(el.id === 'itemImageInput' && el.files[0]){
     var projItem = DAL.state.projects[DAL.currentProjectId];
     var advItem = DAL.ensureAdventure(projItem);
@@ -7087,7 +6920,6 @@ document.addEventListener('change', function(e){
     DAL._uploadItemIdx = null;
     return;
   }
-  // Scene image upload (adventure-tools)
   if(el.id === 'sceneImageInput' && el.files[0]){
     var projScene = DAL.state.projects[DAL.currentProjectId];
     var advScene = DAL.ensureAdventure(projScene);
@@ -7104,7 +6936,6 @@ document.addEventListener('change', function(e){
   }
 });
 
-// Restore confirm handler
 document.addEventListener('click', function(e){
   var el = e.target.closest('[data-action="restore-confirm"]');
   if(!el) return;
@@ -7123,28 +6954,18 @@ document.addEventListener('click', function(e){
  * terms (see LICENSE.md). Credit to the original author must remain visible.
  * Commercial use requires a license — see COMMERCIAL-LICENSE.md.
  */
-/* ============================================
-   DRAFT A LORE — Story Tools Module
-   Manuscript, Characters, Relationships, Plots, Lore, Mind Map, Book Preview, Export
-   ============================================ */
 DAL = DAL || {};
-
-/* --- Workspace Render --- */
 DAL.renderWorkspace = function(proj){
   var app = document.getElementById('app');
-  // Build workspace layout
   var typeLabel = proj.type === 'novel' ? 'Novel' : (proj.type === 'rpg' ? 'RPG Adventure' : 'Dual');
   var wc = DAL.getProjectWordCount(proj);
   var daily = DAL.getDailyWordCount(proj.id);
 
   var html = '<div class="workspace">';
-  // Workspace sidebar
   html += '<aside class="workspace-sidebar" id="wsSidebar">';
 
-  // Back button
   html += '<div style="padding:8px 12px;border-bottom:1px solid var(--c-border)"><button class="btn sm" data-action="nav-projects">← Projects</button></div>';
 
-  // Story Tools section
   if(proj.type === 'novel' || proj.type === 'dual'){
     if(proj.type === 'dual') html += '<div class="ws-nav-group-label">Story Tools</div>';
     var storyTools = [
@@ -7166,7 +6987,6 @@ DAL.renderWorkspace = function(proj){
     });
   }
 
-  // Adventure Tools section
   if(proj.type === 'rpg' || proj.type === 'dual'){
     if(proj.type === 'dual') html += '<div class="ws-nav-group-label">Adventure Tools</div>';
     var advTools = [
@@ -7192,7 +7012,6 @@ DAL.renderWorkspace = function(proj){
 
   html += '</aside>'; // end sidebar
 
-  // Workspace topbar + main
   html += '<div class="workspace-shell">';
   html += '<div class="workspace-topbar">'+
     '<button class="btn sm" data-action="nav-projects">← Back</button>'+
@@ -7221,10 +7040,8 @@ DAL.renderWorkspace = function(proj){
       '<button class="btn sm ws-folder-btn" data-action="link-folder" data-pid="'+proj.id+'">Link Folder</button>'+
     '</div></div>';
 
-  // Main content
   html += '<div class="workspace-main" id="wsMain">';
 
-  // Render the current tool
   if(!DAL.currentTool) DAL.currentTool = proj.type === 'rpg' ? 'storygraph' : 'overview';
   html += DAL.renderStoryTool(proj, DAL.currentTool);
 
@@ -7237,7 +7054,6 @@ DAL.renderWorkspace = function(proj){
   var topTitle = document.getElementById('topTitle');
   if(topTitle) topTitle.textContent = proj.name || 'Project';
 
-  // Replace content
   var content = document.getElementById('content');
   content.style.padding = '0';
   content.innerHTML = html;
@@ -7246,7 +7062,6 @@ DAL.renderWorkspace = function(proj){
   content.parentElement.style.flexDirection = 'column';
   content.parentElement.style.overflow = 'hidden';
 
-  // Post-render hooks
   DAL.afterStoryRender(proj);
 };
 
@@ -7272,8 +7087,6 @@ DAL.renderStoryTool = function(proj, tool){
     default: return DAL.renderOverview(proj);
   }
 };
-
-/* --- Overview --- */
 DAL.renderOverview = function(proj){
   var wc = DAL.getProjectWordCount(proj);
   var now = Date.now();
@@ -7288,7 +7101,6 @@ DAL.renderOverview = function(proj){
   var html = '<div class="u-measure-mid">';
   html += '<div class="section-header"><div class="section-title">'+DAL.escapeHtml(proj.name)+'</div><span class="badge accent">'+proj.type+'</span></div>';
 
-  // Stats grid
   html += '<div class="card-grid ws-stat-grid">'+
     '<div class="card" style="text-align:center"><div style="font-size:var(--ts-lg);font-weight:700;color:var(--c-accent)">'+(proj.chapters||[]).length+'</div><div style="font-size:var(--ts-xs);color:var(--c-text-muted)">Chapters</div></div>'+
     '<div class="card" style="text-align:center"><div style="font-size:var(--ts-lg);font-weight:700;color:var(--c-accent)">'+(proj.characters||[]).length+'</div><div style="font-size:var(--ts-xs);color:var(--c-text-muted)">Characters</div></div>'+
@@ -7296,7 +7108,6 @@ DAL.renderOverview = function(proj){
     '<div class="card" style="text-align:center"><div style="font-size:var(--ts-lg);font-weight:700;color:var(--c-accent)">'+(proj.lore&&proj.lore.entries||[]).length+'</div><div style="font-size:var(--ts-xs);color:var(--c-text-muted)">Lore Entries</div></div>'+
   '</div>';
 
-  // Word counts
   html += '<div class="card" style="margin-bottom:16px;text-align:center">'+
     '<div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px;font-size:var(--ts-xs);color:var(--c-text-muted);text-transform:uppercase;letter-spacing:.4px">Word Counts '+DAL.infoIcon('Manuscript = words in your chapters and adventure nodes (the actual story). Supplementary = words in characters, lore and plot threads. Total = both combined. Daily goals and writing streaks track the manuscript count.')+'</div>'+
     '<div style="display:flex;gap:16px;justify-content:center">'+
@@ -7305,7 +7116,6 @@ DAL.renderOverview = function(proj){
     '<div><div style="font-size:var(--ts-lg);font-weight:700;color:var(--c-accent)">'+wc.total+'</div><div style="font-size:var(--ts-xs);color:var(--c-text-muted)">Total</div></div>'+
     '</div></div>';
 
-  // Stale plots
   if(stalePlots.length){
     html += '<div class="card" style="margin-bottom:16px;border-left:3px solid var(--c-warning)">'+
       '<div style="display:flex;align-items:center;gap:6px;font-weight:600;color:var(--c-warning);margin-bottom:8px">⚠ Stale Plot Threads '+DAL.infoIcon('A plot thread is marked stale when it hasn\'t been edited in 30+ days, so abandoned storylines don\'t quietly slip through the cracks. Open a thread and edit it to reset the timer.')+'</div>';
@@ -7315,7 +7125,6 @@ DAL.renderOverview = function(proj){
     html += '</div>';
   }
 
-  // Quick links
   html += '<div class="card" style="margin-bottom:16px"><div style="font-weight:600;margin-bottom:8px">Quick Links</div><div class="quick-links">';
   var tools = proj.type === 'rpg' ? ['storygraph','stats','items','playtest','assets'] : ['manuscript','characters','illustrations','bookpreview','assets'];
   if(proj.type === 'dual') tools = ['manuscript','characters','storygraph','items','playtest','assets'];
@@ -7325,7 +7134,6 @@ DAL.renderOverview = function(proj){
   });
   html += '</div></div>';
 
-  // Recent activity
   if(recent.length){
     html += '<div class="card"><div style="font-weight:600;margin-bottom:8px">Recent Activity</div>';
     recent.forEach(function(r){
@@ -7337,8 +7145,6 @@ DAL.renderOverview = function(proj){
   html += '</div>';
   return html;
 };
-
-/* --- Manuscript --- */
 DAL.renderManuscript = function(proj){
   if(!proj.chapters) proj.chapters = [];
   if(!DAL.selectedChapterId && proj.chapters.length){
@@ -7347,7 +7153,6 @@ DAL.renderManuscript = function(proj){
   var currentCh = proj.chapters.find(function(c){ return c.id === DAL.selectedChapterId; });
 
   var html = '<div class="manuscript-layout u-fill-body">';
-  // Chapter list
   var chapterPanelBody = '<div class="chapter-list-header"><span style="font-size:var(--ts-xs);font-weight:600;text-transform:uppercase;color:var(--c-text-muted)">Chapters</span><button class="btn sm primary" data-action="add-chapter">+</button></div>'+
     '<div class="chapter-list-items" id="chapterList" data-drop="chapter" data-sort-item="[data-drag=\"chapter\"]">';
   proj.chapters.forEach(function(ch, i){
@@ -7365,22 +7170,17 @@ DAL.renderManuscript = function(proj){
   chapterPanelBody += '</div>';
   html += '<div class="chapter-list">'+DAL.panel('manuscript-chapters','Chapters',chapterPanelBody,{defaultOpen:true,badge:proj.chapters.length})+DAL.panel('manuscript-tools','Writer tools','<div class="writer-tool-actions"><button class="btn sm" data-action="show-find">Find</button><button class="btn sm" data-action="show-comments">Comments '+DAL.commentBadge(proj)+'</button><button class="btn sm" data-action="show-sprint">Sprint</button><button class="btn sm" data-action="toggle-sprint-widget">Sprint timer</button><button class="btn sm" data-action="show-corkboard">Corkboard</button>'+(DAL.renderWriterReviewButtons?DAL.renderWriterReviewButtons():'')+'</div>',{defaultOpen:true})+'</div>';
 
-  // Editor
   html += '<div class="editor-area">';
   html += '<div class="editor-toolbar" id="editorToolbar">';
-  // Block format
   html += '<select data-action="format-block"><option value="p">Body Text</option><option value="h1">Heading 1</option><option value="h2">Heading 2</option><option value="h3">Subheading</option></select>';
-  // Font family
   var fonts = DAL.getFontList();
   html += '<select class="tb-select" data-action="font-family">';
   fonts.forEach(function(f){ html += '<option value="'+f+'">'+f+'</option>'; });
   html += '</select>';
-  // Font size
   html += '<select data-action="font-size" style="width:50px">';
   [12,14,16,18,20,24,28,32].forEach(function(s){ html += '<option value="'+s+'">'+s+'</option>'; });
   html += '</select>';
   html += '<span class="tb-sep"></span>';
-  // Formatting buttons
   var fmtBtns = [
     ['bold','<b>B</b>','Bold'],
     ['italic','<i>I</i>','Italic'],
@@ -7405,7 +7205,6 @@ DAL.renderManuscript = function(proj){
   if(DAL.renderAdvancedWriterToolbar) html += DAL.renderAdvancedWriterToolbar();
   html += '</div>'; // end toolbar
 
-  // Chapter illustrations strip
   if(currentCh){
     html += '<div class="chapter-illustrations-strip asset-dropzone" data-drop="asset" data-asset-bind="chapter:'+currentCh.id+'">';
     html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:var(--ts-xs);font-weight:600;text-transform:uppercase;color:var(--c-text-muted)">Chapter Illustrations</span>'+
@@ -7427,10 +7226,8 @@ DAL.renderManuscript = function(proj){
     html += DAL.renderAudioBinding(proj, currentCh, 'chapter', currentCh.id);
   }
 
-  // Editor surface
   html += '<div class="editor-surface"><div class="content-editable'+(currentCh?'':' is-disabled')+'" id="editorContent" contenteditable="'+(currentCh?'true':'false')+'" spellcheck="true" lang="'+DAL.escapeHtml(proj.language||'en')+'" role="textbox" aria-multiline="true" aria-label="'+(currentCh?'Chapter manuscript editor':'Manuscript editor — add a chapter to begin')+'"'+(currentCh?'':' aria-disabled="true"')+' data-placeholder="'+(currentCh?'Start writing...':'Add a chapter to start writing')+'" data-cid="'+(currentCh?currentCh.id:'')+'">'+(currentCh?currentCh.contentHTML:'')+'</div></div>';
 
-  // Editor footer
   var editorWC = currentCh ? DAL.countWords(currentCh.contentHTML) : 0;
   html += '<div class="editor-footer"><span>'+editorWC+' words</span><span id="selectionStats"></span><span>'+(currentCh?'Edited '+DAL.formatDate(currentCh.updatedAt):'')+'</span></div>';
 
@@ -7440,7 +7237,6 @@ DAL.renderManuscript = function(proj){
 };
 
 DAL.afterStoryRender = function(proj){
-  // Bind editor if present
   var editor = document.getElementById('editorContent');
   if(editor){
     var saveTimer = null;
@@ -7461,7 +7257,6 @@ DAL.afterStoryRender = function(proj){
         } else {
           saveTimer = setTimeout(function(){ DAL.saveState(); }, 450);
         }
-        // Update word count
         var wc = DAL.countWords(editor.innerHTML);
         var footer = editor.parentElement.parentElement.querySelector('.editor-footer span');
         if(footer) footer.textContent = wc + ' words';
@@ -7477,7 +7272,6 @@ DAL.afterStoryRender = function(proj){
   // Bind relationship map if present
   DAL.initRelMap(proj);
 
-  // Bind project name input
   var nameInput = document.getElementById('projNameInput');
   if(nameInput){
     nameInput.addEventListener('change', function(){
@@ -7488,7 +7282,6 @@ DAL.afterStoryRender = function(proj){
     });
   }
 
-  // Status change
   var statusSel = document.querySelector('[data-action="change-status"]');
   if(statusSel){
     statusSel.addEventListener('change', function(){
@@ -7498,8 +7291,6 @@ DAL.afterStoryRender = function(proj){
     });
   }
 };
-
-/* --- Characters --- */
 DAL.renderCharacters = function(proj){
   if(!proj.characters) proj.characters = [];
   if(DAL.selectedCharId){
@@ -7529,11 +7320,9 @@ DAL.renderCharacterDetail = function(proj, ch){
   var html = '<div class="u-measure">';
   html += '<div style="margin-bottom:16px"><button class="btn sm" data-action="back-to-characters">← Back</button></div>';
   html += '<div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start">';
-  // Portrait
   html += '<div class="char-portrait" style="width:96px;height:96px;flex-shrink:0;font-size:32px;border-radius:var(--radius-lg)">'+(ch.image?'<img src="'+ch.image+'">':DAL.escapeHtml((ch.name||'?').charAt(0).toUpperCase()))+'</div>';
   html += '<div style="flex:1"><input class="form-input" id="charName" data-char-field="name" value="'+DAL.escapeHtml(ch.name||'')+'" placeholder="Character name" aria-label="Character name" style="font-size:var(--ts-lg);font-weight:700;margin-bottom:4px"><label class="u-hint" style="display:inline-flex;align-items:center;gap:6px;margin-top:6px"><input type="checkbox" data-action="toggle-character-deceased" data-cid="'+ch.id+'"'+(ch.deceased?' checked':'')+'> Killed / deceased</label></div></div>';
 
-  // Portrait upload
   html += '<div style="margin-bottom:12px"><input type="file" id="charPortrait" accept="image/*" style="display:none"><button class="btn sm" data-action="upload-portrait" data-cid="'+ch.id+'">Upload Portrait</button> '+(ch.image?'<button class="btn sm danger" data-action="remove-portrait" data-cid="'+ch.id+'">Remove</button>':'')+'</div>';
 
   html += '<div class="form-row" style="margin-bottom:12px">'+
@@ -7546,7 +7335,6 @@ DAL.renderCharacterDetail = function(proj, ch){
     html += '<div class="form-group"><label class="form-label">'+f[1]+'</label><textarea class="form-textarea" data-char-field="'+f[0]+'" placeholder="Write '+f[1].toLowerCase()+'...">'+DAL.escapeHtml(ch[f[0]]||'')+'</textarea></div>';
   });
 
-  // Custom fields
   if(!ch.customFields) ch.customFields = [];
   html += '<div class="form-group"><label class="form-label">Custom Fields</label><div class="custom-fields">';
   ch.customFields.forEach(function(cf, i){
@@ -7556,10 +7344,8 @@ DAL.renderCharacterDetail = function(proj, ch){
   });
   html += '</div><button class="btn sm" data-action="add-custom-field" data-cid="'+ch.id+'">+ Add Custom Field</button></div>';
 
-  // Tags
   html += '<div class="form-group" style="margin-top:12px"><label class="form-label">Tags</label><input class="form-input" data-char-field="tags" value="'+DAL.escapeHtml((ch.tags||[]).join(', '))+'" placeholder="comma, separated, tags"></div>';
 
-  // Linked plots
   html += '<div class="form-group"><label class="form-label">Linked Plot Threads</label><div style="display:flex;flex-wrap:wrap;gap:4px">';
   (proj.plots||[]).forEach(function(p){
     var sel = (ch.linkedPlotIds||[]).indexOf(p.id) >= 0;
@@ -7572,8 +7358,6 @@ DAL.renderCharacterDetail = function(proj, ch){
   html += '</div>';
   return html;
 };
-
-/* --- Relationship Map --- */
 DAL.renderRelationshipMap = function(proj){
   if(!proj.characters || !proj.characters.length){
     return '<div class="empty-state"><h3>No Characters</h3><p>Add characters first to build relationship maps.</p></div>';
@@ -7599,7 +7383,6 @@ DAL.renderRelationshipMap = function(proj){
   html += '<div class="rel-map-container" id="relMapContainer">';
   html += '<svg class="rel-svg" id="relSvg"></svg>';
 
-  // Center node
   html += '<div class="rel-node center" id="relCenterNode">'+
     '<div style="font-weight:700">'+DAL.escapeHtml(center.name)+'</div>'+
     '<div style="font-size:var(--ts-xs);color:var(--c-text-muted)">'+DAL.escapeHtml(center.role||'')+'</div></div>';
@@ -7656,8 +7439,6 @@ DAL.openRelationshipEditor = function(proj, rel){
   DAL._editingRelationshipId=rel?rel.id:null;
   DAL.modal(rel?'Edit Relationship':'Add Relationship',html,{footer:'<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="save-relationship">Save</button>'});
 };
-
-/* --- Plot Threads --- */
 DAL.renderPlotThreads = function(proj){
   if(!proj.plots) proj.plots = [];
   if(DAL.selectedPlotId){
@@ -7671,7 +7452,6 @@ DAL.renderPlotThreads = function(proj){
 
   var html = '<div class="section-header"><div class="section-title">Plot Threads</div></div>';
 
-  // Main plots
   html += '<div class="plot-section"><div class="plot-section-title">Main Plot</div>';
   if(main.length){
     main.forEach(function(p){
@@ -7687,7 +7467,6 @@ DAL.renderPlotThreads = function(proj){
   }
   html += '<button class="btn sm" data-action="add-plot" data-type="main" style="margin-top:4px">+ Add Main Plot</button></div>';
 
-  // Subplots
   html += '<div class="plot-section"><div class="plot-section-title">Subplots</div>';
   if(sub.length){
     sub.forEach(function(p){
@@ -7719,7 +7498,6 @@ DAL.renderPlotDetail = function(proj, p){
     '</select></div></div>';
   html += '<div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="plotDesc" placeholder="Describe this plot thread...">'+DAL.escapeHtml(p.description||'')+'</textarea></div>';
 
-  // Linked chapters
   html += '<div class="form-group"><label class="form-label">Linked Chapters</label><div style="display:flex;flex-wrap:wrap;gap:4px">';
   (proj.chapters||[]).forEach(function(ch){
     var sel = (p.linkedChapterIds||[]).indexOf(ch.id) >= 0;
@@ -7728,7 +7506,6 @@ DAL.renderPlotDetail = function(proj, p){
   if(!proj.chapters||!proj.chapters.length) html += '<span style="font-size:var(--ts-xs);color:var(--c-text-faint)">No chapters yet</span>';
   html += '</div></div>';
 
-  // Linked characters
   html += '<div class="form-group"><label class="form-label">Linked Characters</label><div style="display:flex;flex-wrap:wrap;gap:4px">';
   (proj.characters||[]).forEach(function(c){
     var sel = (p.linkedCharacterIds||[]).indexOf(c.id) >= 0;
@@ -7744,8 +7521,6 @@ DAL.renderPlotDetail = function(proj, p){
   html += '</div>';
   return html;
 };
-
-/* --- Timeline ----------------------------------------------------------- */
 DAL.renderTimeline = function(proj){
   if(!Array.isArray(proj.timeline)) proj.timeline = [];
   var events = proj.timeline.slice().sort(function(a,b){
@@ -7769,8 +7544,6 @@ DAL.renderTimeline = function(proj){
   }
   return html+'</div></div>';
 };
-
-/* --- Lore Notebook --- */
 DAL.renderLoreNotebook = function(proj){
   if(!proj.lore) proj.lore = { folders: ['Locations','Factions','Magic / Technology','Relics & Artifacts','Cosmology & History','Miscellaneous'], entries: [] };
   if(!DAL.selectedLoreFolder) DAL.selectedLoreFolder = proj.lore.folders[0] || 'Miscellaneous';
@@ -7781,7 +7554,6 @@ DAL.renderLoreNotebook = function(proj){
   }
 
   var html = '<div class="lore-layout u-fill-body">';
-  // Sidebar
   html += '<div class="lore-sidebar"><div style="padding:8px 12px;border-bottom:1px solid var(--c-border)"><span style="font-size:var(--ts-xs);font-weight:600;text-transform:uppercase;color:var(--c-text-muted)">Lore</span></div>';
   proj.lore.folders.forEach(function(f){
     var active = f === DAL.selectedLoreFolder ? ' active' : '';
@@ -7795,7 +7567,6 @@ DAL.renderLoreNotebook = function(proj){
   html += '<div style="padding:8px 12px"><button class="btn sm" data-action="add-lore-folder">+ Folder</button></div>';
   html += '</div>';
 
-  // Main area
   var entries = proj.lore.entries.filter(function(e){ return e.folder === DAL.selectedLoreFolder; });
   html += '<div class="lore-main">';
   html += '<div class="section-header"><div class="section-title">'+DAL.escapeHtml(DAL.selectedLoreFolder)+'</div><button class="btn primary" data-action="add-lore-entry">+ Add Entry</button></div>';
@@ -7822,7 +7593,6 @@ DAL.renderLoreDetail = function(proj, entry){
   html += '<div class="form-group"><label class="form-label">Content</label><textarea class="form-textarea" id="loreContent" style="min-height:200px" placeholder="Write lore content...">'+DAL.escapeHtml(entry.content||'')+'</textarea></div>';
   html += '<div class="form-group"><label class="form-label">Tags</label><input class="form-input" id="loreTags" value="'+DAL.escapeHtml((entry.tags||[]).join(', '))+'" placeholder="comma, separated, tags"></div>';
 
-  // Linked characters
   html += '<div class="form-group"><label class="form-label">Linked Characters</label><div style="display:flex;flex-wrap:wrap;gap:4px">';
   (proj.characters||[]).forEach(function(c){
     var sel = (entry.linkedCharIds||[]).indexOf(c.id) >= 0;
@@ -7830,7 +7600,6 @@ DAL.renderLoreDetail = function(proj, entry){
   });
   html += '</div></div>';
 
-  // Linked plots
   html += '<div class="form-group"><label class="form-label">Linked Plot Threads</label><div style="display:flex;flex-wrap:wrap;gap:4px">';
   (proj.plots||[]).forEach(function(p){
     var sel = (entry.linkedPlotIds||[]).indexOf(p.id) >= 0;
@@ -7843,8 +7612,6 @@ DAL.renderLoreDetail = function(proj, entry){
   html += '</div>';
   return html;
 };
-
-/* --- Illustrations / Asset Library --- */
 DAL.bookPageLabel = function(proj, page){
   page = parseInt(page, 10) || 0;
   if(page < 1) return 'Not assigned to the book';
@@ -7910,8 +7677,6 @@ DAL.renderIllustrations = function(proj){
   html += '</div>';
   return html;
 };
-
-/* --- Mind Map --- */
 DAL.renderMindMap = function(proj){
   if(!proj.mindmap) proj.mindmap = { nodes: [], edges: [] };
   var mm = proj.mindmap;
@@ -7922,9 +7687,10 @@ DAL.renderMindMap = function(proj){
     '<button class="tb-btn" data-action="mm-edit-sel" title="Edit selected idea" aria-label="Edit selected idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z"/></svg></button>'+
     '<button class="tb-btn" data-action="mm-connect" title="Connect ideas" aria-label="Connect ideas" aria-pressed="'+(DAL.connectMode?'true':'false')+'" '+(DAL.connectMode?'style="background:var(--c-accent-soft);color:var(--c-accent)"':'')+'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>'+
     '<button class="tb-btn" data-action="mm-delete-sel" title="Delete selected idea" aria-label="Delete selected idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg></button>'+
+    '<button class="tb-btn mobile-context-action" data-action="selection-menu" title="More actions for selected idea" aria-label="More actions for selected idea">&#8942;</button>'+
     '<span class="tb-sep"></span>'+
     DAL.canvasViewControls()+
-    '<span style="flex:1"></span>'+DAL.infoIcon('Mind Map: add or double-tap to create an idea. Select an idea to edit or delete it, double-click it to open its details, or right-click for edit, child, connection, clipboard, and delete tools. Drag ideas to rearrange them.')+
+    '<span style="flex:1"></span>'+DAL.infoIcon('Mind Map: add or double-tap to create an idea. Select an idea to edit or delete it. Right-click, touch and hold, or use More for child, connection, clipboard, and delete tools. Drag ideas to rearrange them.')+
   '</div>';
   html += '<div class="canvas-container u-fill-canvas" id="canvasContainer"><div class="canvas-inner" id="canvasInner"><div class="canvas-stage" id="canvasStage">';
   html += '<svg class="canvas-svg" id="canvasSvg"></svg>';
@@ -7943,7 +7709,7 @@ DAL.renderMindMap = function(proj){
     html += '<div class="canvas-empty">'+
       '<div style="margin-bottom:8px;font-size:var(--ts-lg);color:var(--c-text-muted)">What is a Mind Map?</div>'+
       '<p style="line-height:1.6">A mind map is a free-form visual brainstorming space. Use it to jot down ideas, connect them with lines, and see how different parts of your story relate to each other.</p>'+
-      '<p style="margin-top:8px"><strong>Double-click</strong> the canvas to add an idea, select an idea to edit it, <strong>right-click</strong> for more actions, and click a connection line to remove it.</p>'+
+      '<p style="margin-top:8px">Double-click or double-tap the canvas to add an idea. Select an idea to edit it, then right-click, touch and hold, or use More for every action. Tap a connection line to remove it.</p>'+
     '</div>';
   }
   html += '</div></div></div>';
@@ -7959,7 +7725,7 @@ DAL.CTX['mind-node']=function(id){return [{heading:'Mind map idea'},{label:'Edit
 DAL.SELECT['mind-node']={label:function(id){var node=DAL.mindMapNode(DAL.state.projects[DAL.currentProjectId],id);return node?node.label:'Idea';},copy:function(id){return DAL.clone(DAL.mindMapNode(DAL.state.projects[DAL.currentProjectId],id));},remove:DAL.removeMindMapNode};
 DAL.PASTE['mind-node']=function(payload){var proj=DAL.state.projects[DAL.currentProjectId],mm=proj&&proj.mindmap;if(!mm)return false;DAL.pushHistory();var node=DAL.clone(payload||{});node.id=DAL.uid('mm');node.label=(node.label||'Idea')+' copy';node.x=Math.max(0,Math.min(2480,(parseFloat(node.x)||0)+30));node.y=Math.max(0,Math.min(1620,(parseFloat(node.y)||0)+30));mm.nodes.push(node);DAL.selectedNodeId=node.id;proj.updatedAt=Date.now();DAL.saveState();DAL.render();return true;};
 
-/* --- Canvas: view controls, panning, zooming and node dragging -------------
+/* Canvas: view controls, panning, zooming and node dragging
    One implementation serves both boards. Which board is on screen is decided by
    the current tool, and the shape of the data differs (a story graph connects
    scenes through choices, a mind map through its own edge list), but the
@@ -8284,8 +8050,6 @@ DAL.initCanvasInteractions = function(proj){
     data.nodes.push(idea);DAL.selectedNodeId=idea.id;proj.updatedAt=Date.now();DAL.saveState();DAL.render();setTimeout(function(){DAL.showMindMapNodeEditor(idea.id);},0);
   };
 };
-
-/* --- Book Preview --- */
 DAL.renderBookPreview = function(proj){
   if(!proj.chapters) proj.chapters = [];
   if(DAL.readerPage === undefined || DAL.readerPage === null) DAL.readerPage = 0;
@@ -8331,7 +8095,7 @@ DAL.renderBookPreview = function(proj){
   return html;
 };
 
-/* --- Export registry -------------------------------------------------------
+/* Export registry
    Every export button in the app is generated from this one list so the Export
    tool tab, the RPG export tab and the Export Project dialog cannot drift apart
    in wording or in which formats they offer. Groups appear only when the
@@ -8422,8 +8186,6 @@ DAL.exportSelectValue = function(id){
   var el = document.querySelector('.modal-backdrop #' + id) || document.getElementById(id);
   return el ? el.value : '';
 };
-
-/* --- Story Export --- */
 DAL.renderStoryExport = function(proj){
   var html = '<div class="u-measure"><div class="section-header"><div class="section-title">Export</div></div>';
   html += DAL.renderExportGroups(proj);
@@ -8436,7 +8198,6 @@ DAL.renderStoryExport = function(proj){
   });
   html += '</select></div><button class="btn primary" style="margin-top:8px" data-action="transfer-item" data-pid="'+proj.id+'">Transfer</button></div>';
 
-  // Version snapshots
   html += '<div class="card"><div style="font-weight:600;margin-bottom:8px">Version Snapshots</div>';
   html += '<button class="btn sm" data-action="save-version" data-pid="'+proj.id+'">Save Version Now</button>';
   if(proj.versions && proj.versions.length){
@@ -8477,8 +8238,6 @@ DAL.removeProjectReferences = function(proj, kind, id){
     ((structure||{}).beats||[]).forEach(function(beat){ if(beat.chapterId === id) beat.chapterId = ''; });
   }
 };
-
-/* --- Story Click Handler --- */
 DAL.handleStoryClick = function(action, el, e){
   if(action === 'ws-tool'){
     DAL.currentTool = el.getAttribute('data-tool');
@@ -8486,7 +8245,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Illustrations
   if(action === 'upload-illustration'){ document.getElementById('illustrationUpload').click(); return; }
 
   if(action === 'delete-illustration'){
@@ -8499,7 +8257,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Chapter image upload
   if(action === 'upload-chapter-image'){
     var chIdx = el.getAttribute('data-cid');
     DAL._uploadChapterCid = chIdx;
@@ -8526,7 +8283,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Manuscript
   if(action === 'add-chapter'){
     DAL.pushHistory();
     var proj = DAL.state.projects[DAL.currentProjectId];
@@ -8612,7 +8368,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Characters
   if(action === 'add-character'){
     DAL.pushHistory();
     var proj4 = DAL.state.projects[DAL.currentProjectId];
@@ -8693,7 +8448,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Relationships
   if(action === 'rel-center-on'){
     DAL._relCenter = el.getAttribute('data-cid');
     DAL.render();
@@ -8747,7 +8501,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Plots
   if(action === 'add-plot'){
     DAL.pushHistory();
     var proj12 = DAL.state.projects[DAL.currentProjectId];
@@ -8804,7 +8557,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Lore
   if(action === 'select-lore-folder'){
     DAL.selectedLoreFolder = el.getAttribute('data-folder');
     DAL.selectedLoreEntry = null;
@@ -8883,7 +8635,6 @@ DAL.handleStoryClick = function(action, el, e){
     DAL.selectedTimelineId=null; projTimelineDelete.updatedAt=Date.now(); DAL.saveState(); DAL.render(); DAL.toast('Timeline event deleted','warning'); return;
   }
 
-  // Mind Map
   if(action === 'mm-add-node'){
     var proj20 = DAL.state.projects[DAL.currentProjectId];
     DAL.pushHistory();
@@ -8940,7 +8691,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Book Preview
   if(action === 'bp-prev'){
     if(DAL.readerPage > 0){ DAL.readerPage--; DAL.render(); }
     return;
@@ -8955,7 +8705,6 @@ DAL.handleStoryClick = function(action, el, e){
     return;
   }
 
-  // Export
   if(action === 'export-json'){
     var proj25 = DAL.exportTarget(el);
     if(!proj25){ DAL.toast('Open a project first.','error'); return; }
@@ -9070,8 +8819,6 @@ DAL.saveChapterContent = function(){
     DAL.saveState();
   }
 };
-
-/* --- Field bindings for story tools --- */
 document.addEventListener('input', function(e){
   var el = e.target;
   if(el.hasAttribute('data-timeline-field')){ DAL.updateTimelineField(el); return; }
@@ -9150,8 +8897,6 @@ document.addEventListener('keydown', function(e){
   var step=e.shiftKey?1:10;item.x=Math.max(0,Math.min(2480,(parseFloat(item.x)||0)+move[0]*step));item.y=Math.max(0,Math.min(1620,(parseFloat(item.y)||0)+move[1]*step));node.style.left=item.x+'px';node.style.top=item.y+'px';DAL.selectedNodeId=id;node.classList.add('selected');if(DAL.drawCanvasEdges)DAL.drawCanvasEdges(proj,DAL.canvasData(proj));DAL.saveState();
 });
 document.addEventListener('dblclick',function(e){var node=e.target&&e.target.closest?e.target.closest('.mind-node[data-nid]'):null;if(!node||DAL.currentTool!=='mindmap')return;e.preventDefault();e.stopPropagation();DAL.selectedNodeId=node.getAttribute('data-nid');DAL.showMindMapNodeEditor(DAL.selectedNodeId);});
-
-/* --- Change handler for story tool selects --- */
 document.addEventListener('change', function(e){
   var el = e.target;
   if(el.hasAttribute('data-timeline-field')){ DAL.updateTimelineField(el); return; }
@@ -9173,7 +8918,6 @@ document.addEventListener('change', function(e){
          open reader in place instead of re-rendering it. */
     }
   }
-  // Transfer item dropdown
   if(el.id === 'transferType'){
     var proj = DAL.state.projects[DAL.currentProjectId];
     var type = el.value;
@@ -9361,7 +9105,7 @@ DAL.showSprint = function(finished){
   DAL.modal('Start Writing Sprint',h2,{footer:'<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="start-sprint">Start</button>'});
 };
 
-/* --- Floating sprint timer -------------------------------------------------
+/* Floating sprint timer
    A modal timer means the writer cannot write while it is open, which defeats
    the point of a sprint. The timer therefore lives in a small panel that floats
    over the workspace, can be dragged anywhere, collapsed to a strip, or hidden
@@ -9771,21 +9515,6 @@ DAL.afterStoryRender=function(proj){DAL._afterStoryRenderBase(proj);var ed=docum
  * terms (see LICENSE.md). Credit to the original author must remain visible.
  * Commercial use requires a license — see COMMERCIAL-LICENSE.md.
  */
-/* ============================================
-   DRAFT A LORE — Adventure Rules Engine
-   The single authority on what an adventure's state is and how it changes.
-   Every reader of the rules — the editor previews, the Playthrough tool, the
-   validator and the exported game — goes through this object, so they cannot
-   drift apart.
-
-   Two constraints keep that promise, and both matter if you edit this file:
-   1. Nothing here touches the DOM, storage or any other DAL function. State is
-      passed in and returned; the engine is pure logic.
-   2. Internal calls go through `RPG.`, never `DAL.rpg.`. RPG.engineSource()
-      serialises this object into the exported HTML, where the same functions
-      are rebuilt on a bare `var RPG = {}`. A `DAL.` reference would compile in
-      the app and throw in the export.
-   ============================================ */
 DAL = DAL || {};
 
 (function(){
@@ -9823,9 +9552,6 @@ DAL = DAL || {};
     if((slot.allowedTypes || []).length && (slot.allowedTypes || []).indexOf(item.type || '') === -1) return { ok:false, reason:RPG.slotLabel(adv, slot.id)+' only accepts '+slot.allowedTypes.join(', ') };
     return { ok:true, slot:slot };
   };
-
-  /* --- Definition lookups ------------------------------------------------ */
-
   RPG.statDef = function(adv, key){
     var list = adv.stats || [];
     for(var i=0;i<list.length;i++){ if(list[i].key === key) return list[i]; }
@@ -9894,9 +9620,6 @@ DAL = DAL || {};
       capacity: RPG.hasLimit(r.capacity) ? Math.max(0, RPG.num(r.capacity, 0)) : null
     };
   };
-
-  /* --- Numbers ----------------------------------------------------------- */
-
   RPG.num = function(v, fallback){
     var n = parseFloat(v);
     return isNaN(n) ? (fallback || 0) : n;
@@ -9921,9 +9644,6 @@ DAL = DAL || {};
     if(def.type === 'boolean') return def['default'] === true || def['default'] === 'true';
     return String(def['default'] === undefined || def['default'] === null ? '' : def['default']);
   };
-
-  /* --- State ------------------------------------------------------------- */
-
   /* The authoritative runtime shape. Anything the rules can read lives here
      and nowhere else. */
   RPG.blankState = function(adv){
@@ -10051,9 +9771,6 @@ DAL = DAL || {};
     if(def) def.key = newKey;
     return touched;
   };
-
-  /* --- Conditions -------------------------------------------------------- */
-
   /* An unrecognised operator fails CLOSED. A requirement nobody can parse must
      lock the choice, not grant it: a door that stays shut sends the author to
      the integrity scan, whereas one that silently opens ships as a broken game. */
@@ -10201,9 +9918,6 @@ DAL = DAL || {};
     }
     return 'unrecognised requirement';
   };
-
-  /* --- Effects ----------------------------------------------------------- */
-
   RPG.describeEffect = function(eff, adv){
     if(!eff || !eff.type) return 'does nothing';
     /* Same courtesy as conditions: an unfinished row says so instead of
@@ -10399,9 +10113,6 @@ DAL = DAL || {};
     } else result.ok = false;
     return result;
   };
-
-  /* --- Failure rules ----------------------------------------------------- */
-
   /* Stat thresholds that stop a run — health hitting zero being the obvious
      one. The first matching rule wins so the outcome is never ambiguous. */
   RPG.failureHit = function(state, adv){
@@ -10418,9 +10129,6 @@ DAL = DAL || {};
     var words = { '>=':'reaches', '<=':'drops to', '>':'goes above', '<':'falls below', '==':'equals', '!=':'is not' };
     return RPG.statLabel(adv, rule.statKey) + ' ' + (words[rule.op || '<='] || 'reaches') + ' ' + RPG.num(rule.value, 0);
   };
-
-  /* --- Movement ---------------------------------------------------------- */
-
   /* Entering a scene is a fixed sequence: arrive, count the visit, run the
      scene's entry effects, honour a redirect, then check for failure or an
      ending. Redirect chains are capped so a loop cannot hang the reader. */
@@ -10499,18 +10207,12 @@ DAL = DAL || {};
     var res = RPG.applyEffects([{ type:'equip', op: op, key: itemKey }], state, adv);
     return res.changes[0] || null;
   };
-
-  /* --- Snapshots --------------------------------------------------------- */
-
   /* Step Back needs a real previous state, not a rewound node id: a run that
      spent gold and walked back a scene should still be poorer. Snapshots are
      plain data, so a structural copy is enough. */
   RPG.snapshot = function(state){
     return JSON.parse(JSON.stringify(state));
   };
-
-  /* --- Panels ------------------------------------------------------------ */
-
   /* One description of what the reader should see, used by the Playthrough
      inspector and the exported game so the two cannot disagree. */
   RPG.statRows = function(state, adv){
@@ -10556,9 +10258,6 @@ DAL = DAL || {};
       return { slot: slot.id, label:slot.label, key: key || null, name: key ? RPG.itemName(adv, key) : null };
     });
   };
-
-  /* --- Checkup ----------------------------------------------------------- */
-
   /* Finds the mistakes a branching story hides from its author: scenes nobody
      can reach, choices that lead nowhere, and requirements or changes that name
      something the author has since deleted. Reports only, never repairs. */
@@ -10729,9 +10428,6 @@ DAL = DAL || {};
     var problems = issues.filter(function(i){ return i.level === 'problem'; }).length;
     return { issues: issues, problems: problems, warnings: issues.length - problems, ok: !issues.length };
   };
-
-  /* --- Export ------------------------------------------------------------ */
-
   /* Runtime functions embedded in playable exports. */
   RPG.API = ['SLOTS','statDef','traitDef','nodeById','itemDef','itemKey','itemName','statLabel',
     'traitLabel','nodeTitle','rules','num','hasLimit','clampStat','statStart','blankState',
@@ -10847,13 +10543,7 @@ DAL = DAL || {};
  * terms (see LICENSE.md). Credit to the original author must remain visible.
  * Commercial use requires a license — see COMMERCIAL-LICENSE.md.
  */
-/* ============================================
-   DRAFT A LORE — Adventure Tools Module
-   Story Graph, Stats & Traits, Inventory & Items, Playtest, RPG Export
-   ============================================ */
 DAL = DAL || {};
-
-/* --- Ensure adventure exists --- */
 DAL.ensureAdventure = function(proj){
   if(!proj.adventure){
     proj.adventure = DAL.defaultAdventure(proj.name);
@@ -10872,8 +10562,6 @@ DAL.ensureAdventure = function(proj){
   adv.items.forEach(function(it){ if(!it.id) it.id = DAL.uid('item'); });
   return adv;
 };
-
-/* --- Story Graph --- */
 DAL.renderStoryGraph = function(proj){
   var adv = DAL.ensureAdventure(proj);
   if(!adv.nodes) adv.nodes = [];
@@ -10882,6 +10570,7 @@ DAL.renderStoryGraph = function(proj){
     '<button class="tb-btn" data-action="sg-add-node" title="Add scene" aria-label="Add scene"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>'+
     '<button class="tb-btn" data-action="sg-connect" title="Connect scenes" aria-label="Connect scenes" '+(DAL.connectMode?'style="background:var(--c-accent-soft);color:var(--c-accent)" aria-pressed="true"':'aria-pressed="false"')+'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>'+
     '<button class="tb-btn" data-action="sg-delete-sel" title="Delete selected scene" aria-label="Delete selected scene"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg></button>'+
+    '<button class="tb-btn mobile-context-action" data-action="selection-menu" title="More actions for selected scene" aria-label="More actions for selected scene">&#8942;</button>'+
     '<span class="tb-sep" style="width:1px;height:20px;background:var(--c-border);margin:0 4px"></span>'+
     '<button class="tb-btn" data-action="sg-checkup" title="Story checkup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><polyline points="9 11 12 14 20 6"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></button>'+
     '<span class="tb-sep" style="width:1px;height:20px;background:var(--c-border);margin:0 4px"></span>'+
@@ -10940,7 +10629,6 @@ DAL.renderNodeDetail = function(proj, adv, node){
   var html = '<div class="form-group"><label class="form-label">Scene Title</label><input class="form-input" id="nodeTitle" value="'+DAL.escapeHtml(node.title||'')+'" placeholder="Scene title"></div>';
   html += '<div class="form-group"><label class="form-label">What the Reader Sees</label><textarea class="form-textarea" id="nodeText" style="min-height:100px" placeholder="Write the scene text that the reader will experience...">'+DAL.escapeHtml(node.text||'')+'</textarea></div>';
 
-  // Scene illustrations
   html += '<div class="form-group asset-dropzone" data-drop="asset" data-asset-bind="node:'+node.id+'"><label class="form-label">Scene Illustrations</label>'+
     '<p style="font-size:var(--ts-xs);color:var(--c-text-muted);margin-bottom:4px">Add artwork that shows alongside this scene in the playthrough, or drag one in from the Assets tool.</p>';
   if(node.images && node.images.length){
@@ -10957,10 +10645,8 @@ DAL.renderNodeDetail = function(proj, adv, node){
   html += '<input type="file" id="sceneImageInput" accept="image/*" style="display:none">';
   html += '</div>';
 
-  // Start node
   html += '<div class="form-group"><label class="form-label">Start Node</label><div style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="nodeIsStart" '+(adv.startNodeId===node.id?'checked':'')+' data-action="sg-set-start" data-nid="'+node.id+'"><label for="nodeIsStart" style="font-size:var(--ts-sm);cursor:pointer">Set as adventure start</label></div></div>';
 
-  // Ending scenes
   html += '<div class="form-group"><label class="form-label">Scene Kind '+DAL.infoIcon('A normal scene carries on through its choices. An ending scene closes the run the moment the reader arrives, and the closing screen shows the ending name you give it — useful for tracking which endings a reader has found.')+'</label>'+
     '<select class="form-select" data-node-field="kind" data-nid="'+node.id+'">'+
       '<option value="normal"'+(node.kind!=='ending'?' selected':'')+'>Normal scene</option>'+
@@ -10981,7 +10667,6 @@ DAL.renderNodeDetail = function(proj, adv, node){
   if(entrySummary) html += '<div style="font-size:var(--ts-xs);color:var(--c-text-faint);margin-top:4px;font-style:italic">On arrival: '+DAL.escapeHtml(entrySummary)+'</div>';
   html += '</div>';
 
-  // Choices
   html += '<div class="form-group"><label class="form-label">Choices '+DAL.infoIcon('A choice is a button the reader can tap to leave the current scene. Conditions (optional) hide a choice until the reader meets a requirement, e.g. a stat is high enough or a trait is set. Effects change the story state when the choice is picked — set a flag, raise a stat, give or take an item.')+'</label><p style="font-size:var(--ts-xs);color:var(--c-text-muted);margin-bottom:4px">Each choice sends the reader to another scene. Add conditions to control when a choice appears.</p><div id="choicesList" style="display:flex;flex-direction:column;gap:8px">';
   (node.choices||[]).forEach(function(ch, i){
     html += '<div style="border:1px solid var(--c-border);border-radius:var(--radius);padding:8px;margin-bottom:4px">';
@@ -11236,15 +10921,12 @@ DAL.describeChoiceGate = function(ch, adv){
   var parts = conds.map(function(c){ return DAL.rpg.describeCondition(c, adv); });
   return 'Shown when ' + parts.join(joiner) + '.';
 };
-
-/* --- Stats & Traits --- */
 DAL.renderStatsTraits = function(proj){
   var adv = DAL.ensureAdventure(proj);
   var html = '<div class="u-measure-mid">';
 
   html += '<p style="color:var(--c-text-muted);font-size:var(--ts-sm);margin-bottom:16px;line-height:1.6">Stats are numbers that track things like Health, Gold, or Strength. Traits are yes/no flags like \"Knows Lockpicking\" or \"Has Met the King.\" Both are used to control which choices appear for the reader.</p>';
 
-  // Stats
   html += '<div class="section-header"><div class="section-title">Stats (Numbers) '+DAL.infoIcon('Stats are numeric values like Health, Gold or Charisma. Use them in conditions (e.g. only show a choice if Health > 5) and change them with effects when a choice is picked.')+'</div><button class="btn primary" data-action="sg-add-stat">+ Add Stat</button></div>';
   html += '<div class="card" style="margin-bottom:20px"><table class="stats-table"><thead><tr><th>Key</th><th>Label</th><th>Type</th><th>Default</th><th>Min '+DAL.infoIcon('The lowest this stat can go. Any change that would drop below it stops here instead, so Health cannot fall past zero and gold cannot go negative. Leave blank for no floor.')+'</th><th>Max '+DAL.infoIcon('The highest this stat can go. Healing past a full Health bar stops at the maximum. A maximum also gives the playthrough panel a bar to draw. Leave blank for no ceiling.')+'</th><th></th></tr></thead><tbody>';
   (adv.stats||[]).forEach(function(s, i){
@@ -11260,7 +10942,6 @@ DAL.renderStatsTraits = function(proj){
   if(!adv.stats||!adv.stats.length) html += '<tr><td colspan="7" style="text-align:center;color:var(--c-text-faint)">No stats defined</td></tr>';
   html += '</tbody></table></div>';
 
-  // Traits
   html += '<div class="section-header"><div class="section-title">Traits (Yes/No Flags) '+DAL.infoIcon('Traits are simple on/off flags — e.g. “met the king”, “has sword”, “trusted by rebels”. They cost nothing to track and are perfect for branching conditions: show a choice only when a trait is set.')+'</div><button class="btn primary" data-action="sg-add-trait">+ Add Trait</button></div>';
   html += '<div class="card"><table class="stats-table"><thead><tr><th>Key</th><th>Label</th><th>Description</th><th>Default</th><th></th></tr></thead><tbody>';
   (adv.traits||[]).forEach(function(t, i){
@@ -11372,9 +11053,6 @@ DAL.FAILURE_OPS = [
   { value: '==', label: 'equals' },
   { value: '!=', label: 'is anything but' }
 ];
-
-
-/* --- Inventory & Items --- */
 DAL.renderItems = function(proj){
   var adv = DAL.ensureAdventure(proj);
   var html = '<div class="u-measure-wide">';
@@ -11402,8 +11080,6 @@ DAL.renderItems = function(proj){
   html += '</div>';
   return html;
 };
-
-/* --- RPG Playtest --- */
 DAL.renderPlaytest = function(proj){
   var adv = DAL.ensureAdventure(proj);
   if(!adv.nodes || !adv.nodes.length){
@@ -11411,7 +11087,6 @@ DAL.renderPlaytest = function(proj){
   }
   if(!adv.startNodeId) adv.startNodeId = adv.nodes[0].id;
 
-  // Initialize playtest state
   if(!DAL.playtestState){
     DAL.initPlaytest(adv);
   }
@@ -11420,7 +11095,6 @@ DAL.renderPlaytest = function(proj){
   if(!currentNode){ DAL.initPlaytest(adv); currentNode = DAL.rpg.currentNode(DAL.playtestState, adv); }
 
   var html = '<div class="playtest-layout u-fill-body'+(DAL.playtestStyle==='terminal'?' terminal-mode':'')+'">';
-  // Main passage area
   html += '<div class="playtest-main">';
   html += '<div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap">'+
     '<button class="btn sm" data-action="pt-restart">Restart</button>'+
@@ -11437,7 +11111,6 @@ DAL.renderPlaytest = function(proj){
     '</div></div>';
 
   html += '<div class="playtest-passage-title" style="font-family:var(--font-display);font-size:var(--ts-lg);font-weight:700;margin-bottom:12px">'+DAL.escapeHtml(currentNode.title||'')+'</div>';
-  // Scene illustrations
   if(currentNode.images && currentNode.images.length){
     currentNode.images.forEach(function(img){
       html += '<div class="playtest-scene-image"><img src="'+DAL.imageSrc(proj,img)+'"></div>';
@@ -11480,7 +11153,6 @@ DAL.renderPlaytest = function(proj){
 
   html += '</div>'; // end main
 
-  // State inspector
   html += '<div class="playtest-inspector">';
   html += DAL.renderPlaytestPanels(adv);
   html += '</div>'; // end inspector
@@ -11627,8 +11299,6 @@ DAL.checkConditions = function(conditions, adv){
 DAL.applyEffects = function(effects, adv){
   return DAL.rpg.applyEffects(effects, DAL.playtestState, adv);
 };
-
-/* --- RPG Export --- */
 DAL.renderRPGExport = function(proj){
   var adv = DAL.ensureAdventure(proj);
   var report = DAL.rpg.audit(adv);
@@ -11645,7 +11315,7 @@ DAL.renderRPGExport = function(proj){
   return html;
 };
 
-/* --- Playable export -------------------------------------------------------
+/* Playable export
    The download runs the same engine the Playthrough tool runs: RPG.engineSource()
    serialises it verbatim, so a rule that works here works there. Only the
    presentation below is written twice, and it is deliberately plain — a single
@@ -11900,7 +11570,7 @@ DAL.exportPlayableHTML = function(proj){
     '<\/script><\/body><\/html>';
 };
 
-/* --- Twine export ----------------------------------------------------------
+/* Twine export
    SugarCube can express stats, traits, items and gated links, so those carry
    over. What cannot: gear slots, stack limits, min/max clamping, run-ending
    rules and visit counts. Rather than silently dropping them, the export writes
@@ -12085,8 +11755,6 @@ DAL.nodeSpawnPoint = function(proj, adv){
   while(taken(x, y) && guard++ < 60){ x += 260; if(x > 2260){ x = 180 + (guard % 3) * 24; y += 170; } }
   return { x: x, y: y };
 };
-
-/* --- Adventure Click Handler --- */
 DAL.handleAdventureClick = function(action, el, e){
   if(['sg-add-node','sg-delete-sel','sg-delete-node','sg-set-start','sg-add-effect','sg-delete-effect','sg-add-choice','sg-delete-choice','sg-add-cond','sg-delete-cond','sg-add-choice-effect'].indexOf(action) >= 0) DAL.pushHistory();
   if(action === 'sg-add-node'){
@@ -12287,7 +11955,6 @@ DAL.handleAdventureClick = function(action, el, e){
     return;
   }
 
-  // Stats & Traits
   if(action === 'sg-checkup'){
     DAL.openCheckup();
     return;
@@ -12374,7 +12041,6 @@ DAL.handleAdventureClick = function(action, el, e){
     return;
   }
 
-  // Items
   if(action === 'sg-add-item'){
     var proj17 = DAL.state.projects[DAL.currentProjectId];
     var adv17 = DAL.ensureAdventure(proj17);
@@ -12422,7 +12088,6 @@ DAL.handleAdventureClick = function(action, el, e){
     return;
   }
 
-  // Playtest
   if(action === 'pt-restart'){
     var proj19 = DAL.state.projects[DAL.currentProjectId];
     var adv19 = DAL.ensureAdventure(proj19);
@@ -12493,7 +12158,6 @@ DAL.handleAdventureClick = function(action, el, e){
     return;
   }
 
-  // RPG Export
   if(action === 'export-twee'){
     var proj23 = DAL.exportTarget(el);
     if(!proj23) return;
@@ -12525,8 +12189,6 @@ DAL.handleAdventureClick = function(action, el, e){
     return;
   }
 };
-
-/* --- Field bindings for adventure tools --- */
 document.addEventListener('input', function(e){
   var el = e.target;
   if(el.id === 'nodeTitle' || el.id === 'nodeText'){
@@ -12652,8 +12314,6 @@ document.addEventListener('input', function(e){
     return;
   }
 });
-
-/* --- Change handler for adventure tool selects --- */
 document.addEventListener('change', function(e){
   var el = e.target;
   if(el.hasAttribute('data-choice-target')){
@@ -13150,9 +12810,6 @@ document.addEventListener('change', function(e){
       return { count: (rows || []).length, bytes: total };
     });
   };
-
-  /* --- Object URL cache -------------------------------------------------- */
-
   /* Rendering is synchronous, so a view cannot await a blob. Every asset a
      project owns is turned into an object URL once when the project opens, and
      the views read this cache. */
@@ -13175,9 +12832,6 @@ document.addEventListener('change', function(e){
     var url = DAL._assetUrls[assetId];
     if(url){ URL.revokeObjectURL(url); delete DAL._assetUrls[assetId]; }
   };
-
-  /* --- Asset registry ---------------------------------------------------- */
-
   /* Folder names double as the on-disk layout under a linked project folder. */
   DAL.ASSET_FOLDERS = [
     { key:'illustrations', dir:'Illustrations', label:'Illustrations',
@@ -13358,9 +13012,6 @@ document.addEventListener('change', function(e){
     }
     (proj.illustrations || []).forEach(function(ill){ if(ill.assetId === id) ill.assetId = ''; });
   };
-
-  /* --- Audio bus --------------------------------------------------------- */
-
   /* Separate channels let ambience, an arrival effect and narration coexist. */
   var Bus = DAL.audioBus = {
     ambient: null, effect: null, voice: null, ambientId: null, projectId: null
@@ -13444,9 +13095,6 @@ document.addEventListener('change', function(e){
   };
 
   Bus.stopAll = function(){ Bus.stopAmbient(); Bus.stopEffect(); Bus.stopVoice(); };
-
-  /* --- Narration --------------------------------------------------------- */
-
   /* A bound voice clip takes priority over text-to-speech. */
   var TTS = DAL.tts = { speaking: false };
 
@@ -13499,9 +13147,6 @@ document.addEventListener('change', function(e){
     try{ window.speechSynthesis.cancel(); }catch(e){}
     TTS.speaking = false;
   };
-
-  /* --- Scene playback ---------------------------------------------------- */
-
   /* One entry point for "present this scene": art, bed and narration together,
      so the playtester and the library reader behave identically. */
   DAL.presentScene = function(proj, holder, text, onEnd){
@@ -13525,9 +13170,6 @@ document.addEventListener('change', function(e){
     if(holder && holder.narration) return holder.narration;
     return fallback || '';
   };
-
-  /* --- Inlining assets for export ---------------------------------------- */
-
   /* A blob: URL is scoped to the origin and session that made it, so an exported
      file carrying one shows nothing at all. Bytes are read back out of IndexedDB
      and inlined as data URLs at export time instead. */
@@ -13589,9 +13231,6 @@ document.addEventListener('change', function(e){
     });
     return found;
   };
-
-  /* --- Reading a manuscript aloud ---------------------------------------- */
-
   /* The reader speaks whatever page is on screen. A chapter that has a voiceover
      clip bound plays the clip instead of the synthesised voice, which is the same
      rule scenes follow, so an author only has to learn it once. */
@@ -13687,9 +13326,6 @@ document.addEventListener('change', function(e){
     if(!DAL._assetFolderKey) DAL._assetFolderKey = 'illustrations';
     return DAL._assetFolderKey;
   };
-
-  /* --- Asset manager ------------------------------------------------------ */
-
   DAL.renderAssets = function(proj){
     DAL.ensureAssets(proj);
     DAL.tts.warm();
@@ -13774,9 +13410,6 @@ document.addEventListener('change', function(e){
       });
     }).catch(function(){ el.textContent = 'Stored asset size is unavailable.'; });
   };
-
-  /* --- Audio and narration settings -------------------------------------- */
-
   DAL.renderAudioSettings = function(proj){
     DAL.ensureAssets(proj);
     var a = proj.audio;
@@ -13815,9 +13448,6 @@ document.addEventListener('change', function(e){
 
     return DAL.panel('project-audio', 'Audio & narration', body, { defaultOpen:false });
   };
-
-  /* --- Binding controls -------------------------------------------------- */
-
   /* Rendered inside a scene or chapter editor. `kind` and `id` identify what the
      picked asset should attach to, so one control serves both sides of the app. */
   DAL.renderAudioBinding = function(proj, holder, kind, id){
@@ -13870,9 +13500,6 @@ document.addEventListener('change', function(e){
     if(kind === 'chapter') return DAL.plainChapter(holder);
     return holder.text || '';
   };
-
-  /* --- File input -------------------------------------------------------- */
-
   /* One hidden input reused for every import, because a fresh input per folder
      leaves stale nodes in the DOM after each render. */
   DAL.openAssetPicker = function(folderKey){
@@ -13916,9 +13543,6 @@ document.addEventListener('change', function(e){
       DAL.syncAssetFolder();
     });
   };
-
-  /* --- Native drag-and-drop of real files -------------------------------- */
-
   /* The in-app pointer drag system moves records between panels; files arriving
      from the desktop are a separate HTML5 dataTransfer flow. */
   function fileDropTarget(el){
@@ -14002,9 +13626,6 @@ document.addEventListener('change', function(e){
       if(attached.length) DAL.toast('Attached ' + attached.join(', '), 'success');
     });
   };
-
-  /* --- Actions ----------------------------------------------------------- */
-
   DAL.handleAssetAction = function(action, el){
     /* The audio controls also appear in the library player, which has no
        "active project" in the workspace sense. */
@@ -14167,9 +13788,6 @@ document.addEventListener('change', function(e){
     DAL.saveState();
     DAL.render();
   };
-
-  /* --- Event wiring ------------------------------------------------------ */
-
   /* Clicks reach view handlers through DAL.handleClick; wrapping it keeps asset
      actions out of the core dispatch chain. */
 
@@ -14216,9 +13834,6 @@ document.addEventListener('change', function(e){
       if(resolved) DAL.render();
     });
   });
-
-  /* --- Folder sync ------------------------------------------------------- */
-
   /* Mirrors the asset registry into Assets/<Folder>/ inside a linked project
      folder, so a project handed to someone else carries its media with it. */
   DAL.syncAssetFolder = function(root, proj){
@@ -14264,9 +13879,6 @@ document.addEventListener('change', function(e){
     }
     return img.dataUrl || '';
   };
-
-  /* --- Shelf -------------------------------------------------------------- */
-
   /* The shelf now carries adventures as well as books: an RPG project is
      finished work too, and previously had nowhere to be read from end to end. */
   DAL.libraryEntries = function(){
@@ -14322,9 +13934,6 @@ document.addEventListener('change', function(e){
     html += '</div>';
     return html;
   };
-
-  /* --- Adventure player --------------------------------------------------- */
-
   /* A reader-facing run of a finished adventure: no author panels, no debug
      inspector, art and audio on by default. Kept apart from the playtester so
      neither has to compromise. */
@@ -14461,9 +14070,6 @@ document.addEventListener('change', function(e){
       '<input class="form-range slim" type="range" min="0" max="100" value="'+Math.round(proj.audio.voiceVolume*100)+'" data-action="audio-vol" data-channel="voice" title="Voice volume" aria-label="Voice volume">'+
     '</div>';
   };
-
-  /* --- Playtester audio and art ------------------------------------------ */
-
   /* The playtester keeps its author panels; this adds the transport bar and
      makes each scene change speak and play its bed. */
   var basePlaytest = DAL.renderPlaytest;
@@ -14485,9 +14091,6 @@ document.addEventListener('change', function(e){
     }
     return html;
   };
-
-  /* --- Actions ----------------------------------------------------------- */
-
   DAL.registerActionHandler(function(action, el){
     var proj;
 
@@ -14552,9 +14155,6 @@ document.addEventListener('change', function(e){
       if(node) DAL.presentScene(proj, node, DAL.sceneNarrationText(node, node.text));
     }
   };
-
-  /* --- Import ------------------------------------------------------------ */
-
   /* Two shapes are accepted: a single project .json, or a folder chosen with the
      directory picker whose relative Assets/ tree is read in alongside it. A
      project shared between machines therefore arrives complete. */
