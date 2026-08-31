@@ -7,6 +7,7 @@
     "category": "Writing",
     "tags": ["no-ai", "offline", "writing", "rpg", "story"],
     "thumbnail": "/thumbnails/draft-a-lore.png",
+    "thumbnailAlt": "Draft A Lore manuscript workspace with chapter navigation, story tools, adventure tools, formatting controls, and an active manuscript editor",
     "launchFile": "/apps/DraftALore.html",
     "downloads": {
       "windows": "/downloads/DraftALore-Windows.zip",

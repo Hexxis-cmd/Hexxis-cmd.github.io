@@ -211,6 +211,14 @@ export function useSoundscape(themeId) {
   const startedRef = useRef(false)
   const themeRef = useRef(themeId)
 
+  useEffect(() => {
+    const vibrate = (event) => {
+      if (event.target.closest?.('a, button, [role="button"]')) navigator.vibrate?.(12)
+    }
+    document.addEventListener('pointerdown', vibrate, true)
+    return () => document.removeEventListener('pointerdown', vibrate, true)
+  }, [])
+
   const start = useCallback(async () => {
     if (!engineRef.current) engineRef.current = createEngine()
     const engine = engineRef.current

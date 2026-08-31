@@ -64,7 +64,7 @@ function ProjectCard({ project, onLaunch }) {
     <article className="project-card">
       <div className="project-image-wrap">
         {project.thumbnail
-          ? <img src={project.thumbnail} alt={`${project.title} project artwork`} style={{ objectPosition: project.thumbnailPosition || 'center' }} />
+          ? <img src={project.thumbnail} alt={project.thumbnailAlt || `${project.title} project artwork`} style={{ objectPosition: project.thumbnailPosition || 'center' }} />
           : <div className="template-preview" aria-hidden="true"><span>&lt;/&gt;</span><strong>YOUR SITE</strong><small>Replace this placeholder</small></div>}
         {project.featured && <span className="featured-badge">Featured</span>}
       </div>
@@ -319,9 +319,13 @@ function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main-content" onClick={(event) => {
+        event.preventDefault()
+        document.getElementById('main-content')?.focus()
+      }}>Skip to main content</a>
       <main>
         <Navigation route={route} soundEnabled={sound.enabled} onSoundToggle={sound.toggle} />
-        <div key={route}>
+        <div id="main-content" key={route} tabIndex="-1">
           {route === 'home' && <HomePage />}
           {route === 'projects' && <ProjectsPage activeCategory={activeCategory} setActiveCategory={setActiveCategory} onLaunch={setLaunchedProject} />}
           {route === 'products' && <ProductsPage onCardFlip={sound.flipCard} />}
