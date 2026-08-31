@@ -10,13 +10,13 @@ const categories = ['All', 'Writing', 'Tools', 'Generators', 'Games', 'Art', 'We
 const pricingTiers = [
   {
     id: 'template',
-    name: 'Blank Template',
+    name: 'Business Foundation Launch Kit',
     price: '$80',
     qualifier: 'one-time',
     art: '/pricing/tarot-template.webp',
     link: 'https://www.patreon.com/Hexxis_CMD/posts/business-website-168038505',
-    features: ['Business Foundation theme ZIP', 'Responsive native WordPress blocks', 'Editable homepage and reusable sections', 'Installation and replacement guide', 'Single-business license'],
-    note: 'For owners comfortable editing and publishing their own WordPress site.',
+    features: ['Installable WordPress block theme', '5 starter pages + 11 reusable sections', '4 professional style directions', 'Content, image, SEO, launch, and accessibility guides', 'No paid-plugin or page-builder dependency'],
+    note: 'A complete self-service foundation for owners comfortable editing and publishing their own WordPress site.',
   },
   {
     id: 'turnkey',
@@ -25,7 +25,7 @@ const pricingTiers = [
     qualifier: 'one-time',
     art: '/pricing/tarot-turnkey.webp',
     link: 'https://www.patreon.com/Hexxis_CMD/posts/business-website-168043113',
-    features: ['Everything in Blank Template', 'Theme installation and launch setup', 'Your supplied logo, colors, copy, and images', 'Up to five standard pages', 'Contact form, mobile QA, and one revision'],
+    features: ['Everything in Business Foundation Launch Kit', 'Theme installation and launch setup', 'Your supplied logo, colors, copy, and images', 'Up to five standard pages', 'Contact form, mobile QA, and one revision'],
     note: 'Hosting, domain, paid plugins, and copywriting are not included.',
   },
   {
@@ -305,7 +305,10 @@ function ProductsPage({ onCardFlip }) {
       <div className="pricing-grid">
         {pricingTiers.map((tier) => <PricingCard key={tier.id} tier={tier} onFlip={onCardFlip} />)}
       </div>
-      <p className="pricing-footnote">All prices are one-time project prices in USD. Final custom-build scope is confirmed before work begins.</p>
+      <p className="pricing-footnote">
+        All prices are one-time project prices in USD. Final custom-build scope is confirmed before work begins.<br />
+        <a href="mailto:hexxis.cmd@proton.me?subject=Website%20service%20question">Questions before purchasing? Email hexxis.cmd@proton.me</a>
+      </p>
     </section>
   )
 }
