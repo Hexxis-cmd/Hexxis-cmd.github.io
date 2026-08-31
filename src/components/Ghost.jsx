@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHolidayTheme } from '../hooks/useHolidayTheme'
 
 function accessoryPosition(index) {
@@ -11,28 +11,7 @@ function accessoryPosition(index) {
 
 export default function Ghost() {
   const theme = useHolidayTheme()
-  const stageRef = useRef(null)
   const [blinking, setBlinking] = useState(false)
-
-  useEffect(() => {
-    let frame
-    const track = (event) => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => {
-        const stage = stageRef.current
-        if (!stage) return
-        const box = stage.getBoundingClientRect()
-        const angle = Math.atan2(event.clientY - (box.top + box.height / 2), event.clientX - (box.left + box.width / 2))
-        stage.style.setProperty('--eye-x', `${Math.cos(angle) * 5}px`)
-        stage.style.setProperty('--eye-y', `${Math.sin(angle) * 5}px`)
-      })
-    }
-    document.addEventListener('mousemove', track, { passive: true })
-    return () => {
-      cancelAnimationFrame(frame)
-      document.removeEventListener('mousemove', track)
-    }
-  }, [])
 
   useEffect(() => {
     let blinkTimer
@@ -58,7 +37,6 @@ export default function Ghost() {
       <div
         className="ghost-stage"
         data-effect={theme.effect}
-        ref={stageRef}
         role="img"
         aria-label="Hexxis ghost mascot"
       >
