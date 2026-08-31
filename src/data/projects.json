@@ -1,5 +1,22 @@
 [
   {
+    "id": "hexadock",
+    "title": "HexaDock",
+    "version": "1.0.0",
+    "description": "A compact, searchable Windows file dock with fuzzy search, smart categories, favorites, recent items, multi-monitor positioning, offline PIN protection, and a local encrypted vault.",
+    "category": "Tools",
+    "tags": ["windows", "offline", "privacy", "productivity", "open-source"],
+    "thumbnail": "/thumbnails/hexadock.png",
+    "thumbnailAlt": "HexaDock metallic hexagonal X logo with cyan lighting",
+    "thumbnailFit": "contain",
+    "downloads": {
+      "windows": "https://github.com/Hexxis-cmd/HexaDock/releases/latest/download/HexaDock-1.0.0-Setup.exe",
+      "portable": "https://github.com/Hexxis-cmd/HexaDock/releases/latest/download/HexaDock-v1.0.0-win-x64.zip"
+    },
+    "source": "https://github.com/Hexxis-cmd/HexaDock",
+    "featured": true
+  },
+  {
     "id": "draft-a-lore",
     "title": "Draft A Lore",
     "version": "1.0.0",
