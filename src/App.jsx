@@ -83,6 +83,7 @@ function ProjectCard({ project, onLaunch }) {
           {project.purchaseLink && <a className="primary-button product-link" href={project.purchaseLink} target="_blank" rel="noreferrer" aria-label={`Buy ${project.title} for ${project.price} on Patreon`}><img className="patreon-mark" src="/branding/patreon-symbol.png" alt="" aria-hidden="true" /><span>{project.price}</span><span aria-hidden="true">·</span>{project.productCode} <span aria-hidden="true">↗</span></a>}
           {project.downloads?.windows && <a className="secondary-button" href={project.downloads.windows} target="_blank" rel="noreferrer">Windows <span aria-hidden="true">↗</span></a>}
           {project.downloads?.portable && <a className="secondary-button" href={project.downloads.portable} target="_blank" rel="noreferrer">Portable ZIP <span aria-hidden="true">↗</span></a>}
+          {project.downloads?.linux && <a className="secondary-button" href={project.downloads.linux} target="_blank" rel="noreferrer">Linux AppImage <span aria-hidden="true">↗</span></a>}
           {project.downloads?.android && <a className="secondary-button" href={project.downloads.android} target="_blank" rel="noreferrer">Android <span aria-hidden="true">↗</span></a>}
           {project.downloads?.template && <a className="secondary-button" href={project.downloads.template} download>Download template <span aria-hidden="true">↓</span></a>}
           {project.source && <a className="secondary-button" href={project.source} target="_blank" rel="noreferrer">Source <span aria-hidden="true">↗</span></a>}
