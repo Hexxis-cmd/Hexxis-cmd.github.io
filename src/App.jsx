@@ -84,6 +84,7 @@ function ProjectCard({ project, onLaunch }) {
           {project.downloads?.windows && <a className="secondary-button" href={project.downloads.windows} target="_blank" rel="noreferrer">Windows <span aria-hidden="true">↗</span></a>}
           {project.downloads?.portable && <a className="secondary-button" href={project.downloads.portable} target="_blank" rel="noreferrer">Portable ZIP <span aria-hidden="true">↗</span></a>}
           {project.downloads?.linux && <a className="secondary-button" href={project.downloads.linux} target="_blank" rel="noreferrer">Linux AppImage <span aria-hidden="true">↗</span></a>}
+          {project.downloads?.web && <a className="secondary-button" href={project.downloads.web} target="_blank" rel="noreferrer">Web HTML <span aria-hidden="true">↗</span></a>}
           {project.downloads?.android && <a className="secondary-button" href={project.downloads.android} target="_blank" rel="noreferrer">Android <span aria-hidden="true">↗</span></a>}
           {project.downloads?.template && <a className="secondary-button" href={project.downloads.template} download>Download template <span aria-hidden="true">↓</span></a>}
           {project.source && <a className="secondary-button" href={project.source} target="_blank" rel="noreferrer">Source <span aria-hidden="true">↗</span></a>}
