@@ -192,10 +192,15 @@ function HomePage() {
 }
 
 function ProjectsPage({ activeCategory, setActiveCategory, onLaunch }) {
+  const [viewMode, setViewMode] = useState(() => localStorage.getItem('project-view') === 'list' ? 'list' : 'grid')
+  const [cardSize, setCardSize] = useState(() => ['small', 'medium'].includes(localStorage.getItem('project-size')) ? localStorage.getItem('project-size') : 'large')
   const visibleProjects = useMemo(
     () => activeCategory === 'All' ? projects : projects.filter((project) => project.category === activeCategory),
     [activeCategory],
   )
+
+  useEffect(() => localStorage.setItem('project-view', viewMode), [viewMode])
+  useEffect(() => localStorage.setItem('project-size', cardSize), [cardSize])
 
   return (
     <section className="projects-section page-view">
@@ -221,7 +226,18 @@ function ProjectsPage({ activeCategory, setActiveCategory, onLaunch }) {
         ))}
       </div>
 
-      <div className="project-grid" aria-live="polite">
+      <div className="project-controls">
+        {viewMode === 'grid' && (
+          <div className="display-options" role="group" aria-label="Project card size">
+            {['small', 'medium', 'large'].map((size) => <button className={cardSize === size ? 'is-active' : ''} key={size} type="button" onClick={() => setCardSize(size)} aria-pressed={cardSize === size}>{size}</button>)}
+          </div>
+        )}
+        <div className="display-options" role="group" aria-label="Project layout">
+          {['grid', 'list'].map((mode) => <button className={viewMode === mode ? 'is-active' : ''} key={mode} type="button" onClick={() => setViewMode(mode)} aria-pressed={viewMode === mode}>{mode}</button>)}
+        </div>
+      </div>
+
+      <div className={`project-grid is-${viewMode} size-${cardSize}`} aria-live="polite">
         {visibleProjects.length > 0
           ? visibleProjects.map((project) => <ProjectCard key={project.id} project={project} onLaunch={onLaunch} />)
           : <div className="empty-state"><span>∅</span><h3>Nothing here yet.</h3><p>Future {activeCategory.toLowerCase()} projects will appear here.</p></div>}
