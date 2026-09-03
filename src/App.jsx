@@ -66,12 +66,11 @@ function ProjectCard({ project, onLaunch }) {
         {project.thumbnail
           ? <img src={project.thumbnail} alt={project.thumbnailAlt || `${project.title} project artwork`} style={{ objectPosition: project.thumbnailPosition || 'center', objectFit: project.thumbnailFit || 'cover' }} />
           : <div className="template-preview" aria-hidden="true"><span>&lt;/&gt;</span><strong>YOUR SITE</strong><small>Replace this placeholder</small></div>}
-        {project.featured && <span className="featured-badge">Featured</span>}
       </div>
       <div className="project-card-body">
         <div className="project-title-line">
           <span className="category">{project.category}</span>
-          <span className={project.price ? 'product-price' : 'version'}>{project.price || `v${project.version}`}</span>
+          {project.price && <span className="product-price">{project.price}</span>}
         </div>
         <h3>{project.title}</h3>
         <p>{project.description}</p>

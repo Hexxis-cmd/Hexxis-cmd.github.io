@@ -2,7 +2,6 @@
   {
     "id": "hexadock",
     "title": "HexaDock",
-    "version": "1.0.0",
     "description": "A compact, searchable Windows and Linux file dock with smart categories, favorites, recent items, monitor-safe positioning, offline PIN protection, and a local encrypted vault.",
     "category": "Tools",
     "tags": ["windows", "linux", "offline", "privacy", "productivity", "open-source"],
@@ -14,13 +13,11 @@
       "portable": "https://github.com/Hexxis-cmd/HexaDock/releases/latest/download/HexaDock-v1.0.0-win-x64.zip",
       "linux": "https://github.com/Hexxis-cmd/HexaDock/releases/latest/download/HexaDock-1.0.0-linux-x86_64.AppImage"
     },
-    "source": "https://github.com/Hexxis-cmd/HexaDock",
-    "featured": true
+    "source": "https://github.com/Hexxis-cmd/HexaDock"
   },
   {
     "id": "draft-a-lore",
     "title": "Draft A Lore",
-    "version": "1.0.0",
     "description": "An offline writing workspace for manuscripts, story planning, and branching RPG adventures. No account, no server, no AI.",
     "category": "Writing",
     "tags": ["no-ai", "offline", "writing", "rpg", "story"],
@@ -30,13 +27,11 @@
       "web": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/latest/download/DraftALore.html",
       "windows": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/latest/download/DraftALore-Windows.zip",
       "android": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/latest/download/DraftALore.apk"
-    },
-    "featured": true
+    }
   },
   {
     "id": "github-pages-starter",
     "title": "GitHub Pages Starter",
-    "version": "1.0.0",
     "description": "A neutral, responsive portfolio starter with placeholder content, setup instructions, and automatic GitHub Pages deployment. No personal information, branding, images, or third-party dependencies.",
     "category": "GitHub Page Templates",
     "tags": ["template", "github-pages", "responsive", "no-build", "accessible"],
@@ -44,13 +39,11 @@
     "launchFile": "/templates/github-pages-starter/index.html",
     "downloads": {
       "template": "/downloads/github-pages-starter.zip"
-    },
-    "featured": false
+    }
   },
   {
     "id": "business-foundation-template-001",
     "title": "Business Foundation",
-    "version": "1.0.0",
     "description": "A self-service WordPress production launch kit with five starter pages, eleven reusable sections, four visual styles, and practical content, image, SEO, accessibility, launch, and maintenance guides.",
     "category": "Website Templates",
     "tags": ["wordpress", "launch-kit", "responsive", "block-theme", "no-paid-plugins"],
@@ -59,7 +52,6 @@
     "launchFile": "/templates/business-foundation/index.html",
     "price": "$80",
     "productCode": "TEMPLATE#001",
-    "purchaseLink": "https://www.patreon.com/Hexxis_CMD/posts/business-website-168038505",
-    "featured": false
+    "purchaseLink": "https://www.patreon.com/Hexxis_CMD/posts/business-website-168038505"
   }
 ]
