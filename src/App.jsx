@@ -5,7 +5,28 @@ import { useHolidayTheme } from './hooks/useHolidayTheme'
 import { useSoundscape } from './hooks/useSoundscape'
 import './App.css'
 
-const categories = ['All', 'Writing', 'Tools', 'Generators', 'Games', 'Art', 'Website Templates', 'GitHub Page Templates']
+const categories = ['All', 'Writing', 'Tools', 'Generators', 'Games', 'Art']
+
+const productTemplates = [
+  {
+    id: 'github-pages-starter',
+    title: 'GitHub Pages Starter',
+    description: 'A neutral, responsive portfolio starter with setup instructions and automatic GitHub Pages deployment.',
+    price: 'Free',
+    launchFile: '/templates/github-pages-starter/index.html',
+    download: '/downloads/github-pages-starter.zip',
+  },
+  {
+    id: 'business-foundation-template-001',
+    title: 'Business Foundation',
+    description: 'A self-service WordPress launch kit with starter pages, reusable sections, four visual styles, and practical guides.',
+    price: '$80',
+    thumbnail: '/thumbnails/business-template-001.png',
+    thumbnailAlt: 'Business Foundation website template preview',
+    thumbnailPosition: 'left center',
+    launchFile: '/templates/business-foundation/index.html',
+  },
+]
 
 const pricingTiers = [
   {
@@ -192,15 +213,10 @@ function HomePage() {
 }
 
 function ProjectsPage({ activeCategory, setActiveCategory, onLaunch }) {
-  const [viewMode, setViewMode] = useState(() => localStorage.getItem('project-view') === 'list' ? 'list' : 'grid')
-  const [cardSize, setCardSize] = useState(() => ['small', 'medium'].includes(localStorage.getItem('project-size')) ? localStorage.getItem('project-size') : 'large')
   const visibleProjects = useMemo(
     () => activeCategory === 'All' ? projects : projects.filter((project) => project.category === activeCategory),
     [activeCategory],
   )
-
-  useEffect(() => localStorage.setItem('project-view', viewMode), [viewMode])
-  useEffect(() => localStorage.setItem('project-size', cardSize), [cardSize])
 
   return (
     <section className="projects-section page-view">
@@ -226,18 +242,7 @@ function ProjectsPage({ activeCategory, setActiveCategory, onLaunch }) {
         ))}
       </div>
 
-      <div className="project-controls">
-        {viewMode === 'grid' && (
-          <div className="display-options" role="group" aria-label="Project card size">
-            {['small', 'medium', 'large'].map((size) => <button className={cardSize === size ? 'is-active' : ''} key={size} type="button" onClick={() => setCardSize(size)} aria-pressed={cardSize === size}>{size}</button>)}
-          </div>
-        )}
-        <div className="display-options" role="group" aria-label="Project layout">
-          {['grid', 'list'].map((mode) => <button className={viewMode === mode ? 'is-active' : ''} key={mode} type="button" onClick={() => setViewMode(mode)} aria-pressed={viewMode === mode}>{mode}</button>)}
-        </div>
-      </div>
-
-      <div className={`project-grid is-${viewMode} size-${cardSize}`} aria-live="polite">
+      <div className="project-grid" aria-live="polite">
         {visibleProjects.length > 0
           ? visibleProjects.map((project) => <ProjectCard key={project.id} project={project} onLaunch={onLaunch} />)
           : <div className="empty-state"><span>∅</span><h3>Nothing here yet.</h3><p>Future {activeCategory.toLowerCase()} projects will appear here.</p></div>}
@@ -313,7 +318,28 @@ function PricingCard({ tier, onFlip }) {
   )
 }
 
-function ProductsPage({ onCardFlip }) {
+function TemplateProductCard({ product, onPreview }) {
+  return (
+    <article className="template-product-card">
+      <div className="template-product-image">
+        {product.thumbnail
+          ? <img src={product.thumbnail} alt={product.thumbnailAlt} style={{ objectPosition: product.thumbnailPosition || 'center' }} />
+          : <div className="template-preview" aria-hidden="true"><span>&lt;/&gt;</span><strong>YOUR SITE</strong><small>Replace this placeholder</small></div>}
+        <span className="template-product-price">{product.price}</span>
+      </div>
+      <div className="template-product-body">
+        <h2>{product.title}</h2>
+        <p>{product.description}</p>
+        <div className="card-actions">
+          <button className="primary-button" type="button" onClick={() => onPreview(product)}>Preview</button>
+          {product.download && <a className="secondary-button" href={product.download} download>Download template <span aria-hidden="true">↓</span></a>}
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function ProductsPage({ onCardFlip, onPreview }) {
   return (
     <section className="products-section page-view">
       <div className="products-heading">
@@ -328,6 +354,13 @@ function ProductsPage({ onCardFlip }) {
         All prices are one-time project prices in USD. Final custom-build scope is confirmed before work begins.<br />
         <a href="mailto:hexxis.cmd@proton.me?subject=Website%20service%20question">Questions before purchasing? Email hexxis.cmd@proton.me</a>
       </p>
+      <div className="template-products-heading">
+        <p className="eyebrow">Templates</p>
+        <h2>Preview the available templates.</h2>
+      </div>
+      <div className="template-products-grid">
+        {productTemplates.map((product) => <TemplateProductCard key={product.id} product={product} onPreview={onPreview} />)}
+      </div>
     </section>
   )
 }
@@ -350,7 +383,7 @@ function App() {
         <div id="main-content" key={route} tabIndex="-1">
           {route === 'home' && <HomePage />}
           {route === 'projects' && <ProjectsPage activeCategory={activeCategory} setActiveCategory={setActiveCategory} onLaunch={setLaunchedProject} />}
-          {route === 'products' && <ProductsPage onCardFlip={sound.flipCard} />}
+          {route === 'products' && <ProductsPage onCardFlip={sound.flipCard} onPreview={setLaunchedProject} />}
           {route === 'about' && <AboutPage />}
         </div>
       </main>

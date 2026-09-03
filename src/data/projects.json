@@ -28,30 +28,5 @@
       "windows": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/latest/download/DraftALore-Windows.zip",
       "android": "https://github.com/Hexxis-cmd/Draft-A-Lore/releases/latest/download/DraftALore.apk"
     }
-  },
-  {
-    "id": "github-pages-starter",
-    "title": "GitHub Pages Starter",
-    "description": "A neutral, responsive portfolio starter with placeholder content, setup instructions, and automatic GitHub Pages deployment. No personal information, branding, images, or third-party dependencies.",
-    "category": "GitHub Page Templates",
-    "tags": ["template", "github-pages", "responsive", "no-build", "accessible"],
-    "thumbnail": null,
-    "launchFile": "/templates/github-pages-starter/index.html",
-    "downloads": {
-      "template": "/downloads/github-pages-starter.zip"
-    }
-  },
-  {
-    "id": "business-foundation-template-001",
-    "title": "Business Foundation",
-    "description": "A self-service WordPress production launch kit with five starter pages, eleven reusable sections, four visual styles, and practical content, image, SEO, accessibility, launch, and maintenance guides.",
-    "category": "Website Templates",
-    "tags": ["wordpress", "launch-kit", "responsive", "block-theme", "no-paid-plugins"],
-    "thumbnail": "/thumbnails/business-template-001.png",
-    "thumbnailPosition": "left center",
-    "launchFile": "/templates/business-foundation/index.html",
-    "price": "$80",
-    "productCode": "TEMPLATE#001",
-    "purchaseLink": "https://www.patreon.com/Hexxis_CMD/posts/business-website-168038505"
   }
 ]
